@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(e) {
+
+		$(document).on("click", "img", function() {
+			var path = $(this).attr('src')
+			showImage(path);
+		});
+
+		function showImage(fileCallPath) {
+
+			$(".bigPictureWrapper").css("display", "flex").show();
+
+			$(".bigPicture").html("<img src='"+fileCallPath+"' >").animate({
+				width : '100%',
+				height : '100%'
+			}, 1000);
+
+		}
+
+		$(".bigPictureWrapper").on("click", function(e) {
+			$(".bigPicture").animate({
+				width : '0%',
+				height : '0%'
+			}, 1000);
+			setTimeout(function() {
+				$('.bigPictureWrapper').hide();
+			}, 1000);
+		});
+	});
+</script>
+<style type="text/css">
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: Arial;
+}
+
+.row {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	padding: 0 4px;
+}
+
+.column {
+	-ms-flex: 50%;
+	flex: 50%;
+	max-width: 50%;
+	padding: 0 4px;
+}
+
+.column img {
+	margin-top: 8px;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.bigPictureWrapper {
+	position: fixed;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: gray;
+	z-index: 100;
+	background: rgba(255, 255, 255, 0.5);
+}
+
+.bigPicture {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.bigPicture img {
+	width: 60%;
+}
+
+@media screen and (max-width: 600px) {
+	.column {
+		-ms-flex: 100%;
+		flex: 100%;
+		max-width: 100%;
+	}
+}
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+	<div class='bigPictureWrapper'>
+		<div class='bigPicture'></div>
+	</div>
+	<div class="row">
+		<div class="column">
+			<img src="C:\Users\chohy\OneDrive\Desktop\webproject\1.jpg"> <img
+				src="C:\Users\chohy\OneDrive\Desktop\webproject\3.jpg"> <img
+				src="C:\Users\chohy\OneDrive\Desktop\webproject\5.jpg"> <img
+				src="C:\Users\chohy\OneDrive\Desktop\webproject\7.jpg">
+		</div>
+		<div class="column">
+			<img src="C:\Users\chohy\OneDrive\Desktop\webproject\2.jpg"> <img
+				src="C:\Users\chohy\OneDrive\Desktop\webproject\4.jpg"> <img
+				src="C:\Users\chohy\OneDrive\Desktop\webproject\6.jpg"> <img
+				src="C:\Users\chohy\OneDrive\Desktop\webproject\8.jpg">
+		</div>
+	</div>
+</body>
+</html>
