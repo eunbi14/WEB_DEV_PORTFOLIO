@@ -522,6 +522,8 @@ mark,
   flex-basis: 100%;
   flex-grow: 1;
   align-items: center;
+  z-index:2;
+  background-color: #1e1918;
 }
 
 .navbar-toggler {

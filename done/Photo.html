@@ -24,24 +24,22 @@
           <div class="nav-top">
           <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
               <div class="container">
-                  <a class="navbar-brand js-scroll-trigger" href="#about">Seungchae Lee</a>
+                  <a class="navbar-brand js-scroll-trigger" href="./About.html">Seungchae Lee</a>
                   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarResponsive">
                       <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#fleshes">fleshes</a></li>
-                          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#Bones">Bones</a></li>
-                          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#commercial">commercial</a></li>
-                          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#Contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="./About.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="./Photo.html">Photo</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="./Films/Films.html">Films</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="./Commercial/Commercial.html">Commercial</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="./Contact/Contact.html">Contact</a></li>
                       </ul>
                   </div>
               </div>
           </nav>
         </div>
-
-
           <!-- Bootstrap core JS-->
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -54,6 +52,8 @@
     </head>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+
+
 	$(document).ready(function(e) {
 
 		$(document).on("click", "img", function() {
@@ -65,23 +65,20 @@
 
 			$(".bigPictureWrapper").css("display", "flex").show();
 
-			$(".bigPicture").html("<img src='"+fileCallPath+"' >").animate({
-				width : '100%',
-				height : '100%'
-			}, 1000);
-
-		}
-
-		$(".bigPictureWrapper").on("click", function(e) {
-			$(".bigPicture").animate({
-				width : '0%',
-				height : '0%'
-			}, 1000);
-			setTimeout(function() {
-				$('.bigPictureWrapper').hide();
-			}, 1000);
+			$(".bigPicture").html("<img src='"+fileCallPath+"' >").on("click", function(e) {
+          $(".bigPicture").fadeIn('slow');
 		});
-	});
+  }
+
+    $(".bigPictureWrapper").on("click", function(e) {
+      $(".bigPicture").show(1000);
+      setTimeout(function() {
+        $('.bigPictureWrapper').hide();
+      }, 200);
+    });
+});
+
+
 </script>
 <style type="text/css">
 * {
@@ -90,7 +87,7 @@
 
 body {
 	margin: 0;
-	font-family: Arial;
+
 }
 
 .row {
@@ -124,9 +121,9 @@ body {
 	top: 0%;
 	width: 100%;
 	height: 100%;
-	background-color: gray;
-	z-index: 100;
-	background: rgba(255, 255, 255, 0.5);
+	background-color: #1e1918;
+	background-color: rgba(0,0,0,0.8);
+  z-index: 100;
 }
 
 .bigPicture {
