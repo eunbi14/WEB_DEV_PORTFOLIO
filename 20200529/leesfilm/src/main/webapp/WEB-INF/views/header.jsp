@@ -77,7 +77,7 @@
 			id="mainNav">
 			
 			<div class="container">
-				<a class="navbar-brand js-scroll-trigger" href="./about">Seungchae
+				<a class="navbar-brand js-scroll-trigger" href="./">Seungchae
 					Lee</a>
 				<button class="navbar-toggler navbar-toggler-right" type="button"
 					data-toggle="collapse" data-target="#navbarResponsive"
@@ -88,7 +88,7 @@
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto my-2 my-lg-0">
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"
-							href="./about">About</a></li>
+							href="./">About</a></li>
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"
 							href="./Photo.html">Photo</a></li>
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"
@@ -96,7 +96,7 @@
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"
 							href="./Commercial/Commercial.html">Commercial</a></li>
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"
-							href="./">Contact</a></li>
+							href="./contact">Contact</a></li>
 					</ul>
 				</div>
 			</div>

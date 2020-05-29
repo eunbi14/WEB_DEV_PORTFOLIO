@@ -48,15 +48,15 @@ public class HomeController {
 		return "email";
 	}
 	
-	@RequestMapping(value="/about")
+	@RequestMapping(value="/contact")
 	public String about(Locale locale, Model model) {
-		logger.debug("about page.........");
-		return "about";
+		logger.debug("contact page.........");
+		return "contact";
 	}
 	
 	@RequestMapping(value="/logout")
 	public String logout(Locale locale, Model model) {
-		logger.debug("about page.........");
+		logger.debug("logout page.........");
 		return "logout";
 	}
 	

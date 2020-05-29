@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+
+ #title_img {
+	float: left;
+	width: 40%;
+	margin: 11% 0% 4% 8%;
+}
+
+#text {
+	float: left;
+	margin: 12% 0% 0% 4%;
+}
+
+#partition {
+	clear: left;
+	text-align: center;
+}
+
+#first_img {
+	float: left;
+	margin: 5% 0% 0% 8%;
+	width: 28%;
+}
+
+#second_img {
+	float: left;
+	margin: 5% 0% 0% 1%;
+	width: 28%;
+}
+
+#second_row {
+	float: left;
+	margin: 1% 0% 1% 8%;
+	width: 28%;
+}
+
+#second_second {
+	float: left;
+	margin: 1% 0% 1% 1%;
+	width: 28%;
+}
+
+#instagram {
+	clear: left;
+	margin: 1% 0% 0% 8%;
+}
+
+@media ( max-width : 640px) {
+	#title_img {
+		clear: left;
+		width: 90%;
+		margin: 11% 0% 4% 5%;
+	}
+	#text {
+		clear: left;
+		margin: 0% 0% 0% 5%;
+	}
+}
