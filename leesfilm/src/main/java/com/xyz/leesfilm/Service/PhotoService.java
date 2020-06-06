@@ -1,8 +1,10 @@
 package com.xyz.leesfilm.Service;
 
-import com.xyz.leesfilm.DAO.PhotoDAO;
+import java.util.List;
+
+import com.xyz.leesfilm.DTO.PhotoDTO;
 
 
 public interface PhotoService {
-	int photoInsert(PhotoDAO photo);
+	public PhotoDTO insertPhoto(PhotoDTO photoVO);
 }

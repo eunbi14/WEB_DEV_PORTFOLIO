@@ -1,20 +1,24 @@
 package com.xyz.leesfilm.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 
 import com.xyz.leesfilm.DAO.PhotoDAO;
+import com.xyz.leesfilm.DTO.PhotoDTO;
 
-@Service
+@Service("PhotoService")
 public class PhotoServiceImpl implements PhotoService {
 
-	@Autowired
-	PhotoDAO photoDAO;
+	@Inject
+	private PhotoDAO photoDAO;
 
 	@Override
-	public int photoInsert(PhotoDAO photo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public PhotoDTO insertPhoto(PhotoDTO photoDTO) {
+		 photoDAO.insertPhoto(photoDTO);
+		 return photoDTO;
 	}
 
 }
