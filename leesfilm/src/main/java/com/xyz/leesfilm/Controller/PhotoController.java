@@ -34,56 +34,15 @@ private static final Logger logger=LoggerFactory.getLogger(PhotoController.class
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
-	@RequestMapping(value = "/")
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
-	}
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(Locale locale, Model model) {
-		logger.debug("login page........");
-		return "login";
-	}
-	
-	@RequestMapping(value="/email", method=RequestMethod.POST)
-	public String email(Locale locale, Model model) {
-		logger.debug("email page.........");
-		return "email";
-	}
-	
-	@RequestMapping(value="/contact")
-	public String about(Locale locale, Model model) {
-		logger.debug("contact page.........");
-		return "contact";
-	}
-	
-	@RequestMapping(value="/logout")
-	public String logout(Locale locale, Model model) {
-		logger.debug("logout page.........");
-		return "logout";
-	}
-	
-	@RequestMapping(value="/upload")
-	public String upload(Locale locale, Model model)  {
-		logger.debug("logout page.........");
-		return "upload";
-	}
 	@RequestMapping(value="/uploadphoto",method=RequestMethod.POST)
 	public String uploadPhoto(MultipartHttpServletRequest req) {
 		
 		PhotoDTO dto = new PhotoDTO();
-		MultipartFile mf = req.getFile("file");
+		MultipartFile mf = req.getFile("photofile");
 		System.out.println(mf.getSize());
 		String path = req.getSession().getServletContext().getRealPath("/");
+		logger.info("path--------: "+path);
 		String filename = mf.getOriginalFilename();
 		File uploadFile = new File(path +"//"+ filename);
 		
@@ -93,36 +52,15 @@ private static final Logger logger=LoggerFactory.getLogger(PhotoController.class
 			e.printStackTrace();
 		}
 		dto.setP_Category("fleshes");
-		//카테고리 값도 받아오기 수정 필요 
+		//카테고리 값들 디비에서 가져오기 
+		//중복되는 파일이름 수정가능하게 uuid-> 유튜브 참고하기 
 		dto.setP_Name(filename);
 		dto.setP_RealName(filename);
 		photoDAO.insertPhoto(dto);
+		System.out.println(mf.getSize());
+		
 		System.out.println("photo insert success!, filename: "+ filename);
 		return "home";
 		
-	}
-	
-	@RequestMapping(value="/editImage")
-	public String edit(Locale locale, Model model) {
-		logger.debug("editImage page.........");
-		return "editImage";
-	}
-	
-	@RequestMapping(value="/uploadAction")
-	public String uploadAction(Locale locale, Model model) {
-		logger.debug("uploadAction page.........");
-		return "uploadAction";
-	}
-	
-	@RequestMapping(value="/films")
-	public String films(Locale locale, Model model) {
-		logger.debug("films page.........");
-		return "films";
-	}
-	
-	@RequestMapping(value="/commercial")
-	public String commercial(Locale locale, Model model) {
-		logger.debug("commercial page.........");
-		return "commercial";
 	}
 }

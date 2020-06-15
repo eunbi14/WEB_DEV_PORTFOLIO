@@ -151,7 +151,7 @@ function changeSecondSelect(){
      <tr>
 	                <th id="upload_th">사진 첨부 </th>
 	                <td>
-	                <input id="upload_file" type="file" name="file" id="photoImg"/>
+	                <input id="upload_file" type="file" name="photofile" id="photoImg"/>
                 	</td>
       </tr>
       <!-- 
