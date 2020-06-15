@@ -8,6 +8,7 @@ public class PhotoDTO {
 	String p_Category;
 	String p_Name;
 	String p_RealName;
+	String p_isdeleted;
 	
 	public int getP_Id() {
 		return p_Id;
@@ -32,5 +33,11 @@ public class PhotoDTO {
 	}
 	public void setP_RealName(String p_RealName) {
 		this.p_RealName = p_RealName;
+	}
+	public String getP_isdeleted() {
+		return p_isdeleted;
+	}
+	public void setP_isdeleted(String p_isdeleted) {
+		this.p_isdeleted = p_isdeleted;
 	}
 }
