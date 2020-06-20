@@ -1,13 +1,9 @@
 package com.xyz.leesfilm.Controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -16,8 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xyz.leesfilm.DAO.PhotoDAO;
 import com.xyz.leesfilm.DTO.PhotoDTO;
@@ -31,20 +26,9 @@ private static final Logger logger=LoggerFactory.getLogger(HomeController.class)
 	private PhotoDAO photoDAO;
 	private PhotoService photoService;
 	
-	@Resource(name="uploadPath")
-	private String uploadPath;
-	
 	@RequestMapping(value = "/")
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
 		return "home";
 	}
 	
@@ -77,22 +61,22 @@ private static final Logger logger=LoggerFactory.getLogger(HomeController.class)
 		logger.debug("logout page.........");
 		return "upload";
 	}
+	
 	@RequestMapping(value="/editImage")
 	public String edit(Locale locale, Model model) {
 		logger.debug("editImage page.........");
 		return "editImage";
 	}
 	
-	@RequestMapping(value="/uploadAction")
-	public String uploadAction(Locale locale, Model model) {
-		logger.debug("uploadAction page.........");
-		return "uploadAction";
-	}
-	
 	@RequestMapping(value="/films")
 	public String films(Locale locale, Model model) {
 		logger.debug("films page.........");
 		return "films";
+	}
+	@RequestMapping(value="/photo")
+	public String photo(Locale locale, Model model) {
+		logger.debug("photo page.........");
+		return "photo";
 	}
 	
 	@RequestMapping(value="/commercial")

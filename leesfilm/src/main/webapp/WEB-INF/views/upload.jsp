@@ -136,12 +136,11 @@ function changeSecondSelect(){
 	    <th id="upload_th">카테고리 </th>
 	    <td>
 	    <div id="sido">
-	               	
-			    <select id="sidoSelect" onChange="changeSidoSelect();">
+			    <select id="sidoSelect" name="sidoSelect" onChange="changeSidoSelect();">
 			        <option value="">대분류를 선택하세요.</option>
 			    </select>
 			  
-			    <select id="gugunSelect" onChange="changeSecondSelect();">
+			    <select id="gugunSelect" name="gugunSelect" onChange="changeSecondSelect();">
 			        <option value="">중분류 선택하세요.</option>
 			    </select>
 			
@@ -151,7 +150,8 @@ function changeSecondSelect(){
      <tr>
 	                <th id="upload_th">사진 첨부 </th>
 	                <td>
-	                <input id="upload_file" type="file" name="photofile" id="photoImg"/>
+	                <!-- <input id="upload_file" type="file" name="photofile" id="photoImg"/>-->
+	                <input type="text" id="upload_file" name="photofile" id="photoImg"/>
                 	</td>
       </tr>
       <!-- 

@@ -4,12 +4,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PhotoDTO {
-	int p_Id;
-	String p_Category;
-	String p_Name;
-	String p_RealName;
-	String p_isdeleted;
-	
+	private int p_Id;
+	private String p_Category;
+	private String p_Name;
+
 	public int getP_Id() {
 		return p_Id;
 	}
@@ -27,17 +25,5 @@ public class PhotoDTO {
 	}
 	public void setP_Name(String p_Name) {
 		this.p_Name = p_Name;
-	}
-	public String getP_RealName() {
-		return p_RealName;
-	}
-	public void setP_RealName(String p_RealName) {
-		this.p_RealName = p_RealName;
-	}
-	public String getP_isdeleted() {
-		return p_isdeleted;
-	}
-	public void setP_isdeleted(String p_isdeleted) {
-		this.p_isdeleted = p_isdeleted;
 	}
 }
