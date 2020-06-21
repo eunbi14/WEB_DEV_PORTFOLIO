@@ -1,5 +1,8 @@
 package com.xyz.leesfilm.DAO;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -21,5 +24,12 @@ public class PhotoDAOImpl implements PhotoDAO {
 	public int insertPhoto(PhotoDTO photoDTO) {
 		return sqlSession.insert(namespace+".insertPhoto", photoDTO);
 	}
+
+	@Override
+	public List<PhotoDTO> selectPhotoList() {
+		return sqlSession.selectList(namespace+".selectPhotoList");
+	}
+	
+	
 
 }

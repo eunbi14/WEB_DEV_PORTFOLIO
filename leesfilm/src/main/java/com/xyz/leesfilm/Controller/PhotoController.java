@@ -1,13 +1,8 @@
 package com.xyz.leesfilm.Controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -16,8 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xyz.leesfilm.DAO.PhotoDAO;
 import com.xyz.leesfilm.DTO.PhotoDTO;
@@ -25,104 +19,51 @@ import com.xyz.leesfilm.Service.PhotoService;
 
 @Controller
 public class PhotoController {
-private static final Logger logger=LoggerFactory.getLogger(PhotoController.class);
-		
+	private static final Logger logger=LoggerFactory.getLogger(PhotoController.class);
+	
+	List<String> resultList;
+	
 	@Inject
 	private PhotoDAO photoDAO;
 	private PhotoService photoService;
 	
-	@Resource(name="uploadPath")
-	private String uploadPath;
-	
-	@RequestMapping(value = "/")
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+	@RequestMapping(value="/uploadphoto",method={RequestMethod.GET,RequestMethod.POST})
+	public String uploadPhoto(Model model,
+			@RequestParam("photofile") String photoUrl,
+			@RequestParam("gugunSelect") String category) {
+	//등록 버튼 눌렀을 때 db 에 업로드 하는 메소드 
+	// url에서 id 부분만 떼서 db 에 저장 
+		PhotoDTO photoDTO = new PhotoDTO();
+		String url = photoUrl;
+		logger.info(url);
+		logger.info(category);
+		String urlarr[] = url.split("/");
+		String photo_name = urlarr[5];
+		photoDTO.setP_Name(photo_name);
+		photoDTO.setP_Category(category);
+		photoDAO.insertPhoto(photoDTO);
+		return "forward:/photoselect";
 	}
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(Locale locale, Model model) {
-		logger.debug("login page........");
-		return "login";
-	}
-	
-	@RequestMapping(value="/email", method=RequestMethod.POST)
-	public String email(Locale locale, Model model) {
-		logger.debug("email page.........");
-		return "email";
-	}
-	
-	@RequestMapping(value="/contact")
-	public String about(Locale locale, Model model) {
-		logger.debug("contact page.........");
-		return "contact";
-	}
-	
-	@RequestMapping(value="/logout")
-	public String logout(Locale locale, Model model) {
-		logger.debug("logout page.........");
-		return "logout";
-	}
-	
-	@RequestMapping(value="/upload")
-	public String upload(Locale locale, Model model)  {
-		logger.debug("logout page.........");
-		return "upload";
-	}
-	@RequestMapping(value="/uploadphoto",method=RequestMethod.POST)
-	public String uploadPhoto(MultipartHttpServletRequest req) {
+	@RequestMapping(value= {"/photoselect","/photo"}, method={RequestMethod.GET,RequestMethod.POST})
+	public String photo(Model model) {
+		resultList= new ArrayList<String>();
+		List<PhotoDTO> photoList = photoDAO.selectPhotoList();
+		System.out.println("처음"+photoList.size());
 		
-		PhotoDTO dto = new PhotoDTO();
-		MultipartFile mf = req.getFile("file");
-		System.out.println(mf.getSize());
-		String path = req.getSession().getServletContext().getRealPath("/");
-		String filename = mf.getOriginalFilename();
-		File uploadFile = new File(path +"//"+ filename);
-		
-		try {
-			mf.transferTo(uploadFile);
-		}catch(IOException e) {
-			e.printStackTrace();
+		for(int i=0;i<photoList.size();i++) {
+			System.out.println(resultList.size());
+			if(resultList.contains(photoList.get(i).getP_Name())) {
+				
+				System.out.println(i+"번째 photolistname2:"+photoList.get(i).getP_Name());
+				continue;
+			}
+			else {
+			System.out.println(i+"번째 photolistname3:"+photoList.get(i).getP_Name());
+			resultList.add(i, photoList.get(i).getP_Name());
+			}
 		}
-		dto.setP_Category("fleshes");
-		//카테고리 값도 받아오기 수정 필요 
-		dto.setP_Name(filename);
-		dto.setP_RealName(filename);
-		photoDAO.insertPhoto(dto);
-		System.out.println("photo insert success!, filename: "+ filename);
-		return "home";
-		
-	}
-	
-	@RequestMapping(value="/editImage")
-	public String edit(Locale locale, Model model) {
-		logger.debug("editImage page.........");
-		return "editImage";
-	}
-	
-	@RequestMapping(value="/uploadAction")
-	public String uploadAction(Locale locale, Model model) {
-		logger.debug("uploadAction page.........");
-		return "uploadAction";
-	}
-	
-	@RequestMapping(value="/films")
-	public String films(Locale locale, Model model) {
-		logger.debug("films page.........");
-		return "films";
-	}
-	
-	@RequestMapping(value="/commercial")
-	public String commercial(Locale locale, Model model) {
-		logger.debug("commercial page.........");
-		return "commercial";
+		model.addAttribute("resultList",resultList);
+		return "/photo";
 	}
 }

@@ -1,6 +1,7 @@
 package com.xyz.leesfilm.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -19,6 +20,12 @@ public class PhotoServiceImpl implements PhotoService {
 	public PhotoDTO insertPhoto(PhotoDTO photoDTO) {
 		 photoDAO.insertPhoto(photoDTO);
 		 return photoDTO;
+	}
+
+	@Override
+	public List<PhotoDTO> selectPhotoList() {
+		List<PhotoDTO> photolist = photoDAO.selectPhotoList();
+		return photolist;
 	}
 
 }
