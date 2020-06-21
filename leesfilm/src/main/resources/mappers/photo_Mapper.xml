@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyz.leesfilm.photoMapper">
+
+
+  <insert id="insertPhoto" parameterType="com.xyz.leesfilm.DTO.PhotoDTO">
+    insert into photo(p_Category,p_Name)
+    values(#{p_Category},#{p_Name})
+  </insert>
+  
+  <select id="selectPhotoList" resultType="com.xyz.leesfilm.DTO.PhotoDTO">
+	select p_name from photo
+	where p_category='Photo1' or p_category='Photo2' or p_category='Photo3';
+  </select>
+  
+   <insert id="insertFilms" parameterType="com.xyz.leesfilm.DTO.FilmsDTO">
+    insert into films(f_Category,f_Name)
+    values(#{f_Category},#{f_Name})
+  </insert>
+  
+  <select id="selectFilmsList" resultType="com.xyz.leesfilm.DTO.FilmsDTO">
+	select f_name from films;
+  </select>
+  
+     <insert id="insertComme" parameterType="com.xyz.leesfilm.DTO.CommeDTO">
+    insert into commercial(c_Category,c_Name)
+    values(#{c_Category},#{c_Name})
+  </insert>
+  
+  <select id="selectCommeList" resultType="com.xyz.leesfilm.DTO.CommeDTO">
+	select c_name from commercial;
+  </select>
+ 
+</mapper>
