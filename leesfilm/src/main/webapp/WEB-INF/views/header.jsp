@@ -90,7 +90,7 @@
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"
 							href="./">About</a></li>
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"
-							href="./Photo.html">Photo</a></li>
+							href="./photo">Photo</a></li>
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"
 							href="./films">Films</a></li>
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"

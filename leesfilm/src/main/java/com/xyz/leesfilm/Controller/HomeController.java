@@ -68,20 +68,4 @@ private static final Logger logger=LoggerFactory.getLogger(HomeController.class)
 		return "editImage";
 	}
 	
-	@RequestMapping(value="/films")
-	public String films(Locale locale, Model model) {
-		logger.debug("films page.........");
-		return "films";
-	}
-	@RequestMapping(value="/photo")
-	public String photo(Locale locale, Model model) {
-		logger.debug("photo page.........");
-		return "photo";
-	}
-	
-	@RequestMapping(value="/commercial")
-	public String commercial(Locale locale, Model model) {
-		logger.debug("commercial page.........");
-		return "commercial";
-	}
 }

@@ -21,13 +21,13 @@ import com.xyz.leesfilm.Service.PhotoService;
 public class PhotoController {
 	private static final Logger logger=LoggerFactory.getLogger(PhotoController.class);
 	
-	List<String> resultList = new ArrayList<String>();
+	List<String> resultList;
 	
 	@Inject
 	private PhotoDAO photoDAO;
 	private PhotoService photoService;
 	
-	@RequestMapping(value="/uploadphoto",method=RequestMethod.POST)
+	@RequestMapping(value="/uploadphoto",method={RequestMethod.GET,RequestMethod.POST})
 	public String uploadPhoto(Model model,
 			@RequestParam("photofile") String photoUrl,
 			@RequestParam("gugunSelect") String category) {
@@ -42,26 +42,28 @@ public class PhotoController {
 		photoDTO.setP_Name(photo_name);
 		photoDTO.setP_Category(category);
 		photoDAO.insertPhoto(photoDTO);
-		return "redirect:/photoselect";
+		return "forward:/photoselect";
 	}
 	
-	@RequestMapping(value="/photoselect", method=RequestMethod.GET)
+	@RequestMapping(value= {"/photoselect","/photo"}, method={RequestMethod.GET,RequestMethod.POST})
 	public String photo(Model model) {
+		resultList= new ArrayList<String>();
 		List<PhotoDTO> photoList = photoDAO.selectPhotoList();
-		System.out.println(photoList);
-		System.out.println(photoList.size());
+		System.out.println("처음"+photoList.size());
+		
 		for(int i=0;i<photoList.size();i++) {
+			System.out.println(resultList.size());
 			if(resultList.contains(photoList.get(i).getP_Name())) {
+				
+				System.out.println(i+"번째 photolistname2:"+photoList.get(i).getP_Name());
 				continue;
 			}
 			else {
+			System.out.println(i+"번째 photolistname3:"+photoList.get(i).getP_Name());
 			resultList.add(i, photoList.get(i).getP_Name());
 			}
 		}
 		model.addAttribute("resultList",resultList);
-		for(String result:resultList) {
-			System.out.println(result);
-		}
-		return "forward:/photo";
+		return "/photo";
 	}
 }

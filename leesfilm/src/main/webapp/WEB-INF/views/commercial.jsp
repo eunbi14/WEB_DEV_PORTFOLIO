@@ -143,31 +143,12 @@
 <jsp:include page="header.jsp"></jsp:include>
   <div class="video-all">
     	<div class="videos" id="v0">
-    		<a href="https://www.youtube.com/watch?v=eiwgazS7oPE" class="video" >
-    				<span>&nbsp;</span>
-    				<img src="http://i1.ytimg.com/vi/eiwgazS7oPE/maxresdefault.jpg" >
-    		</a>
-    	</div>
-
-    	<div class="videos" id="v1">
-    		<a href="https://www.youtube.com/watch?v=K3R2vykeX80" class="video" >
-    				<span>&nbsp;</span>
-    				<img src="http://i1.ytimg.com/vi/K3R2vykeX80/maxresdefault.jpg" >
-    		</a>
-    	</div>
-
-    	<div class="videos" id="v2">
-    		<a href="https://www.youtube.com/watch?v=nxSJH5oZKhw" class="video" >
-    				<span>&nbsp;</span>
-    				<img src="http://i1.ytimg.com/vi/nxSJH5oZKhw/maxresdefault.jpg" >
-    		</a>
-    	</div>
-
-    	<div class="videos" id="v3">
-    		<a href="https://www.youtube.com/watch?v=pQIGeGfumD0" class="video" >
-    				<span>&nbsp;</span>
-    				<img src="http://i1.ytimg.com/vi/pQIGeGfumD0/maxresdefault.jpg" >
-    		</a>
+    		<c:forEach items="${resultList}" var="commercial">
+				<a href="https://www.youtube.com/watch?v=${commercial}" class="video" >
+					<span>&nbsp;</span>
+					<img src="http://i1.ytimg.com/vi/${commercial}/maxresdefault.jpg" />
+				</a>
+			</c:forEach>
     	</div>
     </div>
 

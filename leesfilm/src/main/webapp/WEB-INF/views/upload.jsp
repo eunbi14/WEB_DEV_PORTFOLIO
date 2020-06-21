@@ -38,7 +38,7 @@ var firstList = new Array("Photo", "Commercial", "Films");
 
 var secondList1 = new Array("소분류를 선택하세요.","Photo1","Photo2","Photo3","소분류 추가");
 var secondList2 = new Array("소분류를 선택하세요.","Commercial1","Commercial2","Commercial3","소분류 추가");
-var secondList3 = new Array("소분류를 선택하세요.","소분류 추가");
+//var secondList3 = new Array("소분류를 선택하세요.","소분류 추가");
   
 // 페이지 로딩시 자동 실행  
 window.onload = function(){
@@ -47,13 +47,10 @@ window.onload = function(){
     for (i =0 ; i<firstList.length; i++){// 0 ~ 3 
         // 새로운 <option value=''>값</option> 태그 생성
         var optionEl = document.createElement("option");
-  
         // option태그에 value 속성 값으로 저장
         optionEl.value = firstList[i];
-      
         // text 문자열을 새로 생성한 <option> 태그의 값으로 추가
         optionEl.appendChild (document.createTextNode(firstList[i]));
-      
         // 만들어진 option 태그를 <select>태그에 추가
         v_sidoSelect.appendChild(optionEl);
     }
@@ -123,6 +120,8 @@ function changeSecondSelect(){
     }
 }
 
+
+
 </script>
 
 </head>
@@ -154,12 +153,12 @@ function changeSecondSelect(){
 	                <input type="text" id="upload_file" name="photofile" id="photoImg"/>
                 	</td>
       </tr>
-      <!-- 
+<!-- 
      		<tr>
                 <th id="upload_th">영상 링크 </th>
                 <td><input type="text" placeholder="영상 링크를 입력하세요" name="video_url" class="form-control"/></td>
             </tr>
-		-->
+-->
             <tr>
                 <td colspan="2">
                     <input id="upload_btn" type="submit" value="등록" class="pull-right submit"/>
@@ -172,7 +171,46 @@ function changeSecondSelect(){
             </tr>
     </tbody>
 </table>
-</form>  
+</form> 
+
+<form id="form" name="form_video" method="post" enctype="multipart/form-data">
+
+	<table class="table table-bordered">
+    <tbody>
+     <tr>
+	    <th id="upload_th">카테고리 </th>
+	    <td>
+	    <div id="sido">
+			    <select id="sidoSelect" name="sidoSelect" onChange="changeSidoSelect();">
+			        <option value="">대분류를 선택하세요.</option>
+			    </select>
+			  
+			    <select id="gugunSelect" name="gugunSelect" onChange="changeSecondSelect();">
+			        <option value="">중분류 선택하세요.</option>
+			    </select>
+			
+		</div>
+		</td>
+     </tr>
+     		<tr>
+                <th id="upload_th">영상 링크 </th>
+                <td><input type="text" placeholder="영상 링크를 입력하세요" name="video_url" class="form-control"/></td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <input id="upload_btn" type="submit" value="film으로 등록 " class="pull-right submit" onclick="javascript: form.action='/leesfilm/uploadFilms';" />
+                    <input id="upload_btn" type="submit" value="commercial으로 등록 " class="pull-right submit" onclick="javascript: form.action='/leesfilm/uploadCommercial';" />
+                    <input id="upload_btn" type="reset" class="pull-left"/>
+                    <input id="upload_btn" type="button" value="뒤로가기" class="pull-right" onclick="javascript:location.href='about'"/>         
+                    <!-- <a class="btn btn-default" onclick="sendData()"> 등록 </a>
+                    <a class="btn btn-default" type="reset"> reset </a>
+                    <a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a> -->
+                </td>
+            </tr>
+    </tbody>
+</table>
+</form>   
 </div>
 </body>
 </html>

@@ -122,20 +122,18 @@
 </head>
 <body id="page-top">
  <jsp:include page="header.jsp"></jsp:include>
-		<div class="video-all">
-				<div class="videos" id="v0">
-					<a href="https://www.youtube.com/watch?v=d-s9B1Slmlk" class="video">
-							<span>&nbsp;</span>
-							<img src="http://i1.ytimg.com/vi/d-s9B1Slmlk/maxresdefault.jpg" >
-					</a>
-				</div>
-				<div class="videos" id="v1">
-					<a href="https://www.youtube.com/watch?v=V5KfPPh1dwk" class="video">
-							<span>&nbsp;</span>
-							<img src="http://i1.ytimg.com/vi/V5KfPPh1dwk/maxresdefault.jpg">
-					</a>
-				</div>
-</div>
+
+
+	<div class="video-all">	
+		<div class="videos" id="v0">
+			<c:forEach items="${resultList}" var="films">
+				<a href="https://www.youtube.com/watch?v=${films}" class="video" >
+					<span>&nbsp;</span>
+					<img src="http://i1.ytimg.com/vi/${films}/maxresdefault.jpg" />
+				</a>
+			</c:forEach>
+		</div>
+	</div>
 
 </body>
 </html>
