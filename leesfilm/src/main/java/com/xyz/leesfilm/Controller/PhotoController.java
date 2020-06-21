@@ -1,6 +1,7 @@
 package com.xyz.leesfilm.Controller;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -47,23 +48,25 @@ public class PhotoController {
 	
 	@RequestMapping(value= {"/photoselect","/photo"}, method={RequestMethod.GET,RequestMethod.POST})
 	public String photo(Model model) {
+	
 		resultList= new ArrayList<String>();
 		List<PhotoDTO> photoList = photoDAO.selectPhotoList();
-		System.out.println("처음"+photoList.size());
-		
+		LinkedHashMap<String, String> photomap = new LinkedHashMap<String, String>();
 		for(int i=0;i<photoList.size();i++) {
-			System.out.println(resultList.size());
-			if(resultList.contains(photoList.get(i).getP_Name())) {
-				
-				System.out.println(i+"번째 photolistname2:"+photoList.get(i).getP_Name());
+			if(photomap.containsValue(photoList.get(i).getP_Name())) {
 				continue;
 			}
 			else {
-			System.out.println(i+"번째 photolistname3:"+photoList.get(i).getP_Name());
-			resultList.add(i, photoList.get(i).getP_Name());
+			photomap.put(Integer.toString(photoList.get(i).getP_Id()), photoList.get(i).getP_Name());
 			}
 		}
-		model.addAttribute("resultList",resultList);
+		model.addAttribute("resultMap",photomap);
 		return "/photo";
+	}
+
+	@RequestMapping(value="/deletephoto", method={RequestMethod.GET,RequestMethod.POST})
+	public String uploadPhoto(Model model, @RequestParam("photo_id")int photo_id) {
+		System.out.println(photo_id);
+		return null;
 	}
 }
