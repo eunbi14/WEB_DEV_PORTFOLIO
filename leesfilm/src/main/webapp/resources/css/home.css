@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
-
- #title_img {
+#title_img {
 	float: left;
 	width: 40%;
 	margin: 11% 0% 4% 8%;
@@ -57,3 +56,4 @@
 		margin: 0% 0% 0% 5%;
 	}
 }
+

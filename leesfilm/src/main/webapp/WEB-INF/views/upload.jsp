@@ -212,5 +212,6 @@ function changeSecondSelect(){
 </table>
 </form>   
 </div>
+<footer class="footer"></footer>
 </body>
 </html>
