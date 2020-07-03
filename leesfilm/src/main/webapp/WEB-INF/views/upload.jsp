@@ -120,14 +120,24 @@ function changeSecondSelect(){
     }
 }
 
-
+function subType(){
+	var v_type = document.getElementById("sidoSelect").value;
+	if(v_type == "Photo"){
+		document.form.action = "/leesfilm/uploadphoto";
+	}else if(v_type == "Commercial"){
+		document.form.action = "/leesfilm/uploadCommercial";
+	}else if(v_type == "Films"){
+		document.form.action = "/leesfilm/uploadFilms";
+	}
+	document.form.submit();
+}
 
 </script>
 
 </head>
 <body>
 <div class="container" id="upload_container">
-<form action="uploadphoto" id="form" name="form" method="post" enctype="multipart/form-data">
+<form id="form" name="form" method="post" enctype="multipart/form-data">
 
 	<table class="table table-bordered">
     <tbody>
@@ -150,20 +160,18 @@ function changeSecondSelect(){
 	                <th id="upload_th">사진 첨부 </th>
 	                <td>
 	                <!-- <input id="upload_file" type="file" name="photofile" id="photoImg"/>-->
-	                <input type="text" id="upload_file" name="photofile" id="photoImg"/>
+	                <input type="text" placeholder="이미지 링크를 입력하세요" id="upload_file" name="photofile" id="photoImg" class="form-control"/>
                 	</td>
       </tr>
-<!-- 
      		<tr>
                 <th id="upload_th">영상 링크 </th>
                 <td><input type="text" placeholder="영상 링크를 입력하세요" name="video_url" class="form-control"/></td>
             </tr>
--->
             <tr>
                 <td colspan="2">
-                    <input id="upload_btn" type="submit" value="등록" class="pull-right submit"/>
+                    <input id="upload_btn" type="button" value="등록" class="pull-right submit" onclick="subType()"/>
                     <input id="upload_btn" type="reset" class="pull-left"/>
-                    <input id="upload_btn" type="button" value="뒤로가기" class="pull-right" onclick="javascript:location.href='about'"/>         
+                    <input id="upload_btn" type="button" value="뒤로가기" class="pull-right" onclick="javascript:location.href='./'"/>         
                     <!-- <a class="btn btn-default" onclick="sendData()"> 등록 </a>
                     <a class="btn btn-default" type="reset"> reset </a>
                     <a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a> -->
@@ -173,7 +181,7 @@ function changeSecondSelect(){
 </table>
 </form> 
 
-<form id="form" name="form_video" method="post" enctype="multipart/form-data">
+<!-- <form id="form" name="form_video" method="post" enctype="multipart/form-data">
 
 	<table class="table table-bordered">
     <tbody>
@@ -203,14 +211,14 @@ function changeSecondSelect(){
                     <input id="upload_btn" type="submit" value="commercial으로 등록 " class="pull-right submit" onclick="javascript: form.action='/leesfilm/uploadCommercial';" />
                     <input id="upload_btn" type="reset" class="pull-left"/>
                     <input id="upload_btn" type="button" value="뒤로가기" class="pull-right" onclick="javascript:location.href='about'"/>         
-                    <!-- <a class="btn btn-default" onclick="sendData()"> 등록 </a>
+                    <a class="btn btn-default" onclick="sendData()"> 등록 </a>
                     <a class="btn btn-default" type="reset"> reset </a>
-                    <a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a> -->
+                    <a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a>
                 </td>
             </tr>
     </tbody>
 </table>
-</form>   
+</form>    -->
 </div>
 <footer class="footer"></footer>
 </body>

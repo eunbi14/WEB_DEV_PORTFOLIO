@@ -30,7 +30,7 @@ public class CommeController {
 	
 	@RequestMapping(value="/uploadCommercial",method={RequestMethod.GET,RequestMethod.POST})
 	public String uploadVideo(Model model,
-			@RequestParam("sidoSelect") String big_category,
+			//@RequestParam("sidoSelect") String big_category,
 			@RequestParam("gugunSelect") String category,
 			@RequestParam("video_url") String videourl) {
 		
@@ -38,7 +38,9 @@ public class CommeController {
 			System.out.println(video_id);	
 			
 			CommeDTO commeDTO = new CommeDTO();
-			commeDTO.setC_Category("comme1");
+			
+			//commeDTO.setC_Category("comme1");
+			commeDTO.setC_Category(category);
 			commeDTO.setC_Name(video_id);
 			commeDAO.insertComme(commeDTO);
 			return "forward:/commeselect";
@@ -49,7 +51,7 @@ public class CommeController {
 		resultList= new ArrayList<String>();
 		List<CommeDTO> commeList = commeDAO.selectCommeList();
 		for(int i=0;i<commeList.size();i++) {
-			System.out.println(i+"ë²ˆì§¸ photolistname3:"+commeList.get(i).getC_Name());
+			System.out.println(i+"¹øÂ° photolistname3:"+commeList.get(i).getC_Name());
 			resultList.add(i, commeList.get(i).getC_Name());
 			}
 		model.addAttribute("resultList",resultList);

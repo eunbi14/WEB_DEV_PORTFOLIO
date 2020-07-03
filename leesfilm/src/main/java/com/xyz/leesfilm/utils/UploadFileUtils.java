@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
-//íŒŒì¼ ì—…ë¡œë“œ/ì‚­ì œ/ì „ì†¡, í´ë”ìƒì„±, íŒŒì¼ëª… ì¤‘ë³µë°©ì§€ ë“± ê¸°ëŠ¥ ì²˜ë¦¬í•  ë©”ì†Œë“œë“¤ 
+//ÆÄÀÏ ¾÷·Îµå/»èÁ¦/Àü¼Û, Æú´õ»ı¼º, ÆÄÀÏ¸í Áßº¹¹æÁö µî ±â´É Ã³¸®ÇÒ ¸Ş¼Òµåµé 
 public class UploadFileUtils {
 	private static final Logger logger = LoggerFactory.getLogger(UploadFileUtils.class);
 	/*

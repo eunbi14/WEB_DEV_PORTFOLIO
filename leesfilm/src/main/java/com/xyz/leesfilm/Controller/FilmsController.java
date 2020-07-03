@@ -48,11 +48,11 @@ public class FilmsController {
 	public String photo(Model model) {
 		resultList= new ArrayList<String>();
 		List<FilmsDTO> filmsList = filmsDAO.selectFilmsList();
-		System.out.println("Ï≤òÏùå"+filmsList.size());
+		System.out.println("√≥¿Ω"+filmsList.size());
 		
 		for(int i=0;i<filmsList.size();i++) {
 
-			System.out.println(i+"Î≤àÏß∏ photolistname3:"+filmsList.get(i).getF_Name());
+			System.out.println(i+"π¯¬∞ photolistname3:"+filmsList.get(i).getF_Name());
 			resultList.add(i, filmsList.get(i).getF_Name());
 			}
 		model.addAttribute("resultList",resultList);
