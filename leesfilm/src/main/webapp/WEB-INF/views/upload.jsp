@@ -33,9 +33,7 @@
 <script type="text/javascript">
 // 대분류
 var firstList = new Array("Photo", "Commercial", "Films");
-
 // 중분류
-
 var secondList1 = new Array("소분류를 선택하세요.","Photo1","Photo2","Photo3","소분류 추가");
 var secondList2 = new Array("소분류를 선택하세요.","Commercial1","Commercial2","Commercial3","소분류 추가");
 //var secondList3 = new Array("소분류를 선택하세요.","소분류 추가");
@@ -59,20 +57,16 @@ window.onload = function(){
     v_gugunSelect.style.display = "none";  // 태그 감추기
   
 }
-
 // 대분류 선택시
 function changeSidoSelect(){
     var v_sidoSelect = document.getElementById("sidoSelect"); // SELECT TAG
     var idx = v_sidoSelect.options.selectedIndex;     // 선택값 0 ~ 3
      
-
     if (idx < 1 && idx > 3){
         return;
     }
  	  gugunSelectFill(idx);   // 중분류 생성
 }
-
-
 function gugunSelectFill(idx){
     var v_gugunSelect = document.getElementById("gugunSelect"); // SELECT TAG
  
@@ -89,7 +83,6 @@ function gugunSelectFill(idx){
      }
     if (idx == 3) data = secondList3;
   
-
     v_gugunSelect.innerHTML = "";  // 태그 출력
       
     for (i =0 ; i<data.length; i++){ 
@@ -108,26 +101,32 @@ function gugunSelectFill(idx){
   
 v_gugunSelect.style.display = ""; // 중분류 태그 출력
 }
-
 // 대분류 선택시
 function changeSecondSelect(){
     var v_sidoSelect = document.getElementById("sidoSelect"); // SELECT TAG
     var v_secondSelect = document.getElementById("gugunSelect"); // SELECT TAG
     var idx = v_sidoSelect.options.selectedIndex; 
-
     if (idx < 0 && idx > 2){
         return;
     }
 }
-
-
-
+function subType(){
+	var v_type = document.getElementById("sidoSelect").value;
+	if(v_type == "Photo"){
+		document.form.action = "/leesfilm/uploadphoto";
+	}else if(v_type == "Commercial"){
+		document.form.action = "/leesfilm/uploadCommercial";
+	}else if(v_type == "Films"){
+		document.form.action = "/leesfilm/uploadFilms";
+	}
+	document.form.submit();
+}
 </script>
 
 </head>
 <body>
 <div class="container" id="upload_container">
-<form action="uploadphoto" id="form" name="form" method="post" enctype="multipart/form-data">
+<form id="form" name="form" method="post" enctype="multipart/form-data">
 
 	<table class="table table-bordered">
     <tbody>
@@ -150,20 +149,18 @@ function changeSecondSelect(){
 	                <th id="upload_th">사진 첨부 </th>
 	                <td>
 	                <!-- <input id="upload_file" type="file" name="photofile" id="photoImg"/>-->
-	                <input type="text" id="upload_file" name="photofile" id="photoImg"/>
+	                <input type="text" placeholder="이미지 링크를 입력하세요" id="upload_file" name="photofile" id="photoImg" class="form-control"/>
                 	</td>
       </tr>
-<!-- 
      		<tr>
                 <th id="upload_th">영상 링크 </th>
                 <td><input type="text" placeholder="영상 링크를 입력하세요" name="video_url" class="form-control"/></td>
             </tr>
--->
             <tr>
                 <td colspan="2">
-                    <input id="upload_btn" type="submit" value="등록" class="pull-right submit"/>
+                    <input id="upload_btn" type="button" value="등록" class="pull-right submit" onclick="subType()"/>
                     <input id="upload_btn" type="reset" class="pull-left"/>
-                    <input id="upload_btn" type="button" value="뒤로가기" class="pull-right" onclick="javascript:location.href='about'"/>         
+                    <input id="upload_btn" type="button" value="뒤로가기" class="pull-right" onclick="javascript:location.href='./'"/>         
                     <!-- <a class="btn btn-default" onclick="sendData()"> 등록 </a>
                     <a class="btn btn-default" type="reset"> reset </a>
                     <a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a> -->
@@ -173,8 +170,7 @@ function changeSecondSelect(){
 </table>
 </form> 
 
-<form id="form" name="form_video" method="post" enctype="multipart/form-data">
-
+<!-- <form id="form" name="form_video" method="post" enctype="multipart/form-data">
 	<table class="table table-bordered">
     <tbody>
      <tr>
@@ -196,21 +192,21 @@ function changeSecondSelect(){
                 <th id="upload_th">영상 링크 </th>
                 <td><input type="text" placeholder="영상 링크를 입력하세요" name="video_url" class="form-control"/></td>
             </tr>
-
             <tr>
                 <td colspan="2">
                     <input id="upload_btn" type="submit" value="film으로 등록 " class="pull-right submit" onclick="javascript: form.action='/leesfilm/uploadFilms';" />
                     <input id="upload_btn" type="submit" value="commercial으로 등록 " class="pull-right submit" onclick="javascript: form.action='/leesfilm/uploadCommercial';" />
                     <input id="upload_btn" type="reset" class="pull-left"/>
                     <input id="upload_btn" type="button" value="뒤로가기" class="pull-right" onclick="javascript:location.href='about'"/>         
-                    <!-- <a class="btn btn-default" onclick="sendData()"> 등록 </a>
+                    <a class="btn btn-default" onclick="sendData()"> 등록 </a>
                     <a class="btn btn-default" type="reset"> reset </a>
-                    <a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a> -->
+                    <a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a>
                 </td>
             </tr>
     </tbody>
 </table>
-</form>   
+</form>    -->
 </div>
+<footer class="footer"></footer>
 </body>
 </html>
