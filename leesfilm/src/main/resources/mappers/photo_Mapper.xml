@@ -11,8 +11,8 @@
   </insert>
   
   <select id="selectPhotoList" resultType="com.xyz.leesfilm.DTO.PhotoDTO">
-	select p_id,p_name from photo
-	where p_category='Photo1' or p_category='Photo2' or p_category='Photo3';
+	select p_id,p_name, p_category from photo;
+	<!-- where p_category='Photo1' or p_category='Photo2' or p_category='Photo3'; -->
   </select>
   
    <insert id="insertFilms" parameterType="com.xyz.leesfilm.DTO.FilmsDTO">
@@ -30,7 +30,7 @@
   </insert>
   
   <select id="selectCommeList" resultType="com.xyz.leesfilm.DTO.CommeDTO">
-	select c_name from commercial;
+	select c_name, c_category from commercial;
   </select>
  
 </mapper>
