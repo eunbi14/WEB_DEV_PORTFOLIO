@@ -30,37 +30,34 @@
 </head>
 <body>
 <div class="container" id="upload_container">
-<table class="table table-bordered">
-    <tbody>
-        <form method="get" encType="multiplart/form-data">
+	<form id="form" name="form" method="post" enctype="multipart/form-data">
+		<table class="table table-bordered">
+    	<tbody>
             <% if(type == "image") { %>
             <tr>
                 <th id="upload_th">사진 첨부 </th>
-                <td><input id="upload_input" type="file" name="filename" /></td>
+                <td><input type="text" placeholder="이미지 링크를 입력하세요" id="upload_file" name="photofile" id="photoImg" class="form-control" /></td>
             </tr>
             <% } else if(type == "video") { %>
             <tr>
                 <th id = "upload_th">영상 링크 </th>
-                <td><input type="text" placeholder="영상 링크를 입력하세요" name="video_url" class="form-control"/></td>
+                <td><input type="text" placeholder="영상 링크를 입력하세요" name="video_url" class="form-control" /></td>
             </tr>
             <% } %>
             <tr>
-                <td colspan="2">  
-                    <input id="upload_btn" type="button" value="수정" onclick="sendData()" class="pull-right"/>
-                	 <input id="upload_btn" type="reset" class="pull-left"/>
-                   <%
-               if(del == "true") {
-               %>
-                    <input id="upload_btn" type="button" value="삭제" onclick="deleteData()" class="pull-right" onclick="javascript: form.action='/leesfilm/deletephoto';" />
+                <td colspan="2">
+                	<input id="upload_btn" type="button" value="수정" onclick="sendData()" class="pull-right"/>
+                	<input id="upload_btn" type="reset" class="pull-left"/>
+                	<%
+                	if(del == "true") {
+                	%>
+                	<input id="upload_btn" type="button" value="삭제" onclick="deleteData()" class="pull-right" onclick="javascript: form.action='/leesfilm/deletephoto';" />
                     <% } %>
-                    <!-- <a class="btn btn-default" onclick="sendData()"> 등록 </a>
-                    <a class="btn btn-default" type="reset"> reset </a>
-                    <a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a> -->
                 </td>
             </tr>
-        </form>
-    </tbody>
-</table>
+    	</tbody>
+    	</table>
+    </form>
 </div>
 </body>
 </html>

@@ -28,4 +28,10 @@ public class PhotoServiceImpl implements PhotoService {
 		return photolist;
 	}
 
+	@Override
+	public PhotoDTO deletePhotoCategory(PhotoDTO photoDTO) {
+		 photoDAO.deletePhotoCategory(photoDTO);
+		 return photoDTO;
+	}
+
 }

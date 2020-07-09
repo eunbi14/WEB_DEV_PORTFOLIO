@@ -9,4 +9,5 @@ public interface PhotoDAO {
 
 	public int insertPhoto(PhotoDTO photoDTO);
 	public List<PhotoDTO> selectPhotoList();
+	public int deletePhotoCategory(PhotoDTO photoDTO);
 }

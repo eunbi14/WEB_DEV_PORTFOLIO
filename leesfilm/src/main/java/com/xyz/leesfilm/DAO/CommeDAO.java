@@ -20,9 +20,13 @@ public class CommeDAO {
 	
 	public int insertComme(CommeDTO commeDTO) {
 		return sqlSession.insert(namespace+".insertComme", commeDTO);
-		
 	}
+	
 	public List<CommeDTO> selectCommeList() {
 		return sqlSession.selectList(namespace+".selectCommeList");
+	}
+	
+	public int deleteCommeCategory(CommeDTO commeDTO) {
+		return sqlSession.delete(namespace+".deleteCommeCategory", commeDTO);
 	}
 }

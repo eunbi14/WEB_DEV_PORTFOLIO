@@ -30,6 +30,9 @@ public class PhotoDAOImpl implements PhotoDAO {
 		return sqlSession.selectList(namespace+".selectPhotoList");
 	}
 	
-	
+	@Override
+	public int deletePhotoCategory(PhotoDTO photoDTO) {
+		return sqlSession.delete(namespace+".deletePhotoCategory", photoDTO);
+	}
 
 }

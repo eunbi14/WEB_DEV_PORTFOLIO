@@ -22,5 +22,10 @@ public class CommeService {
 	public List<CommeDTO> selectCommeList() {
 		List<CommeDTO> commerciallist = commeDAO.selectCommeList();
 		return commerciallist;
-		}
+	}
+	
+	public CommeDTO deleteCommeCategory(CommeDTO commeDTO) {
+		commeDAO.deleteCommeCategory(commeDTO);
+		return commeDTO;
+	}
 }
