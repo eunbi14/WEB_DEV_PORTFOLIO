@@ -21,8 +21,6 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet">
 
-   
-       
 
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -46,52 +44,23 @@
 		//jQuery("a.bla-2").YouTubePopUp( { autoplay: 0 } ); // Disable autoplay
 	});
 </script>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
 <style>
+@media (min-width: 786px) {
+	
+  .video-all{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+	margin: 0% -17% 0% 4%;
+  }
 
-	body{
-		background-color: #1e1918;
-	}
-
-.video-all{
-  width:100%;
-  height:100%;
-  position: absolute;
-  top:100px;
-  z-index:1;
-
-}
-	#v0 { float: left; width: 40%;
-			margin: 11% 1% 4% 8%;
-			 }
-
-	#v1 { float: left; width: 40%;
-			margin: 11% 0% 0% 4%;
-			}
-
-	#v2 { float: left; width: 40%;
-					margin: 1% 5% 4% 8%;
-			}
-
-	#v3 { float: left; width: 40%;
-					margin: 1% 0% 0% 0%;
-			}
-
-
-	.videos img {
-		width:100%;
-		height:auto;
-	}
-
-
-	a.video {
-		float: left;
-		position: relative;
-	}
-
-	a.video span {
+  .video-all > div {
+    width: 40%;
+    margin: 10px;
+    line-height:auto;
+  }
+ }
+ a.video span {
 		width: 100%;
 		height: 100%;
 		position: absolute;
@@ -104,52 +73,30 @@
 		opacity: 0.7;
 		filter: alpha(opacity=70);
 	}
-
-	@media screen and (max-width: 480px) {
-		a.video span {
-			background-size: 20%;
-		}
+ 	.videos .thumnail {
+		width:100%;
+		height:auto;
+		margin : 0 0 25px 0;
 	}
-
-	@media (max-width: 640px) {
-		#v0 {
-			clear: left;
-			width: 90%;
-			margin: 11% 0% 4% 5%;
-		}
-		#v1 {
-			clear: left;
-			width: 90%;
-			margin: 11% 0% 4% 5%;
-		}
-		#v2 {
-			clear: left;
-			width: 90%;
-			margin: 11% 0% 4% 5%;
-		}
-		#v3 {
-			clear: left;
-			width: 90%;
-			margin: 11% 0% 4% 5%;
-		}
+	a.video{
+	float: left;
+	position: relative;
 	}
-
-
 
 </style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-</head>
 <body id="page-top">
 <jsp:include page="header.jsp"></jsp:include>
   <div class="video-all">
-    	<div class="videos" id="v0">
-    		<c:forEach items="${resultList}" var="commercial">
-				<a href="https://www.youtube.com/watch?v=${commercial}" class="video" >
+  <c:forEach items="${resultList}" var="commercial">
+    	<div class="videos">
+				<a href="https://www.youtube.com/watch?v=${commercial}" class="video">
 					<span>&nbsp;</span>
-					<img src="http://i1.ytimg.com/vi/${commercial}/maxresdefault.jpg" />
+					<img class="thumnail" src="http://i1.ytimg.com/vi/${commercial}/maxresdefault.jpg" />
 				</a>
-			</c:forEach>
     	</div>
+    </c:forEach>
     </div>
 
 </body>

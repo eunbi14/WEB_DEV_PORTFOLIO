@@ -11,14 +11,24 @@
   </insert>
   
   <select id="selectPhotoList" resultType="com.xyz.leesfilm.DTO.PhotoDTO">
-	select p_name from photo
+	select p_id,p_name from photo
 	where p_category='Photo1' or p_category='Photo2' or p_category='Photo3';
   </select>
   
+  <delete id="deletePhoto" parameterType="int"> 
+  	delete from photo where p_id = #{photo_id} 
+  </delete>
+  
+    <update id="updatePhoto" parameterType="com.xyz.leesfilm.DTO.PhotoDTO">
+     update photo
+     set p_name = #{p_Name}
+     where p_id = #{p_Id}
+  	</update>
    <insert id="insertFilms" parameterType="com.xyz.leesfilm.DTO.FilmsDTO">
     insert into films(f_Category,f_Name)
     values(#{f_Category},#{f_Name})
   </insert>
+  
   
   <select id="selectFilmsList" resultType="com.xyz.leesfilm.DTO.FilmsDTO">
 	select f_name from films;

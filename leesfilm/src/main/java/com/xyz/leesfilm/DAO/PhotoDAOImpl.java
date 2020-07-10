@@ -1,5 +1,6 @@
 package com.xyz.leesfilm.DAO;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,19 @@ public class PhotoDAOImpl implements PhotoDAO {
 	public List<PhotoDTO> selectPhotoList() {
 		return sqlSession.selectList(namespace+".selectPhotoList");
 	}
+
+
+	public int deletePhoto(int photo_id) {
+		return sqlSession.delete(namespace+".deletePhoto",photo_id);
+	}
+
+
+
+	@Override
+	public int updatePhoto(PhotoDTO photoDTO) {
+		return sqlSession.update(namespace+".updatePhoto",photoDTO);
+	}
+	
 	
 	
 

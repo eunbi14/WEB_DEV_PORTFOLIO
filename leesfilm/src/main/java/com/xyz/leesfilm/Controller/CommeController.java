@@ -25,7 +25,6 @@ public class CommeController {
 	private CommeDAO commeDAO;
 	private CommeService commeService;
 
-	
 	List<String> resultList;
 	
 	@RequestMapping(value="/uploadCommercial",method={RequestMethod.GET,RequestMethod.POST})
@@ -36,9 +35,9 @@ public class CommeController {
 		
 			String video_id=videourl.substring(videourl.lastIndexOf("=")+1);
 			System.out.println(video_id);	
-			
+			System.out.println(big_category);
 			CommeDTO commeDTO = new CommeDTO();
-			commeDTO.setC_Category("comme1");
+			commeDTO.setC_Category(category);
 			commeDTO.setC_Name(video_id);
 			commeDAO.insertComme(commeDTO);
 			return "forward:/commeselect";
