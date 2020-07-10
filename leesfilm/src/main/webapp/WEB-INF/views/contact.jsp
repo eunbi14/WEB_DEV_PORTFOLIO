@@ -71,7 +71,7 @@
                document.infoForm.submit();
       }
       else{
-         document.infoForm.action = "/leesfilm/email";
+         document.infoForm.action = "/leesfilm/mailSend";
          document.infoForm.submit();
       }
      
@@ -169,7 +169,7 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 		<div style="position: fixed; bottom: 5px; right: 5px;">
-   <a href="#" onClick="javascript:window.scrollTo(0,0)"><img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top.png" title="위로 가기"></a>
+   <a onClick="javascript:window.scrollTo(0,0)"><img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top.png" title="위로 가기"></a>
    </div>
  <%--    여기까지 
    <jsp:include page="header.jsp"></jsp:include> --%>
@@ -193,6 +193,5 @@
             </form>
          </div>
    </div>
-   <footer class="footer"></footer>
 </body>
 </html>

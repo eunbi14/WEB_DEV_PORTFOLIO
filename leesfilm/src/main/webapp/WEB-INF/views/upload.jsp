@@ -217,12 +217,15 @@ function deleteSelect(){
 }
 
 function delCate(){
-   var v_type = document.getElementById("sidoSelect").value;
-   if(v_type == "Photo"){
-      document.form.action = "/leesfilm/deletephotocategory";
-   }else if(v_type == "Commercial"){
-      document.form.action = "/leesfilm/deletecommecategory";
-   }
+	var v = document.getElementById("gugunSelect").value;
+	var check = confirm("정말로 "+v+" 카테고리 전체를 삭제하겠습니까? 삭제하면 복구할 수 없습니다.");
+	if(!check) return;
+	var v_type = document.getElementById("sidoSelect").value;
+	if(v_type == "Photo"){
+		document.form.action = "/leesfilm/deletephotocategory";
+	} else if(v_type == "Commercial"){
+		document.form.action = "/leesfilm/deletecommecategory";
+	}
    document.form.submit();
 }
 

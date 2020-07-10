@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.xyz.leesfilm.DAO.CategoryDAO;
 import com.xyz.leesfilm.DAO.HomepicDAO;
 import com.xyz.leesfilm.DTO.CategoryDTO;
-import com.xyz.leesfilm.DTO.HomepicDTO;
+//import com.xyz.leesfilm.DTO.HomepicDTO;
 
 @Controller
 public class HomeController {
@@ -26,7 +26,7 @@ public class HomeController {
 
 	@Inject
 	private CategoryDAO categoryDAO;
-	private HomepicDAO homepicDAO;
+//	private HomepicDAO homepicDAO;
 
 	Set<String> photoCategory;
 	Set<String> comCategory;
@@ -38,30 +38,26 @@ public class HomeController {
 		photoCategory = new HashSet<String>(); 
 		comCategory = new HashSet<String>();
 		List<CategoryDTO> categoryList = categoryDAO.selectCategoryList();
-		
-		List<HomepicDTO> homepicList = homepicDAO.selectHomeList();
+//		List<HomepicDTO> homepicList = homepicDAO.selectHomeList();
 		
 		for(int i=0;i<categoryList.size();i++) {
 			comCategory.add(categoryList.get(i).getC_Category()); 
 			photoCategory.add(categoryList.get(i).getP_Category()); 
 		}
 		
-		LinkedHashMap<String, String> homepicmap = new LinkedHashMap<String, String>();
-		for(int i=0;i<homepicList.size();i++) {
-			homepicmap.put(Integer.toString(homepicList.get(i).getH_Id()), homepicList.get(i).getH_name());
-		}
-		
-		model.addAttribute("resulthomeMap",homepicmap);
-		
+		/*
+		 * LinkedHashMap<String, String> homepicmap = new LinkedHashMap<String,
+		 * String>(); for(int i=0;i<homepicList.size();i++) {
+		 * homepicmap.put(Integer.toString(homepicList.get(i).getH_Id()),
+		 * homepicList.get(i).getH_name()); }
+		 * 
+		 * model.addAttribute("resultMap",homepicmap);
+		 */
 		model.addAttribute("photoCategory", photoCategory);
 		model.addAttribute("comCategory", comCategory);
 		
 		return "home";
 	}
-
-
-	 
-	 
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(Locale locale, Model model) {
@@ -81,15 +77,10 @@ public class HomeController {
 		photoCategory = new HashSet<String>(); 
 		comCategory = new HashSet<String>();
 		List<CategoryDTO> categoryList = categoryDAO.selectCategoryList();
-		
-		System.out.println(categoryDAO);
-		
-		
+			
 		for(int i=0;i<categoryList.size();i++) {
 			comCategory.add(categoryList.get(i).getC_Category()); 
-		 	
 			photoCategory.add(categoryList.get(i).getP_Category()); 
-			
 		}
 		
 		model.addAttribute("photoCategory", photoCategory);
@@ -112,11 +103,8 @@ public class HomeController {
 				
 		for(int i=0;i<categoryList.size();i++) {
 			comCategory.add(categoryList.get(i).getC_Category()); 
-		 	
 			photoCategory.add(categoryList.get(i).getP_Category()); 
 		}
-		System.out.println("size:~~~~~");
-		System.out.println(photoCategory.size());
 		model.addAttribute("photoCategory", photoCategory);
 		model.addAttribute("comCategory", comCategory);
 		return "upload";
@@ -126,6 +114,12 @@ public class HomeController {
 	public String edit(Locale locale, Model model) {
 		logger.debug("editImage page.........");
 		return "editImage";
+	}
+	
+	@RequestMapping(value = "/mailSending")
+	public String mailSending(Locale locale, Model model) {
+		logger.debug("mailSending page.........");
+		return "mailSending";
 	}
 
 }

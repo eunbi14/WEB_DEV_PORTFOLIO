@@ -46,8 +46,8 @@ String id = (String)session.getAttribute("idKey");
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 <!-- 여기까지 -->
-<link href="<c:url value="/resources/css/styles.css?after" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/commercial.css?after" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/commercial.css" />" rel="stylesheet">
  
 <title>Commercial</title>
 <link href="<c:url value="/resources/css/YouTubePopUp.css" />" rel="stylesheet">
@@ -80,45 +80,6 @@ jQuery(function() {
 	//jQuery("a.bla-2").YouTubePopUp( { autoplay: 0 } ); // Disable autoplay
 });
 </script>
-<style>
-	@media (min-width: 786px) {
-	
-  .video-all{
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-	margin: 0% -17% 0% 4%;
-  }
-  .video-all > div {
-    width: 40%;
-    margin: 10px;
-    line-height:auto;
-  }
- }
- a.video span {
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		background: url("https://t1.daumcdn.net/cfile/tistory/272B024E567617E839") no-repeat;
-		background-position: 50% 50%;
-		background-size: 10%;
-	}
-	a.video span:hover {
-		opacity: 0.7;
-		filter: alpha(opacity=70);
-	}
-	
-	.videos .thumnail {
-		width:100%;
-		height:auto;
-		margin : 0 0 25px 0;
-	}
-	
-	a.video{
-	float: left;
-	position: relative;
-	}
-</style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body id="page-top">
@@ -207,8 +168,8 @@ jQuery(function() {
           <!-- Third party plugin JS-->
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-		<div style="position: fixed; bottom: 5px; right: 5px;">
-   <a href="#" onClick="javascript:window.scrollTo(0,0)"><img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top.png" title="위로 가기"></a>
+		<div style="position: fixed; bottom: 5px; right: 5px; z-index:5;">
+   <a onClick="javascript:window.scrollTo(0,0)"><img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top.png" title="위로 가기"></a>
    </div>
  <%--    여기까지 
    <jsp:include page="header.jsp"></jsp:include> --%>
@@ -217,14 +178,14 @@ jQuery(function() {
   		<c:forEach items="${resultCommeMap}" var="commeMap">
   			<c:set var="comme_id" value="${commeMap.key}"/>
 			<c:set var="comme_name" value="${commeMap.value}" />
-    		<div class="videos">
+    		<div class="videos" id="v0">
 				<a href="https://www.youtube.com/watch?v=${comme_name}" class="video" title="${comme_id}">
 					<span>&nbsp;</span>
 					<img class="thumnail" src="http://i1.ytimg.com/vi/${comme_name}/maxresdefault.jpg" />
 				</a>
     		</div>
     	</c:forEach>
+    	<footer id="footer"></footer>
     </div>
-    <footer class="footer"></footer>
 </body>
 </html>

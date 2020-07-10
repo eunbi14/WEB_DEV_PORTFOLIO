@@ -13,19 +13,18 @@ import com.xyz.leesfilm.DTO.HomepicDTO;
 public class HomepicDAO {
 	@Inject
 	private SqlSession sqlSession;
-	
 
-	private static final String namespace="com.xyz.leesfilm.photoMapper";
-	
+	private static final String namespace = "com.xyz.leesfilm.photoMapper";
+
 	public List<HomepicDTO> selectHomeList() {
-		return sqlSession.selectList(namespace+".selectHomeList");
+		return sqlSession.selectList(namespace + ".selectHomeList");
 	}
 
 	public int deleteHome(int homepic_id) {
-		return sqlSession.delete(namespace+".deleteHome",homepic_id);
+		return sqlSession.delete(namespace + ".deleteHome", homepic_id);
 	}
 
 	public int updateHome(HomepicDTO homepicDTO) {
-		return sqlSession.update(namespace+".updateHome",homepicDTO);
+		return sqlSession.update(namespace + ".updateHome", homepicDTO);
 	}
 }

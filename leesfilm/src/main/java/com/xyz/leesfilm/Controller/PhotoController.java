@@ -38,14 +38,12 @@ public class PhotoController {
 	
 	Set<String> photoCategory;
 	Set<String> comCategory;
-
 	
 	@RequestMapping(value="/uploadphoto",method={RequestMethod.GET,RequestMethod.POST})
 	   public String uploadPhoto(Model model,
 	         @RequestParam("photofile") String photoUrl,
 	         @RequestParam("gugunSelect") String category,
 	         HttpServletRequest request) {
-
 	      PhotoDTO photoDTO = new PhotoDTO();
 	      String url = photoUrl;
 	      logger.info(category);
@@ -53,7 +51,7 @@ public class PhotoController {
 	      String urlarr[] = url.split("/");
 	      String photo_name = urlarr[5];
 	      photoDTO.setP_Name(photo_name);
-	      if(category.equals("ï¿½ÒºÐ·ï¿½ ï¿½ß°ï¿½")) {
+	      if(category.equals("¼ÒºÐ·ù Ãß°¡")) {
 	         String addCate = request.getParameter("addCategory");
 	         photoDTO.setP_Category(addCate);
 	      }else {
@@ -78,16 +76,14 @@ public class PhotoController {
 		
 		LinkedHashMap<String, String> photomap = new LinkedHashMap<String, String>();
 		for(int i=0;i<photoList.size();i++) {
-		
 			photoCategory.add(photoList.get(i).getP_Category()); 
-				/*
-			if(photomap.containsValue(photoList.get(i).getP_Name())) {
+			photomap.put(Integer.toString(photoList.get(i).getP_Id()), photoList.get(i).getP_Name());
+			/*if(photomap.containsValue(photoList.get(i).getP_Name())) {
 				continue;
 			}
-			else {
-				*/
-			photomap.put(Integer.toString(photoList.get(i).getP_Id()), photoList.get(i).getP_Name());
-			//}
+			else {	
+				photomap.put(Integer.toString(photoList.get(i).getP_Id()), photoList.get(i).getP_Name());
+			}*/
 		}
 	
 		model.addAttribute("resultMap",photomap);
@@ -99,7 +95,7 @@ public class PhotoController {
 	}
 	
 	@RequestMapping(value= {"/photo/{subvar}"}, method={RequestMethod.GET,RequestMethod.POST})
-	public String photo(@PathVariable String subvar, Model model) {
+	public String subPhoto(@PathVariable String subvar, Model model) {
 		
 		resultList= new ArrayList<String>();
 		photoCategory = new HashSet<String>(); 
@@ -120,8 +116,7 @@ public class PhotoController {
 				continue;
 			}
 			else if(photoList.get(i).getP_Category().equals(subvar)) {
-				System.out.println(photoList.get(i).getP_Id());
-			photomap.put(Integer.toString(photoList.get(i).getP_Id()), photoList.get(i).getP_Name());
+				photomap.put(Integer.toString(photoList.get(i).getP_Id()), photoList.get(i).getP_Name());
 			}
 		}
 	
@@ -163,7 +158,6 @@ public class PhotoController {
 		PhotoDTO photoDTO = new PhotoDTO();
 		photoDTO.setP_Id(photo_id);
 		photoDTO.setP_Name(photo_name);
-		System.out.println(photoDTO.getP_Name());
 		photoDAO.updatePhoto(photoDTO);
 
 		return "redirect:/photo";

@@ -198,7 +198,7 @@ String id = (String)session.getAttribute("idKey");
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 		<div style="position: fixed; bottom: 5px; right: 5px;">
-   <a href="#" onClick="javascript:window.scrollTo(0,0)"><img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top.png" title="위로 가기"></a>
+   <a onClick="javascript:window.scrollTo(0,0)"><img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top.png" title="위로 가기"></a>
    </div>
  <%--    여기까지 
    <jsp:include page="header.jsp"></jsp:include> --%>
@@ -207,40 +207,32 @@ String id = (String)session.getAttribute("idKey");
       <div class='bigPicture'></div>
    </div>
    <div class="row">
-  <div class="column">
+   <div class="column">
    	<% int i = 1; %>
-   	 <c:forEach items="${resultMap}" var="photoMap">
-	<c:if test="${i%2 != 0}">	
-	
+   	<c:forEach items="${resultMap}" var="photoMap">
+   		<c:if test="${i%2 != 0}">
       		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
-					<c:set var="photo_id" value="${photoMap.key}" />
-					<c:set var="photosrc" value="${gd}${photoMap.value}" />
-					<img src="${photosrc}" width="300px" title="${photo_id}"/>
-				
-   	</c:if>
-   	<% i++; %>
+      		<c:set var="photo_id" value="${photoMap.key}" />
+      		<c:set var="photosrc" value="${gd}${photoMap.value}" />
+      		<img src="${photosrc}" width="300px" title="${photo_id}"/>
+      	</c:if>
+   		<% i++; %>
    	</c:forEach>
-   	</div>
-   	
-   	
-   	<div class="column">
+   </div>
+
+   <div class="column">
    	<% int j = 1; %>
    	<c:forEach items="${resultMap}" var="photoMap">
-	<c:if test="${j%2 == 0}">
-	
-      		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
-				<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
-				
-					<c:set var="photo_id" value="${photoMap.key}" />
-					<c:set var="photosrc" value="${gd}${photoMap.value}" />
-					<img src="${photosrc}" width="300px" title="${photo_id}"/>
-				
-   	</c:if>
-   	<% j++; %>
+		<c:if test="${j%2 == 0}">
+			<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
+			<c:set var="photo_id" value="${photoMap.key}" />
+			<c:set var="photosrc" value="${gd}${photoMap.value}" />
+			<img src="${photosrc}" width="300px" title="${photo_id}"/>
+		</c:if>
+   		<% j++; %>
    	</c:forEach>
-   	</div>
-   		</div>
-   	</body>
-<footer class="footer"></footer>   	
-
+  </div>
+  </div>
+</body>
+<footer class="footer"></footer>
 </html>

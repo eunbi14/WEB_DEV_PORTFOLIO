@@ -48,7 +48,7 @@ public class CommeController {
 	      String video_id=videourl.substring(videourl.lastIndexOf("=")+1);
 	      
 	      commeDTO.setC_Name(video_id);
-	      if(category.equals("ï¿½ÒºÐ·ï¿½ ï¿½ß°ï¿½")) {
+	      if(category.equals("¼ÒºÐ·ù Ãß°¡")) {
 	         String addCate = request.getParameter("addCategory");
 	         commeDTO.setC_Category(addCate);
 	      }else {
@@ -69,50 +69,49 @@ public class CommeController {
 		
 		LinkedHashMap<String, String> commemap = new LinkedHashMap<String, String>();
 		for(int i=0;i<commeList.size();i++) {
-		
 			comCategory.add(commeList.get(i).getC_Category()); 
 			commemap.put(Integer.toString(commeList.get(i).getC_Id()), commeList.get(i).getC_Name());
-			}
+		}
 		
 		for(int i=0;i<photoList.size();i++) {
-			
 			photoCategory.add(photoList.get(i).getP_Category()); 
 		}
 		model.addAttribute("resultCommeMap",commemap);
 		model.addAttribute("comCategory", comCategory);
 		model.addAttribute("photoCategory", photoCategory);
-		return "/commercial";
+		return "/commercial";		
 	}
 	
-	@RequestMapping(value= {"/commercial/{subvar}"}, method={RequestMethod.GET,RequestMethod.POST})
-	public String photo(@PathVariable String subvar, Model model) {
-		resultList= new ArrayList<String>();
-		comCategory = new HashSet<String>(); 
-		photoCategory = new HashSet<String>(); 
-	
-		List<PhotoDTO> photoList = photoDAO.selectPhotoList();
-		List<CommeDTO> commeList = commeDAO.selectCommeList();
-		System.out.println(photoDAO);
-		System.out.println(commeDAO);
-		
-		for(int i=0;i<commeList.size();i++) {
-		
-			comCategory.add(commeList.get(i).getC_Category()); 
-			if(commeList.get(i).getC_Category().equals(subvar)) {
-				resultList.add(commeList.get(i).getC_Name());
-			}
-		}
-		
-		for(int i=0;i<photoList.size();i++) {
-			
-			photoCategory.add(photoList.get(i).getP_Category()); 
-		}
-		model.addAttribute("resultList",resultList);
-		model.addAttribute("comCategory", comCategory);
-		model.addAttribute("photoCategory", photoCategory);
-		return "/commercial";
-		
-	}
+	   @RequestMapping(value= {"/commercial/{subvar}"}, method={RequestMethod.GET,RequestMethod.POST})
+	   public String photo(@PathVariable String subvar, Model model) {
+	      resultList= new ArrayList<String>();
+	      comCategory = new HashSet<String>(); 
+	      photoCategory = new HashSet<String>(); 
+	   
+	      List<PhotoDTO> photoList = photoDAO.selectPhotoList();
+	      List<CommeDTO> commeList = commeDAO.selectCommeList();
+	      
+	      for(int i=0;i<photoList.size();i++) {
+	         
+	         photoCategory.add(photoList.get(i).getP_Category()); 
+	      }
+	      
+	      LinkedHashMap<String, String> commemap = new LinkedHashMap<String, String>();
+	      for(int i=0;i<commeList.size();i++) {
+	      
+	         comCategory.add(commeList.get(i).getC_Category()); 
+	         if(commeList.get(i).getC_Category().equals(subvar)) {
+	            commemap.put(Integer.toString(commeList.get(i).getC_Id()), commeList.get(i).getC_Name());
+	         }
+	      }
+	      
+	      model.addAttribute("resultCommeMap",commemap);
+	      model.addAttribute("comCategory", comCategory);
+	      model.addAttribute("photoCategory", photoCategory);
+	      return "/commercial";
+	      
+	   }
+
 	
 	@RequestMapping(value="/deletecommecategory",method={RequestMethod.POST})
 	   public String deleteCommeCategory(Model model,
@@ -124,27 +123,26 @@ public class CommeController {
 	      
 	      commeDAO.deleteCommeCategory(commeDTO);
 	      return "forward:/commeselect";
-	   } 
+	   }
 	
 	@RequestMapping(value="/deletecomme", method={RequestMethod.GET,RequestMethod.POST})
 	public String deleteComme(Model model, @RequestParam("comme_id")int comme_id) {
 		commeDAO.deleteComme(comme_id);
 		return "redirect:/commercial";
 	}
-	
+
 	@RequestMapping(value="/updatecomme", method={RequestMethod.GET,RequestMethod.POST})
 	public String updateFilm(Model model, 
 			@RequestParam("comme_id")int comme_id,
 			@RequestParam("video_comme_url")String comme_real_name) {
-		System.out.println("real name:"+ comme_real_name);
+		//System.out.println("real name:"+ comme_real_name);
 		String comme_name=comme_real_name.substring(comme_real_name.lastIndexOf("=")+1);
-		System.out.println("film_name"+comme_name);
+		//System.out.println("film_name"+comme_name);
 		CommeDTO commeDTO = new CommeDTO();
 		commeDTO.setC_Id(comme_id);
 		commeDTO.setC_Name(comme_name);
 		commeDAO.updateComme(commeDTO);
 		return "redirect:/commercial";
 	}
-	
-			
+
 }

@@ -40,12 +40,13 @@ public class FilmsController {
 	@RequestMapping(value="/uploadFilms",method= {RequestMethod.GET,RequestMethod.POST})
 	public String uploadVideo(Model model,
 			@RequestParam("video_url") String videourl) {
-			String film_name=videourl.substring(videourl.lastIndexOf("=")+1);
+		String film_name=videourl.substring(videourl.lastIndexOf("=")+1);	
 			
-			FilmsDTO filmsDTO = new FilmsDTO();
-			filmsDTO.setF_Name(film_name);
-			filmsDAO.insertFilms(filmsDTO);
-			return "redirect:/filmsselect";
+		FilmsDTO filmsDTO = new FilmsDTO();
+		filmsDTO.setF_Name(film_name);
+		filmsDTO.setF_Category("category1");
+		filmsDAO.insertFilms(filmsDTO);
+		return "redirect:/filmsselect";
 		
 	}
 	
@@ -61,7 +62,7 @@ public class FilmsController {
 		LinkedHashMap<String, String> filmmap = new LinkedHashMap<String, String>();
 		for(int i=0;i<filmsList.size();i++) {
 			filmmap.put(Integer.toString(filmsList.get(i).getF_Id()), filmsList.get(i).getF_Name());
-			}
+		}
 		
 		for(int i=0;i<categoryList.size();i++) {
 			comCategory.add(categoryList.get(i).getC_Category());  	
@@ -74,13 +75,14 @@ public class FilmsController {
 		
 		return "/films";
 	}
+	
 	@RequestMapping(value="/deletefilm", method={RequestMethod.GET,RequestMethod.POST})
 	public String deleteFilm(Model model, @RequestParam("film_id")int film_id) {
 		System.out.println(film_id);
 		filmsDAO.deleteFilms(film_id);
 		return "redirect:/films";
 	}
-	
+
 	@RequestMapping(value="/updatefilm", method={RequestMethod.GET,RequestMethod.POST})
 	public String updateFilm(Model model, 
 			@RequestParam("film_id")int film_id,
@@ -94,5 +96,5 @@ public class FilmsController {
 		filmsDAO.updateFilms(filmsDTO);
 		return "redirect:/films";
 	}
-	 
+	
 }
