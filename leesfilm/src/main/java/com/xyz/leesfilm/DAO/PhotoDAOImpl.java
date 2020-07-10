@@ -37,8 +37,6 @@ public class PhotoDAOImpl implements PhotoDAO {
 		return sqlSession.delete(namespace+".deletePhoto",photo_id);
 	}
 
-
-
 	@Override
 	public int updatePhoto(PhotoDTO photoDTO) {
 		return sqlSession.update(namespace+".updatePhoto",photoDTO);

@@ -1,6 +1,7 @@
 package com.xyz.leesfilm.Controller;
 
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.xyz.leesfilm.DAO.CategoryDAO;
+import com.xyz.leesfilm.DAO.HomepicDAO;
 import com.xyz.leesfilm.DTO.CategoryDTO;
+import com.xyz.leesfilm.DTO.HomepicDTO;
 
 @Controller
 public class HomeController {
@@ -23,7 +26,7 @@ public class HomeController {
 
 	@Inject
 	private CategoryDAO categoryDAO;
-
+	private HomepicDAO homepicDAO;
 
 	Set<String> photoCategory;
 	Set<String> comCategory;
@@ -36,15 +39,19 @@ public class HomeController {
 		comCategory = new HashSet<String>();
 		List<CategoryDTO> categoryList = categoryDAO.selectCategoryList();
 		
-		System.out.println(categoryDAO);
-		
+		List<HomepicDTO> homepicList = homepicDAO.selectHomeList();
 		
 		for(int i=0;i<categoryList.size();i++) {
 			comCategory.add(categoryList.get(i).getC_Category()); 
-		 	
 			photoCategory.add(categoryList.get(i).getP_Category()); 
 		}
 		
+		LinkedHashMap<String, String> homepicmap = new LinkedHashMap<String, String>();
+		for(int i=0;i<homepicList.size();i++) {
+			homepicmap.put(Integer.toString(homepicList.get(i).getH_Id()), homepicList.get(i).getH_name());
+		}
+		
+		model.addAttribute("resultMap",homepicmap);
 		model.addAttribute("photoCategory", photoCategory);
 		model.addAttribute("comCategory", comCategory);
 		

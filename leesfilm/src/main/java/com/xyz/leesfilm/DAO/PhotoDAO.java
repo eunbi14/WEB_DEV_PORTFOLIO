@@ -11,5 +11,5 @@ public interface PhotoDAO {
    public List<PhotoDTO> selectPhotoList();
    public int deletePhotoCategory(PhotoDTO photoDTO);
    public int deletePhoto(int photo_id);
-	public int updatePhoto(PhotoDTO photoDTO);
+   public int updatePhoto(PhotoDTO photoDTO);
 }
