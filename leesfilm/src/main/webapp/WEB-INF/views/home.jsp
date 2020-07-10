@@ -46,23 +46,24 @@
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet" />
 
 <script type="text/javascript">
-	function edit() {
-		<%
-		request.setCharacterEncoding("UTF-8");
-		String id = (String)session.getAttribute("idKey");
-		if(id == "이승채"){ %>
-			var result = confirm("이미지를 수정하겠습니까?");
-			if(result){
-				<% 
-				session.setAttribute("delete","false"); 
-				session.setAttribute("type", "image");
-				%>
-				window.open("./editImage","Edit Image","width=500,height=500");
-			}else{
-				alert("실행 취소 되었습니다.");
-			}
-		<%}%>
-	}		
+			
+function edit() {
+    <%
+    request.setCharacterEncoding("UTF-8");
+    String id = (String)session.getAttribute("idKey");
+    if(id == "이승채"){ %>
+       var result = confirm("이미지를 수정하겠습니까?");
+       if(result){
+          <% 
+          session.setAttribute("delete","false"); 
+          session.setAttribute("type", "image");
+          %>
+          window.open("./editImage","Edit Image","width=500,height=500");
+       }else{
+          alert("실행 취소 되었습니다.");
+       }
+    <%}%>
+ }
 </script>
 
 </head>
@@ -161,7 +162,7 @@
    <jsp:include page="header.jsp"></jsp:include> --%>
 	
 	<div id="title_img">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/1.jpg" width="100%" onclick="edit()">
+		<img id='0' src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/1.jpg" width="100%" onclick="edit('0')">
 	</div>
 	<div id="text">
 		<p>Seoul to Paju</p>
@@ -177,23 +178,23 @@
 	</div>
 
 	<div id="first_img">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/2.jpg" width="100%" onclick="edit()">
+		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/2.jpg" width="100%" onclick="edit('1')">
 	</div>
 	<div id="second_img">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/3.jpg" width="100%" onclick="edit()">
+		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/3.jpg" width="100%" onclick="edit('2')">
 	</div>
 	<div id="second_img">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/4.jpg" width="100%" onclick="edit()">
+		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/4.jpg" width="100%" onclick="edit('3')">
 	</div>
 
 	<div id="second_row">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/5.jpg" width="100%" onclick="edit()">
+		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/5.jpg" width="100%" onclick="edit('4')">
 	</div>
 	<div id="second_second">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/6.jpg" width="100%" onclick="edit()">
+		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/6.jpg" width="100%" onclick="edit('5')">
 	</div>
 	<div id="second_second">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/7.jpg" width="100%" onclick="edit()">
+		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/7.jpg" width="100%" onclick="edit('6')" >
 	</div>
 
 	<div id="instagram">

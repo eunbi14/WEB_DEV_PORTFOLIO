@@ -29,4 +29,14 @@ public class CommeDAO {
    public int deleteCommeCategory(CommeDTO commeDTO) {
       return sqlSession.delete(namespace+".deleteCommeCategory", commeDTO);
    }
+
+public int deleteComme(int comme_id) {
+	return sqlSession.delete(namespace+".deleteComme",comme_id);
+	
+}
+
+public int updateComme(CommeDTO commeDTO) {
+	return sqlSession.update(namespace+".updateComme",commeDTO);
+	
+}
 }

@@ -45,8 +45,7 @@ public class PhotoController {
 	         @RequestParam("photofile") String photoUrl,
 	         @RequestParam("gugunSelect") String category,
 	         HttpServletRequest request) {
-	   // µî·Ï ¹öÆ° ´­·¶À» ¶§ db¿¡ ¾÷·Îµå ÇÏ´Â ¸Þ¼Òµå 
-	   // url¿¡¼­ idºÎºÐ¸¸ ¶¼¼­ db¿¡ ÀúÀå 
+
 	      PhotoDTO photoDTO = new PhotoDTO();
 	      String url = photoUrl;
 	      logger.info(category);
@@ -54,14 +53,14 @@ public class PhotoController {
 	      String urlarr[] = url.split("/");
 	      String photo_name = urlarr[5];
 	      photoDTO.setP_Name(photo_name);
-	      if(category.equals("¼ÒºÐ·ù Ãß°¡")) {
+	      if(category.equals("ï¿½ÒºÐ·ï¿½ ï¿½ß°ï¿½")) {
 	         String addCate = request.getParameter("addCategory");
 	         photoDTO.setP_Category(addCate);
 	      }else {
 	         photoDTO.setP_Category(category);
 	      }
 	      photoDAO.insertPhoto(photoDTO);
-	      return "forward:/photoselect";
+	      return "redirect:/photoselect";
 	   }
 	
 	@RequestMapping(value= {"/photoselect","/photo"}, method={RequestMethod.GET,RequestMethod.POST})
@@ -81,14 +80,14 @@ public class PhotoController {
 		for(int i=0;i<photoList.size();i++) {
 		
 			photoCategory.add(photoList.get(i).getP_Category()); 
-			
+				/*
 			if(photomap.containsValue(photoList.get(i).getP_Name())) {
 				continue;
 			}
 			else {
-				
+				*/
 			photomap.put(Integer.toString(photoList.get(i).getP_Id()), photoList.get(i).getP_Name());
-			}
+			//}
 		}
 	
 		model.addAttribute("resultMap",photomap);
@@ -140,7 +139,6 @@ public class PhotoController {
 		System.out.println(photo_id);
 		photoDAO.deletePhoto(photo_id);
 		return "redirect:/photo";
-		//»èÁ¦ÇÏ°í³ª¼­, À©µµ¿ì Ã¢ ´Ý±â 
 	}
 	
 	@RequestMapping(value="/deletephotocategory",method={RequestMethod.POST})

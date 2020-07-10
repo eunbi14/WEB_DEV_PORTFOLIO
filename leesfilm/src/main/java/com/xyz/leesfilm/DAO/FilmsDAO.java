@@ -25,5 +25,13 @@ public class FilmsDAO {
 	public List<FilmsDTO> selectFilmsList() {
 		return sqlSession.selectList(namespace+".selectFilmsList");
 	}
+
+	public int deleteFilms(int film_id) {
+		return sqlSession.delete(namespace+".deleteFilms",film_id);
+	}
+
+	public int updateFilms(FilmsDTO filmsDTO) {
+		return sqlSession.update(namespace+".updateFilms",filmsDTO);
+	}
 	
 }

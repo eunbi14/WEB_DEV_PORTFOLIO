@@ -60,16 +60,18 @@ String id = (String)session.getAttribute("idKey");
 <script type="text/javascript">
 jQuery(function() {
 	$(document).on("click", "a.video", function() {
-		//var path = $(this).attr('src')
+		var path = $(this).attr('src')
+		var film_id=$(this).attr('title')
+         console.log(film_id);
 		
 		if("<%=id%>" == "이승채"){
 			var result = confirm("동영상을 수정/삭제하겠습니까?");
 			if(result){
 				<%
 				session.setAttribute("delete","true");
-				session.setAttribute("type","video");
+				session.setAttribute("type","films");
 				%>
-				window.open("./editImage","Edit Image","width=500,height=500");
+				window.open("/leesfilm/editImage?film_id="+film_id,"Edit Image","width=500,height=500");
 			}else{
 				alert("실행 취소 되었습니다.");
 			}
@@ -178,11 +180,13 @@ jQuery(function() {
  <%--    여기까지 
    <jsp:include page="header.jsp"></jsp:include> --%>
 	<div class="video-all">	
-		<c:forEach items="${resultList}" var="films">
+		<c:forEach items="${resultFilmMap}" var="filmMap">
+		<c:set var="film_id" value="${filmMap.key}"/>
+		<c:set var="film_name" value="${filmMap.value}" />
 			<div class="videos" id="v0">
-				<a href="https://www.youtube.com/watch?v=${films}" class="video" >
+				<a href="https://www.youtube.com/watch?v=${film_name}" class="video" title="${film_id}" >
 					<span>&nbsp;</span>
-					<img src="http://i1.ytimg.com/vi/${films}/maxresdefault.jpg" />
+					<img src="http://i1.ytimg.com/vi/${film_name}/maxresdefault.jpg" />
 				</a>
 			</div>
 		</c:forEach>

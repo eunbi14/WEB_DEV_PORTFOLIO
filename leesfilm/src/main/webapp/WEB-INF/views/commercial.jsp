@@ -56,16 +56,17 @@ String id = (String)session.getAttribute("idKey");
 <script type="text/javascript">
 jQuery(function() {
 	$(document).on("click", "a.video", function() {
-		//var path = $(this).attr('src')
+		var path = $(this).attr('src')
+		var comme_id=$(this).attr('title')
 		
 		if("<%=id%>" == "이승채"){
 			var result = confirm("동영상을 수정/삭제하겠습니까?");
 			if(result){
 				<%
 				session.setAttribute("delete","true");
-				session.setAttribute("type","video");
+				session.setAttribute("type","comme");
 				%>
-				window.open("/leesfilm/editImage","Edit Image","width=500,height=500");
+				window.open("/leesfilm/editImage?comme_id="+comme_id,"Edit Image","width=500,height=500");
 			}else{
 				alert("실행 취소 되었습니다.");
 			}
@@ -213,11 +214,13 @@ jQuery(function() {
    <jsp:include page="header.jsp"></jsp:include> --%>
 
   	<div class="video-all">
-  		<c:forEach items="${resultList}" var="commercial">
+  		<c:forEach items="${resultCommeMap}" var="commeMap">
+  			<c:set var="comme_id" value="${commeMap.key}"/>
+			<c:set var="comme_name" value="${commeMap.value}" />
     		<div class="videos">
-				<a href="https://www.youtube.com/watch?v=${commercial}" class="video">
+				<a href="https://www.youtube.com/watch?v=${comme_name}" class="video" title="${comme_id}">
 					<span>&nbsp;</span>
-					<img class="thumnail" src="http://i1.ytimg.com/vi/${commercial}/maxresdefault.jpg" />
+					<img class="thumnail" src="http://i1.ytimg.com/vi/${comme_name}/maxresdefault.jpg" />
 				</a>
     		</div>
     	</c:forEach>
