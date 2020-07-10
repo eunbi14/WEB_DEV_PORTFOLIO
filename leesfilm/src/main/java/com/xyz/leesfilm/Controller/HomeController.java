@@ -51,7 +51,8 @@ public class HomeController {
 			homepicmap.put(Integer.toString(homepicList.get(i).getH_Id()), homepicList.get(i).getH_name());
 		}
 		
-		model.addAttribute("resultMap",homepicmap);
+		model.addAttribute("resulthomeMap",homepicmap);
+		
 		model.addAttribute("photoCategory", photoCategory);
 		model.addAttribute("comCategory", comCategory);
 		
