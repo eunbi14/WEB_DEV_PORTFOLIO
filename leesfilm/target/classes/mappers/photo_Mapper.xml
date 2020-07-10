@@ -11,13 +11,23 @@
   </insert>
   
   <select id="selectPhotoList" resultType="com.xyz.leesfilm.DTO.PhotoDTO">
-	select p_id,p_name,p_category from photo
-	<!-- where p_category='Photo1' or p_category='Photo2' or p_category='Photo3'; -->
+   select p_id,p_name, p_category from photo
+   <!-- where p_category='Photo1' or p_category='Photo2' or p_category='Photo3'; -->
   </select>
   
   <delete id="deletePhotoCategory" parameterType="com.xyz.leesfilm.DTO.PhotoDTO">
-  	delete from photo where p_Category = #{p_Category}
+     delete from photo where p_Category = #{p_Category}
   </delete>
+  
+   <delete id="deletePhoto" parameterType="int"> 
+  	delete from photo where p_id = #{photo_id} 
+  </delete>
+
+    <update id="updatePhoto" parameterType="com.xyz.leesfilm.DTO.PhotoDTO">
+     update photo
+     set p_name = #{p_Name}
+     where p_id = #{p_Id}
+  	</update>
   
   <insert id="insertFilms" parameterType="com.xyz.leesfilm.DTO.FilmsDTO">
     insert into films(f_Category,f_Name)
@@ -25,7 +35,7 @@
   </insert>
   
   <select id="selectFilmsList" resultType="com.xyz.leesfilm.DTO.FilmsDTO">
-	select f_name from films;
+   select f_name from films;
   </select>
   
   <insert id="insertComme" parameterType="com.xyz.leesfilm.DTO.CommeDTO">
@@ -34,11 +44,11 @@
   </insert>
   
   <select id="selectCommeList" resultType="com.xyz.leesfilm.DTO.CommeDTO">
-	select c_name, c_Category from commercial;
+   select c_name, c_category from commercial;
   </select>
   
   <delete id="deleteCommeCategory" parameterType="com.xyz.leesfilm.DTO.CommeDTO">
-  	delete from commercial where c_Category = #{c_Category}
+     delete from commercial where c_Category = #{c_Category}
   </delete>
   
   <select id="selectCategoryList" resultType="com.xyz.leesfilm.DTO.CategoryDTO">

@@ -1,8 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="root" value="${pageContext.request.contextPath}" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<%
+request.setCharacterEncoding("UTF-8");
+String id = (String)session.getAttribute("idKey");
+%>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport"
@@ -42,15 +47,15 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-<!-- Core theme JS-->
-<!-- <script src="js/scripts.js"></script> -->
+
+<script type="text/javascript">
+	document.form.action = "/leesfilm/header";
+</script>
 </head>
 <body>
 	<!-- Navigation-->
 		<div class="nav-top">
 			<%
-			request.setCharacterEncoding("UTF-8");
-			String id = (String) session.getAttribute("idKey");
 			if (id == "이승채") {
 			%>
 			<div id="upload_icons">
@@ -97,22 +102,26 @@
 						<ul class="navbar-nav ml-auto my-2 my-lg-0">
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
 								href="./">About</a></li>
+								
+							
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
 								href="./photo">Photo</a>
 								<!-- 은비가 db에서 카테고리 명 갖고 오는 방법 알려주면 그 때 맞게 적용하기 -->
+							 <c:forEach items="${photoCategory}" var="subphotos"> 
 								<ul>
-									<li><a href="#">subphoto1</a></li>
-									<li><a href="#">subphoto2</a></li>
-									<li><a href="#">subphoto3</a></li>
+									<li><a href="#">${subphotos}</a></li>
+									
 								</ul>	
+								 </c:forEach>
 							</li>
+							
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
 								href="./films">Films</a>
 							</li>
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
 								href="./commercial">Commercial</a>
 								<ul>
-									<li><a href="#">subcommercial1</a></li>
+									<li><a href="#">aaa</a></li>
 									<li><a href="#">subcommercial2</a></li>
 								</ul>		
 							</li>

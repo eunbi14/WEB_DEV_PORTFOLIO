@@ -19,106 +19,105 @@ import com.xyz.leesfilm.DTO.CategoryDTO;
 
 @Controller
 public class HomeController {
-   private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-   @Inject
-   private CategoryDAO categoryDAO;
-
-
-   Set<String> photoCategory;
-   Set<String> comCategory;
-   
-   @RequestMapping(value = "/")
-   public String home(Locale locale, Model model) {
-      
-      logger.info("Welcome home! The client locale {}.", locale);
-      photoCategory = new HashSet<String>(); 
-      comCategory = new HashSet<String>();
-      List<CategoryDTO> categoryList = categoryDAO.selectCategoryList();
-      
-      System.out.println(categoryDAO);
-      
-      
-      for(int i=0;i<categoryList.size();i++) {
-         comCategory.add(categoryList.get(i).getC_Category()); 
-          
-         photoCategory.add(categoryList.get(i).getP_Category()); 
-      }
-      
-      model.addAttribute("photoCategory", photoCategory);
-      model.addAttribute("comCategory", comCategory);
-      
-      return "home";
-   }
+	@Inject
+	private CategoryDAO categoryDAO;
 
 
-    
-    
+	Set<String> photoCategory;
+	Set<String> comCategory;
+	
+	@RequestMapping(value = "/")
+	public String home(Locale locale, Model model) {
+		
+		logger.info("Welcome home! The client locale {}.", locale);
+		photoCategory = new HashSet<String>(); 
+		comCategory = new HashSet<String>();
+		List<CategoryDTO> categoryList = categoryDAO.selectCategoryList();
+		
+		System.out.println(categoryDAO);
+		
+		
+		for(int i=0;i<categoryList.size();i++) {
+			comCategory.add(categoryList.get(i).getC_Category()); 
+		 	
+			photoCategory.add(categoryList.get(i).getP_Category()); 
+		}
+		
+		model.addAttribute("photoCategory", photoCategory);
+		model.addAttribute("comCategory", comCategory);
+		
+		return "home";
+	}
 
-   @RequestMapping(value = "/login", method = RequestMethod.POST)
-   public String login(Locale locale, Model model) {
-      logger.debug("login page........");
-      return "login";
-   }
 
-   @RequestMapping(value = "/email", method = RequestMethod.POST)
-   public String email(Locale locale, Model model) {
-      logger.debug("email page.........");
-      return "email";
-   }
+	 
+	 
 
-   @RequestMapping(value = "/contact")
-   public String about(Locale locale, Model model) {
-      logger.debug("contact page.........");
-      photoCategory = new HashSet<String>(); 
-      comCategory = new HashSet<String>();
-      List<CategoryDTO> categoryList = categoryDAO.selectCategoryList();
-      
-      System.out.println(categoryDAO);
-      
-      
-      for(int i=0;i<categoryList.size();i++) {
-         comCategory.add(categoryList.get(i).getC_Category()); 
-          
-         photoCategory.add(categoryList.get(i).getP_Category()); 
-      }
-      
-      model.addAttribute("photoCategory", photoCategory);
-      model.addAttribute("comCategory", comCategory);
-      return "contact";
-   }
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(Locale locale, Model model) {
+		logger.debug("login page........");
+		return "login";
+	}
 
-   @RequestMapping(value = "/logout")
-   public String logout(Locale locale, Model model) {
-      logger.debug("logout page.........");
-      return "logout";
-   }
+	@RequestMapping(value = "/email", method = RequestMethod.POST)
+	public String email(Locale locale, Model model) {
+		logger.debug("email page.........");
+		return "email";
+	}
 
-   @RequestMapping(value = "/upload")
-   public String upload(Locale locale, Model model) {
-      logger.debug("logout page.........");
-      photoCategory = new HashSet<String>(); 
-      comCategory = new HashSet<String>();
-      List<CategoryDTO> categoryList = categoryDAO.selectCategoryList();
-      
-      System.out.println(categoryDAO);
-      
-      
-      for(int i=0;i<categoryList.size();i++) {
-         comCategory.add(categoryList.get(i).getC_Category()); 
-          
-         photoCategory.add(categoryList.get(i).getP_Category()); 
-      }
-      
-      model.addAttribute("photoCategory", photoCategory);
-      model.addAttribute("comCategory", comCategory);
-      return "upload";
-   }
+	@RequestMapping(value = "/contact")
+	public String about(Locale locale, Model model) {
+		logger.debug("contact page.........");
+		photoCategory = new HashSet<String>(); 
+		comCategory = new HashSet<String>();
+		List<CategoryDTO> categoryList = categoryDAO.selectCategoryList();
+		
+		System.out.println(categoryDAO);
+		
+		
+		for(int i=0;i<categoryList.size();i++) {
+			comCategory.add(categoryList.get(i).getC_Category()); 
+		 	
+			photoCategory.add(categoryList.get(i).getP_Category()); 
+			
+		}
+		
+		model.addAttribute("photoCategory", photoCategory);
+		model.addAttribute("comCategory", comCategory);
+		return "contact";
+	}
 
-   @RequestMapping(value = "/editImage")
-   public String edit(Locale locale, Model model) {
-      logger.debug("editImage page.........");
-      return "editImage";
-   }
+	@RequestMapping(value = "/logout")
+	public String logout(Locale locale, Model model) {
+		logger.debug("logout page.........");
+		return "logout";
+	}
+
+	@RequestMapping(value = "/upload")
+	public String upload(Locale locale, Model model) {
+		logger.debug("logout page.........");
+		photoCategory = new HashSet<String>(); 
+		comCategory = new HashSet<String>();
+		List<CategoryDTO> categoryList = categoryDAO.selectCategoryList();
+				
+		for(int i=0;i<categoryList.size();i++) {
+			comCategory.add(categoryList.get(i).getC_Category()); 
+		 	
+			photoCategory.add(categoryList.get(i).getP_Category()); 
+		}
+		System.out.println("size:~~~~~");
+		System.out.println(photoCategory.size());
+		model.addAttribute("photoCategory", photoCategory);
+		model.addAttribute("comCategory", comCategory);
+		return "upload";
+	}
+
+	@RequestMapping(value = "/editImage")
+	public String edit(Locale locale, Model model) {
+		logger.debug("editImage page.........");
+		return "editImage";
+	}
 
 }

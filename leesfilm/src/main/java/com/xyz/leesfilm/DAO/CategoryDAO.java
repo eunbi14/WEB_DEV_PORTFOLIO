@@ -21,3 +21,9 @@ public class CategoryDAO {
 		return sqlSession.selectList(namespace+".selectCategoryList");
 	}
 }
+
+
+
+
+
+	

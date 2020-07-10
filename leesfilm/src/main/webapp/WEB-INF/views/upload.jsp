@@ -1,21 +1,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%
-	request.setCharacterEncoding("UTF-8");
+   request.setCharacterEncoding("UTF-8");
 String id = (String) session.getAttribute("idKey");
 if (id != "이승채") {
 %>
 <script>
-    	 alert("관리자모드로 로그인해주세요!");
-    	 location.href="/leesfilm/contact";
+        alert("관리자모드로 로그인해주세요!");
+        location.href="/leesfilm/contact";
 </script>
 <%
-	}
+   }
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -23,17 +23,17 @@ if (id != "이승채") {
 <title>Upload Images/Videos</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+   integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+   crossorigin="anonymous">
 
 <!-- Optional theme -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+   integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+   crossorigin="anonymous">
 <link href="<c:url value="/resources/css/styles.css" />"
-	rel="stylesheet">
+   rel="stylesheet">
 <!-- Latest compiled and minified JavaScript -->
 
 <script type="text/javascript">
@@ -41,15 +41,16 @@ if (id != "이승채") {
 var firstList = new Array("Photo", "Commercial", "Films");
 
 // 중분류
-
+								
 var secondList1 = new Array("소분류를 선택하세요.");
+//,"Photo1","Photo2","Photo3","소분류 추가");
 <c:forEach items="${photoCategory}" var="subphotos">
-	secondList1.push("${subphotos}");
+secondList1.push("${subphotos}")
 </c:forEach>
 secondList1.push("소분류 추가");
 var secondList2 = new Array("소분류를 선택하세요.");
 <c:forEach items="${comCategory}" var="subcoms">
-secondList2.push("${subcoms}");
+secondList2.push("${subcoms}")
 </c:forEach>
 secondList2.push("소분류 추가");
 //var secondList3 = new Array("소분류를 선택하세요.","소분류 추가");
@@ -88,17 +89,17 @@ function changeSidoSelect(){
     }
     
     if(d_flag){
-		var v_delSelect = document.getElementsByName("deleteCategory")[0];
+      var v_delSelect = document.getElementsByName("deleteCategory")[0];
         v_delSelect.parentNode.removeChild(v_delSelect);
         d_flag = false;
-	}
-	if(a_flag) {
-		var v_addSelect = document.getElementById("addCategory");
+   }
+   if(a_flag) {
+      var v_addSelect = document.getElementById("addCategory");
         v_addSelect.parentNode.removeChild(v_addSelect);
-        a_flag = false;	
-	}
-	
- 	gugunSelectFill(idx);   // 중분류 생성
+        a_flag = false;   
+   }
+   
+    gugunSelectFill(idx);   // 중분류 생성
 }
 
 
@@ -108,7 +109,7 @@ function gugunSelectFill(idx){
     var data = null;
   
     if (idx == 1){ //대분류 photo 일 때, 생기는 소분류 secondList1
-    	//db 에는 소분류 카테고리만 전달 
+       //db 에는 소분류 카테고리만 전달 
      data = secondList1
    
      }
@@ -149,46 +150,48 @@ function changeSecondSelect(){
         return;
     }
     
-	/* if(v_sidoSelect.options[v_sidoSelect.selectedIndex].value == "Films") {
-		return;
+   /* if(v_sidoSelect.options[v_sidoSelect.selectedIndex].value == "Films") {
+      return;
     } */
-	
+   
     var v_next = v_secondSelect.options[v_secondSelect.selectedIndex].value;
     if(v_next == "소분류를 선택하세요."){
-    	if(d_flag){
-    		var v_delSelect = document.getElementsByName("deleteCategory")[0];
+       if(d_flag){
+          var v_delSelect = document.getElementsByName("deleteCategory")[0];
             v_delSelect.parentNode.removeChild(v_delSelect);
             d_flag = false;
-    	}
-    	if(a_flag) {
-    		var v_addSelect = document.getElementById("addCategory");
+       }
+       if(a_flag) {
+          var v_addSelect = document.getElementById("addCategory");
             v_addSelect.parentNode.removeChild(v_addSelect);
-            a_flag = false;	
-    	}
+            a_flag = false;   
+       }
     }
     else if(v_next == "소분류 추가"){
-    	addSecondSelect();
-    	if(d_flag){
-    		var v_delSelect = document.getElementsByName("deleteCategory")[0];
+       addSecondSelect();
+       if(d_flag){
+          var v_delSelect = document.getElementsByName("deleteCategory")[0];
             v_delSelect.parentNode.removeChild(v_delSelect);
             d_flag = false;
-    	}
+       }
     }
     else{
-    	deleteSelect();
-    	if(a_flag) {
-    		var v_addSelect = document.getElementById("addCategory");
+       deleteSelect();
+       if(a_flag) {
+          var v_addSelect = document.getElementById("addCategory");
             v_addSelect.parentNode.removeChild(v_addSelect);
-            a_flag = false;	
-    	}
+            a_flag = false;   
+       }
     }
 }
 
+
+
 function addSecondSelect(){
-	if(a_flag) return;
+   if(a_flag) return;
     var v_addSelect = document.getElementById("sido");
     
-   	var optionEl = document.createElement("input");
+      var optionEl = document.createElement("input");
     optionEl.setAttribute("type", "text");
     optionEl.setAttribute("id", "addCategory");
     optionEl.setAttribute("name", "addCategory");
@@ -199,7 +202,7 @@ function addSecondSelect(){
 }
 
 function deleteSelect(){
-	if(d_flag) return;
+   if(d_flag) return;
     var v_deleteSelect = document.getElementById("sido");
     
     var optionEl = document.createElement("input");
@@ -214,97 +217,97 @@ function deleteSelect(){
 }
 
 function delCate(){
-	var v_type = document.getElementById("sidoSelect").value;
-	if(v_type == "Photo"){
-		document.form.action = "/leesfilm/deletephotocategory";
-	}else if(v_type == "Commercial"){
-		document.form.action = "/leesfilm/deletecommecategory";
-	}
-	document.form.submit();
+   var v_type = document.getElementById("sidoSelect").value;
+   if(v_type == "Photo"){
+      document.form.action = "/leesfilm/deletephotocategory";
+   }else if(v_type == "Commercial"){
+      document.form.action = "/leesfilm/deletecommecategory";
+   }
+   document.form.submit();
 }
 
 function subType(){
-	var v_type = document.getElementById("sidoSelect").value;
-	if(v_type == "Photo"){
-		if(document.form.photofile.value == ""){
-			alert("사진을 첨부해 주세요.");
-			document.form.photofile.focus();
-			return;
-		}
-		if(document.form.video_url.value != ""){
-			alert("영상 링크를 지워주세요.");
-			document.form.video_url.focus();
-			return;
-		}
-		document.form.action = "/leesfilm/uploadphoto";
-	}else if(v_type == "Commercial" || v_type == "Films"){
-		if(document.form.video_url.value == ""){
-			alert("영상 링크를 첨부해 주세요.");
-			document.form.video_url.focus();
-			return;
-		}
-		if(document.form.photofile.value != ""){
-			alert("사진을 지워주세요.");
-			document.form.photofile.focus();
-			return;
-		}
-		
-		if(v_type == "Commercial"){
-			document.form.action = "/leesfilm/uploadCommercial";
-		}else {
-			document.form.action = "/leesfilm/uploadFilms";
-		}
-		
-	}
-	document.form.submit();
+   var v_type = document.getElementById("sidoSelect").value;
+   if(v_type == "Photo"){
+      if(document.form.photofile.value == ""){
+         alert("사진을 첨부해 주세요.");
+         document.form.photofile.focus();
+         return;
+      }
+      if(document.form.video_url.value != ""){
+         alert("영상 링크를 지워주세요.");
+         document.form.video_url.focus();
+         return;
+      }
+      document.form.action = "/leesfilm/uploadphoto";
+   }else if(v_type == "Commercial" || v_type == "Films"){
+      if(document.form.video_url.value == ""){
+         alert("영상 링크를 첨부해 주세요.");
+         document.form.video_url.focus();
+         return;
+      }
+      if(document.form.photofile.value != ""){
+         alert("사진을 지워주세요.");
+         document.form.photofile.focus();
+         return;
+      }
+      
+      if(v_type == "Commercial"){
+         document.form.action = "/leesfilm/uploadCommercial";
+      }else {
+         document.form.action = "/leesfilm/uploadFilms";
+      }
+      
+   }
+   document.form.submit();
 }
 </script>
 
 </head>
 <body>
-	<div class="container" id="upload_container">
-		<form id="form" name="form" method="post" enctype="multipart/form-data">
-			<table class="table table-bordered">
-				<tbody>
-					<tr>
-						<th id="upload_th">카테고리</th>
-						<td>
-							<div id="sido">
-								<select id="sidoSelect" name="sidoSelect" onChange="changeSidoSelect();">
-									<option value="">대분류를 선택하세요.</option>
-								</select>
-								<select id="gugunSelect" name="gugunSelect" onChange="changeSecondSelect();">
-									<option value="">중분류 선택하세요.</option>
-								</select>
-							</div>
-							
-						</td>
-					</tr>
-					<tr>
-						<th id="upload_th">사진 첨부</th>
-						<td>
-							<!-- <input id="upload_file" type="file" name="photofile" id="photoImg"/>-->
-							<input type="text" placeholder="이미지 링크를 입력하세요" id="upload_file" name="photofile" id="photoImg" class="form-control" />
-						</td>
-					</tr>
-					<tr>
-						<th id="upload_th">영상 링크</th>
-						<td><input type="text" placeholder="영상 링크를 입력하세요" name="video_url" class="form-control" /></td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<input id="upload_btn" type="button" value="등록" class="pull-right submit" onclick="subType()" /> 
-							<input id="upload_btn" type="reset" class="pull-left" /> 
-							<input id="upload_btn" type="button" value="뒤로가기" class="pull-right" onclick="javascript:location.href='./'" /> 
-							<!-- <a class="btn btn-default" onclick="sendData()"> 등록 </a>
-                    		<a class="btn btn-default" type="reset"> reset </a>
-                    		<a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a> -->
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</form>
-	</div>
-	<footer class="footer"></footer>
+   <div class="container" id="upload_container">
+      <form id="form" name="form" method="post" enctype="multipart/form-data">
+         <table class="table table-bordered">
+            <tbody>
+               <tr>
+                  <th id="upload_th">카테고리</th>
+                  <td>
+                     <div id="sido">
+                        <select id="sidoSelect" name="sidoSelect" onChange="changeSidoSelect();">
+                           <option value="">대분류를 선택하세요.</option>
+                        </select>
+                        <select id="gugunSelect" name="gugunSelect" onChange="changeSecondSelect();">
+                           <option value="">중분류 선택하세요.</option>
+                        </select>
+                     </div>
+                     
+                  </td>
+               </tr>
+               <tr>
+                  <th id="upload_th">사진 첨부</th>
+                  <td>
+                     <!-- <input id="upload_file" type="file" name="photofile" id="photoImg"/>-->
+                     <input type="text" placeholder="이미지 링크를 입력하세요" id="upload_file" name="photofile" id="photoImg" class="form-control" />
+                  </td>
+               </tr>
+               <tr>
+                  <th id="upload_th">영상 링크</th>
+                  <td><input type="text" placeholder="영상 링크를 입력하세요" name="video_url" class="form-control" /></td>
+               </tr>
+               <tr>
+                  <td colspan="2">
+                     <input id="upload_btn" type="button" value="등록" class="pull-right submit" onclick="subType()" /> 
+                     <input id="upload_btn" type="reset" class="pull-left" /> 
+                     <input id="upload_btn" type="button" value="뒤로가기" class="pull-right" onclick="javascript:location.href='./'" /> 
+                     <!-- <a class="btn btn-default" onclick="sendData()"> 등록 </a>
+                          <a class="btn btn-default" type="reset"> reset </a>
+                          <a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a> -->
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </form>
+   </div>
+   <footer class="footer"></footer>
 </body>
 </html>
