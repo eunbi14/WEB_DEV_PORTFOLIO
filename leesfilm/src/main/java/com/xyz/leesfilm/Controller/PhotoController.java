@@ -44,7 +44,7 @@ public class PhotoController {
 		photoDTO.setP_Name(photo_name);
 		photoDTO.setP_Category(category);
 		photoDAO.insertPhoto(photoDTO);
-		return "forward:/photoselect";
+		return "redirect:/photoselect";
 	}
 	
 	@RequestMapping(value= {"/photoselect","/photo"}, method={RequestMethod.GET,RequestMethod.POST})
@@ -54,12 +54,13 @@ public class PhotoController {
 		List<PhotoDTO> photoList = photoDAO.selectPhotoList();
 		LinkedHashMap<String, String> photomap = new LinkedHashMap<String, String>();
 		for(int i=0;i<photoList.size();i++) {
-			if(photomap.containsValue(photoList.get(i).getP_Name())) {
+			/*if(photomap.containsValue(photoList.get(i).getP_Name())) {
 				continue;
 			}
 			else {
+			*/
 			photomap.put(Integer.toString(photoList.get(i).getP_Id()), photoList.get(i).getP_Name());
-			}
+			//}
 		}
 		model.addAttribute("resultMap",photomap);
 		return "/photo";

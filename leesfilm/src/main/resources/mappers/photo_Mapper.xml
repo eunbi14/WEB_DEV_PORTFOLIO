@@ -24,6 +24,7 @@
      set p_name = #{p_Name}
      where p_id = #{p_Id}
   	</update>
+  	
    <insert id="insertFilms" parameterType="com.xyz.leesfilm.DTO.FilmsDTO">
     insert into films(f_Category,f_Name)
     values(#{f_Category},#{f_Name})

@@ -35,8 +35,7 @@
 	 document.form.submit();
 	
  }
- 
- window.opener.location.reload();
+
 
 
   </script>       
