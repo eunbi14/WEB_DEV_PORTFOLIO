@@ -208,30 +208,39 @@ String id = (String)session.getAttribute("idKey");
    </div>
    <div class="row">
    <div class="column">
-   	<% int i = 1; %>
+   	<c:set var="addNum1" value="1" />
    	<c:forEach items="${resultMap}" var="photoMap">
-   		<c:if test="${i%2 != 0}">
+	<c:if test="${addNum1%2 != 0}">	
+	
       		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
-      		<c:set var="photo_id" value="${photoMap.key}" />
-      		<c:set var="photosrc" value="${gd}${photoMap.value}" />
-      		<img src="${photosrc}" width="300px" title="${photo_id}"/>
-      	</c:if>
-   		<% i++; %>
+				<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
+				
+					<c:set var="photo_id" value="${photoMap.key}" />
+					<c:set var="photosrc" value="${gd}${photoMap.value}" />
+					<img src="${photosrc}" width="300px" title="${photo_id}"/>
+				
+   	</c:if>
+   	<c:set var="addNum1" value="${addNum1+1}" />
    	</c:forEach>
    </div>
-
+   	
+   	
    <div class="column">
-   	<% int j = 1; %>
+   	<c:set var="addNum2" value="1" />
    	<c:forEach items="${resultMap}" var="photoMap">
-		<c:if test="${j%2 == 0}">
-			<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
-			<c:set var="photo_id" value="${photoMap.key}" />
-			<c:set var="photosrc" value="${gd}${photoMap.value}" />
-			<img src="${photosrc}" width="300px" title="${photo_id}"/>
-		</c:if>
-   		<% j++; %>
+	<c:if test="${addNum2%2 == 0}">
+	
+      		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
+				<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
+				
+					<c:set var="photo_id" value="${photoMap.key}" />
+					<c:set var="photosrc" value="${gd}${photoMap.value}" />
+					<img src="${photosrc}" width="300px" title="${photo_id}"/>
+				
+   	</c:if>
+   	<c:set var="addNum2" value="${addNum2+1}" />
    	</c:forEach>
-  </div>
+   </div>
   </div>
 </body>
 <footer class="footer"></footer>
