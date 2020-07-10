@@ -11,16 +11,21 @@ import com.xyz.leesfilm.DTO.CommeDTO;
 
 @Service("CommeService")
 public class CommeService {
-	@Inject
-	private CommeDAO commeDAO;
-	
-	public CommeDTO insertComme(CommeDTO commeDTO) {
-		commeDAO.insertComme(commeDTO);
-		return commeDTO;
-	}
-	
-	public List<CommeDTO> selectCommeList() {
-		List<CommeDTO> commerciallist = commeDAO.selectCommeList();
-		return commerciallist;
-		}
+   @Inject
+   private CommeDAO commeDAO;
+   
+   public CommeDTO insertComme(CommeDTO commeDTO) {
+      commeDAO.insertComme(commeDTO);
+      return commeDTO;
+   }
+   
+   public List<CommeDTO> selectCommeList() {
+      List<CommeDTO> commerciallist = commeDAO.selectCommeList();
+      return commerciallist;
+   }
+   
+   public CommeDTO deleteCommeCategory(CommeDTO commeDTO) {
+      commeDAO.deleteCommeCategory(commeDTO);
+      return commeDTO;
+   }
 }

@@ -1,7 +1,10 @@
 package com.xyz.leesfilm.Controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -13,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.xyz.leesfilm.DAO.CategoryDAO;
 import com.xyz.leesfilm.DAO.FilmsDAO;
+import com.xyz.leesfilm.DTO.CategoryDTO;
 import com.xyz.leesfilm.DTO.FilmsDTO;
 import com.xyz.leesfilm.DTO.PhotoDTO;
-import com.xyz.leesfilm.Service.FilmsService;
 
 @Controller
 public class FilmsController {
@@ -24,40 +28,72 @@ public class FilmsController {
 	
 	@Inject
 	private FilmsDAO filmsDAO;
-	private FilmsService filmsService;
+	
+	@Inject
+	private CategoryDAO categoryDAO;
 	
 	List<String> resultList;
+	Set<String> comCategory;
+	Set<String> photoCategory;
+	
 	
 	@RequestMapping(value="/uploadFilms",method= {RequestMethod.GET,RequestMethod.POST})
 	public String uploadVideo(Model model,
-			@RequestParam("sidoSelect") String big_category,
-			@RequestParam("gugunSelect") String category,
 			@RequestParam("video_url") String videourl) {
-			String video_id=videourl.substring(videourl.lastIndexOf("=")+1);
-			System.out.println(video_id);	
+			String film_name=videourl.substring(videourl.lastIndexOf("=")+1);
 			
 			FilmsDTO filmsDTO = new FilmsDTO();
-			filmsDTO.setF_Category("category1");
-			filmsDTO.setF_Name(video_id);
+			filmsDTO.setF_Category("films");
+			filmsDTO.setF_Name(film_name);
 			filmsDAO.insertFilms(filmsDTO);
-			return "forward:/filmsselect";
+			return "redirect:/filmsselect";
 		
 	}
 	
 	@RequestMapping(value= {"/filmsselect","/films"}, method={RequestMethod.GET,RequestMethod.POST})
-	public String photo(Model model) {
+	public String films(Model model) {
 		resultList= new ArrayList<String>();
-		List<FilmsDTO> filmsList = filmsDAO.selectFilmsList();
-		System.out.println("처음"+filmsList.size());
+		comCategory = new HashSet<String>();
+		photoCategory = new HashSet<String>();
 		
+		List<FilmsDTO> filmsList = filmsDAO.selectFilmsList();
+		List<CategoryDTO> categoryList = categoryDAO.selectCategoryList();
+		
+		LinkedHashMap<String, String> filmmap = new LinkedHashMap<String, String>();
 		for(int i=0;i<filmsList.size();i++) {
-
-			System.out.println(i+"번째 photolistname3:"+filmsList.get(i).getF_Name());
-			resultList.add(i, filmsList.get(i).getF_Name());
+			filmmap.put(Integer.toString(filmsList.get(i).getF_Id()), filmsList.get(i).getF_Name());
 			}
-		model.addAttribute("resultList",resultList);
+		
+		for(int i=0;i<categoryList.size();i++) {
+			comCategory.add(categoryList.get(i).getC_Category());  	
+			photoCategory.add(categoryList.get(i).getP_Category()); 
+		}
+		
+		model.addAttribute("resultFilmMap",filmmap);
+		model.addAttribute("photoCategory", photoCategory);
+		model.addAttribute("comCategory", comCategory);
+		
 		return "/films";
 	}
+	@RequestMapping(value="/deletefilm", method={RequestMethod.GET,RequestMethod.POST})
+	public String deleteFilm(Model model, @RequestParam("film_id")int film_id) {
+		System.out.println(film_id);
+		filmsDAO.deleteFilms(film_id);
+		return "redirect:/films";
+	}
 	
-			
+	@RequestMapping(value="/updatefilm", method={RequestMethod.GET,RequestMethod.POST})
+	public String updateFilm(Model model, 
+			@RequestParam("film_id")int film_id,
+			@RequestParam("video_film_url")String film_real_name) {
+		System.out.println("real name:"+ film_real_name);
+		String film_name=film_real_name.substring(film_real_name.lastIndexOf("=")+1);
+		System.out.println("film_name"+film_name);
+		FilmsDTO filmsDTO = new FilmsDTO();
+		filmsDTO.setF_Id(film_id);
+		filmsDTO.setF_Name(film_name);
+		filmsDAO.updateFilms(filmsDTO);
+		return "redirect:/films";
+	}
+	 
 }

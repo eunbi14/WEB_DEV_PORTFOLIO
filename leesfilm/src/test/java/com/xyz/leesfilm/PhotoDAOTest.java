@@ -23,7 +23,7 @@ public class PhotoDAOTest {
 		PhotoDTO dto = new PhotoDTO();
 		dto.setP_Category("fleshes");
 		dto.setP_Name("test.jpg");
-		dto.setP_RealName("test1.jpg");
+	//	dto.setP_RealName("test1.jpg");
 		dao.insertPhoto(dto);
 	}
 

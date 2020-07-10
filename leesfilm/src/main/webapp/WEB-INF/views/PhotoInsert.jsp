@@ -4,7 +4,7 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Example Photo Insert</title>
 
 <script type="text/javascript">
