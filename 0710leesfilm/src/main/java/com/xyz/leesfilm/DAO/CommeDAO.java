@@ -36,4 +36,12 @@ public class CommeDAO {
 	public int updateComme(CommeDTO commeDTO) {
 		return sqlSession.update(namespace + ".updateComme", commeDTO);
 	}
+	
+	public int downCommeOrder(int std) {
+		return sqlSession.update(namespace+".downCommeOrder", std);
+	}
+	
+	public List<String> getCommeCategory(int id) {
+		return sqlSession.selectList(namespace+".getCommeCategory", id);
+	}
 }

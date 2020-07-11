@@ -30,10 +30,10 @@ public class MailController {
 			
 			//메일 관련 정보
 			String host = "smtp.naver.com";
-			final String username = "choheyin1221";
-			final String password = "chanyeol1221@";
+			final String username = "eun_bi_1226";
+			final String password = "password"; //나중에 맞는 비밀번호로 바꾸기
 			int port=465;
-			String recipient = "choheyin1221@naver.com";
+			String recipient = "eun_bi_1226@naver.com";
 			
 			String title = name + "님으로부터 메일이 도착했습니다.";
 			String msg = "보낸 분 이메일: " + email + "\n" + "내용: \n" + body;

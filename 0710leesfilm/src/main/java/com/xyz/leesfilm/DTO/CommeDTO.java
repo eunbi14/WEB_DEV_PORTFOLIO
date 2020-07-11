@@ -8,6 +8,14 @@ public class CommeDTO {
 	private int c_Id;
 	private String c_Category;
 	private String c_Name;
+	private int c_cate_order;
+	
+	public int getC_cate_order() {
+		return c_cate_order;
+	}
+	public void setC_cate_order(int c_cate_order) {
+		this.c_cate_order = c_cate_order;
+	}
 	
 	public int getC_Id() {
 		return c_Id;

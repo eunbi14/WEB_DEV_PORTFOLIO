@@ -1,7 +1,6 @@
 package com.xyz.leesfilm.DAO;
 
 import java.util.List;
-import java.util.HashMap;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -40,6 +39,21 @@ public class PhotoDAOImpl implements PhotoDAO {
 	@Override
 	public int updatePhoto(PhotoDTO photoDTO) {
 		return sqlSession.update(namespace + ".updatePhoto", photoDTO);
+	}
+	
+	@Override
+	public int getPhotoOrder(String category) {
+		return sqlSession.update(namespace+".getPhotoOrder", category);
+	}
+	
+	@Override
+	public List<String> getPhotoCategory(int id) {
+		return sqlSession.selectList(namespace+".getPhotoCategory", id);
+	}
+
+	@Override
+	public int downPhotoOrder(int std) {
+		return sqlSession.update(namespace+".downPhotoOrder", std);
 	}
 
 }

@@ -1,10 +1,8 @@
 package com.xyz.leesfilm.Controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -17,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xyz.leesfilm.DAO.CategoryDAO;
+import com.xyz.leesfilm.DAO.CommeDAO;
 import com.xyz.leesfilm.DAO.FilmsDAO;
-import com.xyz.leesfilm.DTO.CategoryDTO;
+import com.xyz.leesfilm.DAO.PhotoDAO;
+import com.xyz.leesfilm.DTO.CommeDTO;
 import com.xyz.leesfilm.DTO.FilmsDTO;
 import com.xyz.leesfilm.DTO.PhotoDTO;
 
@@ -30,11 +30,15 @@ public class FilmsController {
 	private FilmsDAO filmsDAO;
 	
 	@Inject
+	private PhotoDAO photoDAO;
+	
+	@Inject
+	private CommeDAO commeDAO;
+	
+	@Inject
 	private CategoryDAO categoryDAO;
 	
 	List<String> resultList;
-	Set<String> comCategory;
-	Set<String> photoCategory;
 	
 	
 	@RequestMapping(value="/uploadFilms",method= {RequestMethod.GET,RequestMethod.POST})
@@ -53,26 +57,31 @@ public class FilmsController {
 	@RequestMapping(value= {"/filmsselect","/films"}, method={RequestMethod.GET,RequestMethod.POST})
 	public String films(Model model) {
 		resultList= new ArrayList<String>();
-		comCategory = new HashSet<String>();
-		photoCategory = new HashSet<String>();
 		
 		List<FilmsDTO> filmsList = filmsDAO.selectFilmsList();
-		List<CategoryDTO> categoryList = categoryDAO.selectCategoryList();
+		List<PhotoDTO> photoList = photoDAO.selectPhotoList();
+		List<CommeDTO> commeList = commeDAO.selectCommeList();
+		String[] photo_order = new String[categoryDAO.count("photo").get(0)];
+		String[] comme_order = new String[categoryDAO.count("commercial").get(0)];
+		
+		for(int i=0;i<photoList.size();i++) {
+			photo_order[photoList.get(i).getP_cate_order()] = photoList.get(i).getP_Category();
+		}
+		
+		for(int i=0;i<commeList.size();i++) {
+			comme_order[commeList.get(i).getC_cate_order()] = commeList.get(i).getC_Category();
+		}
 		
 		LinkedHashMap<String, String> filmmap = new LinkedHashMap<String, String>();
 		for(int i=0;i<filmsList.size();i++) {
 			filmmap.put(Integer.toString(filmsList.get(i).getF_Id()), filmsList.get(i).getF_Name());
 		}
 		
-		for(int i=0;i<categoryList.size();i++) {
-			comCategory.add(categoryList.get(i).getC_Category());  	
-			photoCategory.add(categoryList.get(i).getP_Category()); 
-		}
+		
 		
 		model.addAttribute("resultFilmMap",filmmap);
-		model.addAttribute("photoCategory", photoCategory);
-		model.addAttribute("comCategory", comCategory);
-		
+		model.addAttribute("photoCategory", photo_order);
+		model.addAttribute("comCategory", comme_order);
 		return "/films";
 	}
 	

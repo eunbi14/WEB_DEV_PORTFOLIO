@@ -1,11 +1,8 @@
 package com.xyz.leesfilm.Controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.xyz.leesfilm.DAO.CategoryDAO;
 import com.xyz.leesfilm.DAO.CommeDAO;
 import com.xyz.leesfilm.DAO.PhotoDAO;
+import com.xyz.leesfilm.DTO.CategoryDTO;
 import com.xyz.leesfilm.DTO.CommeDTO;
 import com.xyz.leesfilm.DTO.PhotoDTO;
 
@@ -36,8 +35,9 @@ public class PhotoController {
 	@Inject
 	private CommeDAO commeDAO;
 	
-	Set<String> photoCategory;
-	Set<String> comCategory;
+	@Inject
+	private CategoryDAO categoryDAO;
+	
 	
 	@RequestMapping(value="/uploadphoto",method={RequestMethod.GET,RequestMethod.POST})
 	   public String uploadPhoto(Model model,
@@ -53,9 +53,25 @@ public class PhotoController {
 	      photoDTO.setP_Name(photo_name);
 	      if(category.equals("소분류 추가")) {
 	         String addCate = request.getParameter("addCategory");
+	         int count = categoryDAO.count("photo").get(0);
 	         photoDTO.setP_Category(addCate);
+	         photoDTO.setP_cate_order(count);
+	         CategoryDTO categoryDTO = new CategoryDTO();
+	         categoryDTO.setCate_name(addCate);
+	         categoryDTO.setCate_num(1);
+	         categoryDTO.setCate_order(count);
+	         categoryDTO.setCate_type("photo");
+	         categoryDAO.insertCategory(categoryDTO);
 	      }else {
 	         photoDTO.setP_Category(category);
+	         int order = categoryDAO.getOrder(category).get(0);
+	         photoDTO.setP_cate_order(order);
+	         CategoryDTO categoryDTO = new CategoryDTO();
+	         categoryDTO.setCate_name(category);
+	         int num = categoryDAO.getCateNum(category).get(0);
+	         categoryDTO.setCate_num(num+1);
+	         categoryDTO.setCate_type("photo");
+	         categoryDAO.updateCateNum(categoryDTO);
 	      }
 	      photoDAO.insertPhoto(photoDTO);
 	      return "redirect:/photoselect";
@@ -65,18 +81,21 @@ public class PhotoController {
 	public String photo(Model model) {
 		
 		resultList= new ArrayList<String>();
-		photoCategory = new HashSet<String>(); 
-		comCategory = new HashSet<String>();
+		
 		List<PhotoDTO> photoList = photoDAO.selectPhotoList();
 		List<CommeDTO> commeList = commeDAO.selectCommeList();
+		String[] photo_order = new String[categoryDAO.count("photo").get(0)];
+		String[] comme_order = new String[categoryDAO.count("commercial").get(0)];
+		for(int i=0;i<photoList.size();i++) {
+			photo_order[photoList.get(i).getP_cate_order()] = photoList.get(i).getP_Category();
+		}
 		
 		for(int i=0;i<commeList.size();i++) {
-			comCategory.add(commeList.get(i).getC_Category()); 
+			comme_order[commeList.get(i).getC_cate_order()] = commeList.get(i).getC_Category();
 		}
 		
 		LinkedHashMap<String, String> photomap = new LinkedHashMap<String, String>();
 		for(int i=0;i<photoList.size();i++) {
-			photoCategory.add(photoList.get(i).getP_Category()); 
 			photomap.put(Integer.toString(photoList.get(i).getP_Id()), photoList.get(i).getP_Name());
 			/*if(photomap.containsValue(photoList.get(i).getP_Name())) {
 				continue;
@@ -87,9 +106,8 @@ public class PhotoController {
 		}
 	
 		model.addAttribute("resultMap",photomap);
-		
-		model.addAttribute("photoCategory", photoCategory);
-		model.addAttribute("comCategory", comCategory);
+		model.addAttribute("photoCategory", photo_order);
+		model.addAttribute("comCategory", comme_order);
 		
 		return "/photo";
 	}
@@ -98,20 +116,22 @@ public class PhotoController {
 	public String subPhoto(@PathVariable String subvar, Model model) {
 		
 		resultList= new ArrayList<String>();
-		photoCategory = new HashSet<String>(); 
-		comCategory = new HashSet<String>();
+		
 		List<PhotoDTO> photoList = photoDAO.selectPhotoList();
 		List<CommeDTO> commeList = commeDAO.selectCommeList();
 		
+		String[] photo_order = new String[categoryDAO.count("photo").get(0)];
+		String[] comme_order = new String[categoryDAO.count("commercial").get(0)];
+		for(int i=0;i<photoList.size();i++) {
+			photo_order[photoList.get(i).getP_cate_order()] = photoList.get(i).getP_Category();
+		}
+		
 		for(int i=0;i<commeList.size();i++) {
-			comCategory.add(commeList.get(i).getC_Category()); 
+			comme_order[commeList.get(i).getC_cate_order()] = commeList.get(i).getC_Category();
 		}
 		
 		LinkedHashMap<String, String> photomap = new LinkedHashMap<String, String>();
 		for(int i=0;i<photoList.size();i++) {
-		
-			photoCategory.add(photoList.get(i).getP_Category()); 
-			
 			if(photomap.containsValue(photoList.get(i).getP_Name())) {
 				continue;
 			}
@@ -121,17 +141,36 @@ public class PhotoController {
 		}
 	
 		model.addAttribute("resultMap",photomap);
-		
-		model.addAttribute("photoCategory", photoCategory);
-		model.addAttribute("comCategory", comCategory);
-		
+		model.addAttribute("photoCategory", photo_order);
+		model.addAttribute("comCategory", comme_order);
 		return "/photo";
 	}
 	
 
 	@RequestMapping(value="/deletephoto", method={RequestMethod.GET,RequestMethod.POST})
 	public String deletePhoto(Model model, @RequestParam("photo_id")int photo_id) {
-		System.out.println(photo_id);
+		String category = photoDAO.getPhotoCategory(photo_id).get(0);
+		CategoryDTO categoryDTO = new CategoryDTO();
+	      categoryDTO.setCate_name(category);
+	      categoryDTO.setCate_type("photo");
+		if(categoryDAO.getCateNum(category).get(0)==1) {
+			//카테고리 자체를 지워버리기
+			int std = categoryDAO.getOrder(category).get(0);
+
+		      
+		      categoryDTO.setCate_order(std);
+		      categoryDAO.deleteCategory(categoryDTO);
+		      
+		      photoDAO.downPhotoOrder(std);
+		 
+		      categoryDAO.downCateOrder(categoryDTO);
+		}
+		else {
+			int num = categoryDAO.getCateNum(category).get(0);
+			categoryDTO.setCate_num(num-1);
+			categoryDAO.updateCateNum(categoryDTO);
+		}
+		
 		photoDAO.deletePhoto(photo_id);
 		return "redirect:/photo";
 	}
@@ -141,10 +180,20 @@ public class PhotoController {
 	         @RequestParam("gugunSelect") String category) {
 	      PhotoDTO photoDTO = new PhotoDTO();
 	      logger.info(category);
+	      int std = categoryDAO.getOrder(category).get(0);
+
+	      CategoryDTO categoryDTO = new CategoryDTO();
+	      categoryDTO.setCate_name(category);
+	      categoryDTO.setCate_type("photo");
+	      categoryDTO.setCate_order(std);
+	      categoryDAO.deleteCategory(categoryDTO);
 	      
 	      photoDTO.setP_Category(category);
 	      
 	      photoDAO.deletePhotoCategory(photoDTO);
+	      photoDAO.downPhotoOrder(std);
+	 	 
+	      categoryDAO.downCateOrder(categoryDTO);
 	      return "forward:/photoselect";
 	   }
 	

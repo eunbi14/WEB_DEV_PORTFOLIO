@@ -7,6 +7,7 @@ public class PhotoDTO {
 	private int p_Id;
 	private String p_Category;
 	private String p_Name;
+	private int p_cate_order;
 
 	public int getP_Id() {
 		return p_Id;
@@ -25,5 +26,11 @@ public class PhotoDTO {
 	}
 	public void setP_Name(String p_Name) {
 		this.p_Name = p_Name;
+	}
+	public int getP_cate_order() {
+		return p_cate_order;
+	}
+	public void setP_cate_order(int p_cate_order) {
+		this.p_cate_order = p_cate_order;
 	}
 }
