@@ -121,6 +121,27 @@ public class HomeController {
 		return "editImage";
 	}
 	
+	@RequestMapping(value = "/editCategory")
+	public String editCategory(Locale locale, Model model) {
+		logger.debug("editCategory page.......");
+		List<PhotoDTO> photoList = photoDAO.selectPhotoList();
+		List<CommeDTO> commeList = commeDAO.selectCommeList();
+		String[] photo_order = new String[categoryDAO.count("photo").get(0)];
+		String[] comme_order = new String[categoryDAO.count("commercial").get(0)];
+		for(int i=0;i<photoList.size();i++) {
+			photo_order[photoList.get(i).getP_cate_order()] = photoList.get(i).getP_Category();
+		}
+		
+		for(int i=0;i<commeList.size();i++) {
+			comme_order[commeList.get(i).getC_cate_order()] = commeList.get(i).getC_Category();
+		}
+	
+		
+		model.addAttribute("photoCategory", photo_order);
+		model.addAttribute("comCategory", comme_order);
+		return "editCategory";
+	}
+	
 	@RequestMapping(value = "/mailSending")
 	public String mailSending(Locale locale, Model model) {
 		logger.debug("mailSending page.........");
