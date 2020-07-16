@@ -11,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xyz.leesfilm.DAO.CategoryDAO;
 import com.xyz.leesfilm.DAO.CommeDAO;
 import com.xyz.leesfilm.DAO.PhotoDAO;
+import com.xyz.leesfilm.DTO.CategoryDTO;
 import com.xyz.leesfilm.DTO.CommeDTO;
 //import com.xyz.leesfilm.DTO.HomepicDTO;
 import com.xyz.leesfilm.DTO.PhotoDTO;
@@ -50,6 +52,7 @@ public class HomeController {
 		}
 		model.addAttribute("photoCategory", photo_order);
 		model.addAttribute("comCategory", comme_order);
+	
 		
 		return "home";
 	}
@@ -139,7 +142,57 @@ public class HomeController {
 		
 		model.addAttribute("photoCategory", photo_order);
 		model.addAttribute("comCategory", comme_order);
+		model.addAttribute("photo", categoryDAO.count("photo").get(0));
+		model.addAttribute("commercial", categoryDAO.count("commercial").get(0));
 		return "editCategory";
+	}
+	
+	@RequestMapping(value="/editCategoryApply")
+	public String editCategoryApply(Locale locale, Model model, 
+			@RequestParam("photo") String photo, @RequestParam("commercial") String commercial) {
+		logger.debug("editCategoryApply page.....");
+		String[] pOrder = photo.split(","); //사용자가 지정한 순서
+		String[] cOrder = commercial.split(",");
+		
+		List<PhotoDTO> photoList = photoDAO.selectPhotoList();
+		List<CommeDTO> commeList = commeDAO.selectCommeList();
+		String[] photo_order = new String[categoryDAO.count("photo").get(0)];
+		String[] comme_order = new String[categoryDAO.count("commercial").get(0)];
+		
+		for(int i=0;i<photoList.size();i++) {
+			if(pOrder[photoList.get(i).getP_cate_order()].equals("done")) continue;
+			PhotoDTO photoDTO = new PhotoDTO();
+			CategoryDTO categoryDTO = new CategoryDTO();
+			categoryDTO.setCate_type("photo");
+			photoDTO.setP_Category(photoList.get(i).getP_Category());
+			categoryDTO.setCate_name(photoList.get(i).getP_Category());
+			photoDTO.setP_cate_order(Integer.valueOf(pOrder[photoList.get(i).getP_cate_order()]));
+			categoryDTO.setCate_order(Integer.valueOf(pOrder[photoList.get(i).getP_cate_order()]));
+			pOrder[photoList.get(i).getP_cate_order()] = "done";
+			photo_order[photoDTO.getP_cate_order()] = photoList.get(i).getP_Category();
+			photoDAO.updatePhotoCategory(photoDTO);
+			categoryDAO.updateCateOrder(categoryDTO);
+		}
+		
+		for(int i=0;i<commeList.size();i++) {
+			if(cOrder[commeList.get(i).getC_cate_order()].equals("done")) continue;
+			CommeDTO commeDTO = new CommeDTO();
+			CategoryDTO categoryDTO = new CategoryDTO();
+			categoryDTO.setCate_type("commercial");
+			commeDTO.setC_Category(commeList.get(i).getC_Category());
+			categoryDTO.setCate_name(commeList.get(i).getC_Category());
+			commeDTO.setC_cate_order(Integer.valueOf(cOrder[commeList.get(i).getC_cate_order()]));
+			categoryDTO.setCate_order(Integer.valueOf(cOrder[commeList.get(i).getC_cate_order()]));
+			cOrder[commeList.get(i).getC_cate_order()] = "done";
+			comme_order[commeDTO.getC_cate_order()] = commeList.get(i).getC_Category();
+			commeDAO.updateCommeCategory(commeDTO);
+			categoryDAO.updateCateOrder(categoryDTO);
+		}
+	
+		model.addAttribute("photoCategory", photo_order);
+		model.addAttribute("comCategory", comme_order);
+		
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/mailSending")

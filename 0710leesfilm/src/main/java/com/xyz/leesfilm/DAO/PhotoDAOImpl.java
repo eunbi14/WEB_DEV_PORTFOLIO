@@ -55,5 +55,10 @@ public class PhotoDAOImpl implements PhotoDAO {
 	public int downPhotoOrder(int std) {
 		return sqlSession.update(namespace+".downPhotoOrder", std);
 	}
+	
+	@Override
+	public int updatePhotoCategory(PhotoDTO photoDTO) {
+		return sqlSession.update(namespace+".updatePhotoCategory", photoDTO);
+	}
 
 }

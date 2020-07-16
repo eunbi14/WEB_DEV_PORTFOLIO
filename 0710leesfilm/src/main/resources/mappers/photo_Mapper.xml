@@ -52,6 +52,12 @@
   		where p_cate_order > #{std}
   	</update>
   	
+  	<update id="updatePhotoCategory" parameterType="com.xyz.leesfilm.DTO.PhotoDTO">
+  		update photo
+  		set p_cate_order = #{p_cate_order}
+  		where p_Category = #{p_Category}
+  	</update>
+  	
   	<!-- Films -->
 	<insert id="insertFilms"
 		parameterType="com.xyz.leesfilm.DTO.FilmsDTO">
@@ -112,6 +118,12 @@
   		select c_Category from commercial where c_Id = #{id};
   	</select>
   	
+  	<update id="updateCommeCategory" parameterType="com.xyz.leesfilm.DTO.CommeDTO">
+  		update commercial
+  		set c_cate_order = #{c_cate_order}
+  		where c_Category = #{c_Category};
+  	</update>
+  	
   	<!-- category table -->
    <insert id="insertCategory" parameterType="com.xyz.leesfilm.DTO.CategoryDTO">
   	insert into category (cate_name, cate_num, cate_order, cate_type)
@@ -144,5 +156,11 @@
   		update category
   		set cate_order = cate_order - 1
   		where cate_order > #{cate_order} and cate_type = #{cate_type}
+  	</update>
+  	
+  	<update id="updateCateOrder" parameterType="com.xyz.leesfilm.DTO.CategoryDTO">
+  		update category
+  		set cate_order = #{cate_order}
+  		where cate_name = #{cate_name} and cate_type = #{cate_type}
   	</update>
 </mapper>

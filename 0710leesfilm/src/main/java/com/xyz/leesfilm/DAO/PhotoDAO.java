@@ -13,4 +13,5 @@ public interface PhotoDAO {
 	public int getPhotoOrder(String category);
 	public List<String> getPhotoCategory(int id);
 	public int downPhotoOrder(int std);
+	public int updatePhotoCategory(PhotoDTO photoDTO);
 }
