@@ -17,6 +17,7 @@ public class HomepicDAO {
 	private static final String namespace = "com.xyz.leesfilm.photoMapper";
 
 	public List<HomepicDTO> selectHomeList() {
+		
 		return sqlSession.selectList(namespace + ".selectHomeList");
 	}
 
@@ -27,4 +28,6 @@ public class HomepicDAO {
 	public int updateHome(HomepicDTO homepicDTO) {
 		return sqlSession.update(namespace + ".updateHome", homepicDTO);
 	}
+
+
 }

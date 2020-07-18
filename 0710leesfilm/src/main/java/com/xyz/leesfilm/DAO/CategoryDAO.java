@@ -48,6 +48,9 @@ public class CategoryDAO {
 	 public int downCateOrder(CategoryDTO categoryDTO) {
 		 return sqlSession.update(namespace+".downCateOrder", categoryDTO);
 	 }
+	 public int updateCateOrder(CategoryDTO categoryDTO) {
+		 return sqlSession.update(namespace+".updateCateOrder", categoryDTO);
+	 }
 }
 
 

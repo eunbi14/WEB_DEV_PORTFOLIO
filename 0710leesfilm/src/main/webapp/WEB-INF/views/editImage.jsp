@@ -55,6 +55,15 @@ function submitComme(index){
 	 
 	 document.form.submit();
 }
+
+function submitHomepic(index){
+	 if (index == 1)
+		 document.form.action = "/leesfilm/updatehomepic";
+	 if( index == 2)
+		 document.form.action = "/leesfilm/deletehomepic";
+	 
+	 document.form.submit();
+}
 </script>       
 <div class="container" id="upload_container">
    <form id="form" name="form" method="post" enctype="multipart/form-data">
@@ -64,6 +73,7 @@ function submitComme(index){
        Object photo_id= request.getParameter("photo_id");
        Object film_id = request.getParameter("film_id");
        Object comme_id = request.getParameter("comme_id");
+       Object home_id = request.getParameter("home_id");
        %>
        <form name="form" method="post" encType="multiplart/form-data">
             <% if(type == "image") { %>
@@ -82,11 +92,17 @@ function submitComme(index){
                 <th id = "upload_th">영상 링크 </th>
                 <td><input type="text" placeholder="영상 링크를 입력하세요" name="video_comme_url" class="form-control" /></td>
             </tr>
+            <% } else if(type == "homepic") { %>
+            <tr>
+                <th id = "upload_th">사진 첨부 </th>
+                 <input type="text" placeholder="이미지 링크를 입력하세요" id="upload_file" name="photofile" id="photoImg" class="form-control" /></td>
+            </tr>
             <% } %>
             <tr>
              <input type=hidden name="photo_id" value="<%=photo_id%>">
              <input type=hidden name="film_id" value="<%=film_id%>">
              <input type=hidden name="comme_id" value="<%=comme_id%>">
+             <input type=hidden name="home_id" value="<%=home_id%>">
                 <td colspan="2">
                  <% if(type=="image") {%>
                  	<input id="upload_btn" type="button" value="수정" class="pull-right" onclick='submitPhoto(1)'/>
@@ -107,6 +123,12 @@ function submitComme(index){
                   	<input id="upload_btn" type="reset" class="pull-left"/>
 	                <%if(del == "true") {%>
 	                	<input id="upload_btn" type="button" value="삭제" class="pull-right" onclick='submitComme(2)'/>
+	              	<% } %>
+	             <% } else if (type == "homepic") {%>
+					<input id="upload_btn" type="button" value="수정" class="pull-right" onclick='submitHomepic(1)'/>
+                  	<input id="upload_btn" type="reset" class="pull-left"/>
+	                <%if(del == "true") {%>
+	                	<!-- <input id="upload_btn" type="button" value="삭제" class="pull-right" onclick='submitHomepic(2)'/> -->
 	              	<% } %>
 	             <%} %>
                 </td>
