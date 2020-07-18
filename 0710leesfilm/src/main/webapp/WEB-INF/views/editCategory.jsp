@@ -75,9 +75,6 @@ function editCategory(){
 	document.form.submit();
 }
 
-
-
-
 function submitFilms(index){
 	 if (index == 1)
 		 document.form.action = "/leesfilm/updatefilm";

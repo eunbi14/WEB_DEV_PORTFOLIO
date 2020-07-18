@@ -48,7 +48,7 @@ public class CommeController {
 	      String video_id=videourl.substring(videourl.lastIndexOf("=")+1);
 	      
 	      commeDTO.setC_Name(video_id);
-	      if(category.equals("¼ÒºÐ·ù Ãß°¡")) {
+	      if(category.equals("ì†Œë¶„ë¥˜ ì¶”ê°€")) {
 	         String addCate = request.getParameter("addCategory");
 	         int count = categoryDAO.count("commercial").get(0);
 	         commeDTO.setC_Category(addCate);
@@ -165,7 +165,7 @@ commeDAO.downCommeOrder(std);
 	      categoryDTO.setCate_name(category);
 	      categoryDTO.setCate_type("commercial");
 		if(categoryDAO.getCateNum(category).get(0)==1) {
-			//Ä«Å×°í¸® ÀÚÃ¼¸¦ Áö¿ö¹ö¸®±â
+			//Ä«ï¿½×°ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			int std = categoryDAO.getOrder(category).get(0);
 
 		      

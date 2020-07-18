@@ -84,7 +84,6 @@ String id = (String)session.getAttribute("idKey");
          else{
             showImage(path);
          }   
-         
       });
 
       function showImage(fileCallPath) {
@@ -215,10 +214,8 @@ String id = (String)session.getAttribute("idKey");
    	<c:set var="addNum1" value="1" />
    	<c:forEach items="${resultMap}" var="photoMap">
 	<c:if test="${addNum1%2 != 0}">	
-	
-      		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
-				<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
-				
+
+			<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
 					<c:set var="photo_id" value="${photoMap.key}" />
 					<c:set var="photosrc" value="${gd}${photoMap.value}" />
 					<img src="${photosrc}" width="300px" title="${photo_id}"/>
@@ -234,12 +231,11 @@ String id = (String)session.getAttribute("idKey");
    	<c:forEach items="${resultMap}" var="photoMap">
 	<c:if test="${addNum2%2 == 0}">
 	
-      		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
-				<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
+		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
 				
-					<c:set var="photo_id" value="${photoMap.key}" />
-					<c:set var="photosrc" value="${gd}${photoMap.value}" />
-					<img src="${photosrc}" width="300px" title="${photo_id}"/>
+			<c:set var="photo_id" value="${photoMap.key}" />
+			<c:set var="photosrc" value="${gd}${photoMap.value}" />
+			<img src="${photosrc}" width="300px" title="${photo_id}"/>
 				
    	</c:if>
    	<c:set var="addNum2" value="${addNum2+1}" />

@@ -4,6 +4,10 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<%
+request.setCharacterEncoding("UTF-8"); //
+String id = (String)session.getAttribute("idKey");
+%>
 <head>
 <meta charset="utf-8" /> <!-- 여기부터 -->
 <meta name="viewport"
@@ -45,24 +49,36 @@
 <link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet" />
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet" />
 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-function edit() {
-    <%
-    request.setCharacterEncoding("UTF-8");
-    String id = (String)session.getAttribute("idKey");
-    if(id == "이승채"){ %>
-       var result = confirm("이미지를 수정하겠습니까?");
-       if(result){
-          <% 
-          session.setAttribute("delete","false"); 
-          session.setAttribute("type", "image");
-          %>
-          window.open("./editImage","Edit Image","width=500,height=500");
-       }else{
-          alert("실행 취소 되었습니다.");
-       }
-    <%}%>
- }
+   $(document).ready(function(e) {
+
+      $(document).on("click", "img", function() {
+         var path = $(this).attr('src')
+         var home_id=$(this).attr('title')
+         console.log(home_id);
+         
+         if(path=="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top3.png"){
+             window.scrollTo(0,0);
+              return;
+          }
+         if("<%=id%>" == "이승채") {
+            var result = confirm("이미지를 수정하겠습니까? 삭제는 안돼요 ~");
+            if(result){
+               <%
+               session.setAttribute("delete","true");
+               session.setAttribute("type","homepic");
+               %>
+               window.open("/leesfilm/editImage?home_id="+home_id,"Edit Image","width=500,height=500");
+            }else{
+               alert("실행 취소 되었습니다.");
+            }
+         }
+         else{
+            showImage(path);
+         }   
+      });
+   });
 </script>
 
 </head>
@@ -163,10 +179,14 @@ function edit() {
    </div>
  <%--    여기까지 
    <jsp:include page="header.jsp"></jsp:include> --%>
-	
-	<div id="title_img">
-		<img id='0' src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/1.jpg" width="100%" onclick="edit('0')">
-	</div>
+	<c:forEach items="${homepicMain}" var="Main">
+    		<div class="title_img" id="t0">
+		  		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
+				<c:set var="home_id" value="${Main.key}" />
+				<c:set var="homesrc" value="${gd}${Main.value}" />
+				<img src="${homesrc}" title="${home_id}"/>
+			</div>
+	</c:forEach>
 	<div id="text">
 		<p>Seoul to Paju</p>
 		<br> <br>
@@ -179,33 +199,24 @@ function edit() {
 	<div id="partition">
 		<p>* * *</p>
 	</div>
-
-	<div id="first_img">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/2.jpg" width="100%" onclick="edit('1')">
-	</div>
-	<div id="second_img">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/3.jpg" width="100%" onclick="edit('2')">
-	</div>
-	<div id="second_img">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/4.jpg" width="100%" onclick="edit('3')">
-	</div>
-
-	<div id="second_row">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/5.jpg" width="100%" onclick="edit('4')">
-	</div>
-	<div id="second_second">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/6.jpg" width="100%" onclick="edit('5')">
-	</div>
-	<div id="second_second">
-		<img src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/7.jpg" width="100%" onclick="edit('6')" >
+	<div class="sub_container">
+		<c:forEach items="${homepicMap}" var="homepicMap">
+    		<div class = "sub_img" id="v0">
+		  		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
+				<c:set var="home_id" value="${homepicMap.key}" />
+				<c:set var="homesrc" value="${gd}${homepicMap.value}" />
+				<img src="${homesrc}" title="${home_id}"/>
+			</div>
+		</c:forEach>
 	</div>
 
+	<footer class="footer">
 	<div id="instagram">
 		<p>
 			Follow <a id="insta" href="https://www.instagram.com/toomhme/" target="_blank">@toomhme</a>
 			on Instagram
 		</p>
-	</div>
-	<footer class="footer"></footer>
+	</div>	
+</footer>
 </body>
 </html>

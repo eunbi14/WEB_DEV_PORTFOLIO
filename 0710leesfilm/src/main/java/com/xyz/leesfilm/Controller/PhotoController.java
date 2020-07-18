@@ -51,7 +51,7 @@ public class PhotoController {
 	      String urlarr[] = url.split("/");
 	      String photo_name = urlarr[5];
 	      photoDTO.setP_Name(photo_name);
-	      if(category.equals("¼ÒºÐ·ù Ãß°¡")) {
+	      if(category.equals("ì†Œë¶„ë¥˜ ì¶”ê°€")) {
 	         String addCate = request.getParameter("addCategory");
 	         int count = categoryDAO.count("photo").get(0);
 	         photoDTO.setP_Category(addCate);
@@ -154,10 +154,9 @@ public class PhotoController {
 	      categoryDTO.setCate_name(category);
 	      categoryDTO.setCate_type("photo");
 		if(categoryDAO.getCateNum(category).get(0)==1) {
-			//Ä«Å×°í¸® ÀÚÃ¼¸¦ Áö¿ö¹ö¸®±â
+			//Ä«ï¿½×°ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			int std = categoryDAO.getOrder(category).get(0);
 
-		      
 		      categoryDTO.setCate_order(std);
 		      categoryDAO.deleteCategory(categoryDTO);
 		      

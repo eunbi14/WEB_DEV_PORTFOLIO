@@ -4,26 +4,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xyz.leesfilm.photoMapper">
 <!-- Home -->
-	<select id="selectHomeList"
-		resultType="com.xyz.leesfilm.DTO.HomepicDTO">
+	<select id="selectHomeList" resultType="com.xyz.leesfilm.DTO.HomepicDTO">
 		select h_id,h_name from homepic
 	</select>
-
+	<update id="updateHome" parameterType="com.xyz.leesfilm.DTO.HomepicDTO">
+		update homepic
+		set h_name = #{h_name}
+		where h_id = #{h_Id}
+	</update>
 	<delete id="deleteHome" parameterType="int">
-		delete from homepic where
-		p_id = #{photo_id}
+		delete from homepic where h_id = #{h_Id}
 	</delete>
 
 <!-- Photo -->
 	<insert id="insertPhoto" parameterType="com.xyz.leesfilm.DTO.PhotoDTO">
     insert into photo(p_Category,p_Name, p_cate_order)
     values(#{p_Category},#{p_Name}, #{p_cate_order})
-  </insert>
+    </insert>
 
 	<select id="selectPhotoList" resultType="com.xyz.leesfilm.DTO.PhotoDTO">
    select p_id,p_name, p_category, p_cate_order from photo
    <!-- where p_category='Photo1' or p_category='Photo2' or p_category='Photo3'; -->
-  </select>
+   </select>
 
 	<delete id="deletePhotoCategory"
 		parameterType="com.xyz.leesfilm.DTO.PhotoDTO">
@@ -42,7 +44,7 @@
 		where p_id = #{p_Id}
 	</update>
 
-<select id="getPhotoCategory" parameterType="int" resultType="string">
+	<select id="getPhotoCategory" parameterType="int" resultType="string">
   		select p_Category from photo where p_Id = #{id};
   	</select>
   	
@@ -51,7 +53,6 @@
   		set p_cate_order = p_cate_order - 1
   		where p_cate_order > #{std}
   	</update>
-  	
   	<update id="updatePhotoCategory" parameterType="com.xyz.leesfilm.DTO.PhotoDTO">
   		update photo
   		set p_cate_order = #{p_cate_order}
@@ -86,11 +87,11 @@
 	<insert id="insertComme" parameterType="com.xyz.leesfilm.DTO.CommeDTO">
     insert into commercial(c_Category,c_Name, c_cate_order)
     values(#{c_Category},#{c_Name}, #{c_cate_order})
-  </insert>
+  	</insert>
 
 	<select id="selectCommeList" resultType="com.xyz.leesfilm.DTO.CommeDTO">
-   select c_id, c_name, c_category, c_cate_order from commercial;
-  </select>
+  	 select c_id, c_name, c_category, c_cate_order from commercial;
+  	</select>
 
 	<delete id="deleteCommeCategory"
 		parameterType="com.xyz.leesfilm.DTO.CommeDTO">
@@ -113,6 +114,15 @@
   		set c_cate_order = c_cate_order - 1
   		where c_cate_order > #{std}
   	</update>
+  	 <update id="updateCommeCategory" parameterType="com.xyz.leesfilm.DTO.CommeDTO">
+  		update commercial
+  		set c_cate_order = #{c_cate_order}
+  		where c_Category = #{c_Category};
+  	</update>
+<!-- category table -->
+	  	<select id="getCommeCategory" parameterType="int" resultType="string">
+	  		select c_Category from commercial where c_Id = #{id};
+	  	</select>
   	
   	<select id="getCommeCategory" parameterType="int" resultType="string">
   		select c_Category from commercial where c_Id = #{id};
@@ -145,7 +155,7 @@
  <select id="getCateNum" parameterType="String" resultType="int">
  	select cate_num from category where cate_name = #{name};
  </select>
- 
+
   	<update id="updateCateNum" parameterType="com.xyz.leesfilm.DTO.CategoryDTO">
   	update category
   	set cate_num = #{cate_num}
