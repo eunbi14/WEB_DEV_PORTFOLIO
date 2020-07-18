@@ -44,6 +44,7 @@ public class CommeDAO {
 	public List<String> getCommeCategory(int id) {
 		return sqlSession.selectList(namespace+".getCommeCategory", id);
 	}
+
 	public int updateCommeCategory(CommeDTO commeDTO) {
 		return sqlSession.update(namespace + ".updateCommeCategory", commeDTO);
 	}

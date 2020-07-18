@@ -53,14 +53,13 @@
   		set p_cate_order = p_cate_order - 1
   		where p_cate_order > #{std}
   	</update>
-  	 <update id="updatePhotoCategory" parameterType="com.xyz.leesfilm.DTO.PhotoDTO">
+  	<update id="updatePhotoCategory" parameterType="com.xyz.leesfilm.DTO.PhotoDTO">
   		update photo
   		set p_cate_order = #{p_cate_order}
   		where p_Category = #{p_Category}
   	</update>
   	
-  	
- <!-- Films -->
+  	<!-- Films -->
 	<insert id="insertFilms"
 		parameterType="com.xyz.leesfilm.DTO.FilmsDTO">
 		insert into films(f_Category,f_Name)
@@ -125,27 +124,38 @@
 	  		select c_Category from commercial where c_Id = #{id};
 	  	</select>
   	
-	  <insert id="insertCategory" parameterType="com.xyz.leesfilm.DTO.CategoryDTO">
-	  	insert into category (cate_name, cate_num, cate_order, cate_type)
-	  	values (#{cate_name}, #{cate_num}, #{cate_order}, #{cate_type})
-	  </insert>
-	  
-	  <select id="count" parameterType="string" resultType="int">
-	  	select count(*) from category where cate_type = #{type};
-	  </select>
-	 
-	 <select id="getOrder" parameterType="string" resultType="int">
-	 	select cate_order from category where cate_name = #{name};
-	 </select>
-	 
-	 <delete id="deleteCategory" parameterType="com.xyz.leesfilm.DTO.CategoryDTO">
-	 	delete from category where cate_name = #{cate_name} and cate_type = #{cate_type};
-	 </delete>
-	 
-	 <select id="getCateNum" parameterType="String" resultType="int">
-	 	select cate_num from category where cate_name = #{name};
-	 </select>
-	 
+  	<select id="getCommeCategory" parameterType="int" resultType="string">
+  		select c_Category from commercial where c_Id = #{id};
+  	</select>
+  	
+  	<update id="updateCommeCategory" parameterType="com.xyz.leesfilm.DTO.CommeDTO">
+  		update commercial
+  		set c_cate_order = #{c_cate_order}
+  		where c_Category = #{c_Category};
+  	</update>
+  	
+  	<!-- category table -->
+   <insert id="insertCategory" parameterType="com.xyz.leesfilm.DTO.CategoryDTO">
+  	insert into category (cate_name, cate_num, cate_order, cate_type)
+  	values (#{cate_name}, #{cate_num}, #{cate_order}, #{cate_type})
+  </insert>
+  
+  <select id="count" parameterType="string" resultType="int">
+  	select count(*) from category where cate_type = #{type};
+  </select>
+ 
+ <select id="getOrder" parameterType="string" resultType="int">
+ 	select cate_order from category where cate_name = #{name};
+ </select>
+ 
+ <delete id="deleteCategory" parameterType="com.xyz.leesfilm.DTO.CategoryDTO">
+ 	delete from category where cate_name = #{cate_name} and cate_type = #{cate_type};
+ </delete>
+ 
+ <select id="getCateNum" parameterType="String" resultType="int">
+ 	select cate_num from category where cate_name = #{name};
+ </select>
+
   	<update id="updateCateNum" parameterType="com.xyz.leesfilm.DTO.CategoryDTO">
   	update category
   	set cate_num = #{cate_num}
@@ -157,7 +167,8 @@
   		set cate_order = cate_order - 1
   		where cate_order > #{cate_order} and cate_type = #{cate_type}
   	</update>
-  	  	<update id="updateCateOrder" parameterType="com.xyz.leesfilm.DTO.CategoryDTO">
+  	
+  	<update id="updateCateOrder" parameterType="com.xyz.leesfilm.DTO.CategoryDTO">
   		update category
   		set cate_order = #{cate_order}
   		where cate_name = #{cate_name} and cate_type = #{cate_type}

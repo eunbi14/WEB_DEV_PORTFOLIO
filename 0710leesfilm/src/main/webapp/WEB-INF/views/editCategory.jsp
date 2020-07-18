@@ -70,9 +70,11 @@ function editCategory(){
 		}
 		cOrder[cList[i].value] = true;
 	}
+
 	document.form.action = "/leesfilm/editCategoryApply";
 	document.form.submit();
 }
+
 function submitFilms(index){
 	 if (index == 1)
 		 document.form.action = "/leesfilm/updatefilm";
@@ -89,6 +91,7 @@ function submitComme(index){
 	 
 	 document.form.submit();
 }
+
 </script>       
 <div class="container" id="upload_container">
    <form id="form" name="form" method="post" enctype="multipart/form-data">
