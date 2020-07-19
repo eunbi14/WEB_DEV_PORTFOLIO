@@ -28,8 +28,7 @@ jQuery(function() {
 		if("<%=id%>" == "이승채") {
 			var result = confirm("동영상을 수정/삭제하겠습니까?");
 			if (result) {
-				<%session.setAttribute("delete", "true");
-				session.setAttribute("type", "films");%>
+				<%session.setAttribute("type", "films");%>
 				window.open("/leesfilm/editImage?film_id=" + film_id, "Edit Image", "width=500,height=500");
 			} else {
 				alert("실행 취소 되었습니다.");
