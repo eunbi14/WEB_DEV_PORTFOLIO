@@ -2,8 +2,6 @@
 <c:set var="root" value="${pageContext.request.contextPath}" /> <!--  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-   
-
 
 <!DOCTYPE html>
 <html>
@@ -50,11 +48,8 @@ String id = (String)session.getAttribute("idKey");
 	src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 <!-- 여기까지 -->
 
-
-<link href="<c:url value="/resources/css/styles.css" />"
-   rel="stylesheet">
-<link href="<c:url value="/resources/css/photo.css" />"
-   rel="stylesheet"> 
+<link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/photo.css" />" rel="stylesheet"> 
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
@@ -73,7 +68,6 @@ String id = (String)session.getAttribute("idKey");
             var result = confirm("이미지를 수정/삭제하겠습니까?");
             if(result){
                <%
-               session.setAttribute("delete","true");
                session.setAttribute("type","image");
                %>
                window.open("/leesfilm/editImage?photo_id="+photo_id,"Edit Image","width=500,height=500");
@@ -84,6 +78,7 @@ String id = (String)session.getAttribute("idKey");
          else{
             showImage(path);
          }   
+         
       });
 
       function showImage(fileCallPath) {
@@ -103,8 +98,6 @@ String id = (String)session.getAttribute("idKey");
          }, 200);
       });      
    });
-   
-   
 </script>
 
 <title>Photo</title>
@@ -130,9 +123,9 @@ String id = (String)session.getAttribute("idKey");
 				</svg>
 				&nbsp;
 				<svg id="icon" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-justify" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onClick="location.href='/leesfilm/editCategory'">
-  <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-</svg>
-&nbsp;
+  					<path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+				</svg>
+				&nbsp;
 				<svg id="icon" class="bi bi-people-circle" width="1em" height="1em"
 					viewBox="0 0 16 16" fill="currentColor"
 					xmlns="http://www.w3.org/2000/svg" onClick="location.href='/leesfilm/logout'">
@@ -151,8 +144,7 @@ String id = (String)session.getAttribute("idKey");
 			<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3"
 				id="mainNav">
 				<div class="container">
-					<a class="navbar-brand js-scroll-trigger" href="/leesfilm/">Seungchae
-						Lee</a>
+					<a class="navbar-brand js-scroll-trigger" href="/leesfilm/">Seungchae Lee</a>
 					<button class="navbar-toggler navbar-toggler-right" type="button"
 						data-toggle="collapse" data-target="#navbarResponsive"
 						aria-controls="navbarResponsive" aria-expanded="false"
@@ -163,17 +155,13 @@ String id = (String)session.getAttribute("idKey");
 						<ul class="navbar-nav ml-auto my-2 my-lg-0">
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
 								href="/leesfilm/">About</a></li>
-								
-							
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
 								href="/leesfilm/photo">Photo</a>
-								<!-- 은비가 db에서 카테고리 명 갖고 오는 방법 알려주면 그 때 맞게 적용하기 -->
 							 <c:forEach items="${photoCategory}" var="subphotos"> 
 								<ul>
 									<li><a href="/leesfilm/photo/${subphotos}">${subphotos}</a></li>
-								
 								</ul>	
-								 </c:forEach> 
+							 </c:forEach> 
 							</li>
 							
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
@@ -194,17 +182,9 @@ String id = (String)session.getAttribute("idKey");
 				</div>
 			</nav>
 		</div>
-		<!-- Bootstrap core JS-->
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-          <!-- Third party plugin JS-->
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 		<div style="position: fixed; bottom: 5px; right:5px; z-index:5;">
-   <a onClick="javascript:window.scrollTo(0,0)"><img style="width:50px;height:50px;" src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top3.png" title="위로 가기"></a>
-   </div>
- <%--    여기까지 
-   <jsp:include page="header.jsp"></jsp:include> --%>
+   			<a onClick="javascript:window.scrollTo(0,0)"><img style="width:50px;height:50px;" src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top3.png" title="위로 가기"></a>
+   		</div>
   
    <div class='bigPictureWrapper'>
       <div class='bigPicture'></div>
@@ -214,12 +194,10 @@ String id = (String)session.getAttribute("idKey");
    	<c:set var="addNum1" value="1" />
    	<c:forEach items="${resultMap}" var="photoMap">
 	<c:if test="${addNum1%2 != 0}">	
-
-			<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
-					<c:set var="photo_id" value="${photoMap.key}" />
-					<c:set var="photosrc" value="${gd}${photoMap.value}" />
-					<img src="${photosrc}" width="300px" title="${photo_id}"/>
-				
+      		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
+			<c:set var="photo_id" value="${photoMap.key}" />
+			<c:set var="photosrc" value="${gd}${photoMap.value}" />
+			<img src="${photosrc}" width="300px" title="${photo_id}"/>
    	</c:if>
    	<c:set var="addNum1" value="${addNum1+1}" />
    	</c:forEach>
@@ -230,13 +208,10 @@ String id = (String)session.getAttribute("idKey");
    	<c:set var="addNum2" value="1" />
    	<c:forEach items="${resultMap}" var="photoMap">
 	<c:if test="${addNum2%2 == 0}">
-	
-		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
-				
+      		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
 			<c:set var="photo_id" value="${photoMap.key}" />
 			<c:set var="photosrc" value="${gd}${photoMap.value}" />
-			<img src="${photosrc}" width="300px" title="${photo_id}"/>
-				
+			<img src="${photosrc}" width="300px" title="${photo_id}"/>	
    	</c:if>
    	<c:set var="addNum2" value="${addNum2+1}" />
    	</c:forEach>
