@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html>
 <%
-request.setCharacterEncoding("UTF-8"); //
-String id = (String)session.getAttribute("idKey");
+    request.setCharacterEncoding("UTF-8");
+    String id = (String)session.getAttribute("idKey");
 %>
 <head>
 <meta charset="utf-8" /> <!-- 여기부터 -->
@@ -49,41 +49,38 @@ String id = (String)session.getAttribute("idKey");
 <link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet" />
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet" />
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-   $(document).ready(function(e) {
-
-      $(document).on("click", "img", function() {
-         var path = $(this).attr('src')
-         var home_id=$(this).attr('title')
-         console.log(home_id);
-         
-         if(path=="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top3.png"){
-             window.scrollTo(0,0);
-              return;
-          }
-         if("<%=id%>" == "이승채") {
-            var result = confirm("이미지를 수정하겠습니까? 삭제는 안돼요 ~");
-            if(result){
-               <%
-               session.setAttribute("delete","true");
-               session.setAttribute("type","homepic");
-               %>
-               window.open("/leesfilm/editImage?home_id="+home_id,"Edit Image","width=500,height=500");
-            }else{
-               alert("실행 취소 되었습니다.");
-            }
-         }
-         else{
-            showImage(path);
-         }   
-      });
-   });
+function edit() {
+	$(document).ready(function(e) {
+	      $(document).on("click", "img", function() {
+	         var path = $(this).attr('src')
+	         var home_id=$(this).attr('title')
+	         console.log(home_id);
+	         
+	         if(path=="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top3.png"){
+	             window.scrollTo(0,0);
+	              return;
+	         }
+	         if("<%=id%>" == "이승채") {
+	            var result = confirm("이미지를 수정하겠습니까? 삭제는 안돼요 ~");
+	            if(result){
+	               <%
+	               session.setAttribute("type","homepic");
+	               %>
+	               window.open("/leesfilm/editImage?home_id="+home_id,"Edit Image","width=500,height=500");
+	            }else{
+	               alert("실행 취소 되었습니다.");
+	            }
+	         }
+	         else{
+	            showImage(path);
+	         }   
+	      });
+	   });
+ }
 </script>
-
 </head>
 <body>
-<!-- 여기부터 -->
 <div class="nav-top">
 			<%
 			if (id == "이승채") {
@@ -103,9 +100,9 @@ String id = (String)session.getAttribute("idKey");
 				</svg>
 				&nbsp;
 				<svg id="icon" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-justify" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onClick="location.href='/leesfilm/editCategory'">
-  <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-</svg>
-&nbsp;
+  					<path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+				</svg>
+				&nbsp;
 				<svg id="icon" class="bi bi-people-circle" width="1em" height="1em"
 					viewBox="0 0 16 16" fill="currentColor"
 					xmlns="http://www.w3.org/2000/svg" onClick="location.href='/leesfilm/logout'">
@@ -124,8 +121,7 @@ String id = (String)session.getAttribute("idKey");
 			<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3"
 				id="mainNav">
 				<div class="container">
-					<a class="navbar-brand js-scroll-trigger" href="./">Seungchae
-						Lee</a>
+					<a class="navbar-brand js-scroll-trigger" href="./">Seungchae Lee</a>
 					<button class="navbar-toggler navbar-toggler-right" type="button"
 						data-toggle="collapse" data-target="#navbarResponsive"
 						aria-controls="navbarResponsive" aria-expanded="false"
@@ -136,26 +132,20 @@ String id = (String)session.getAttribute("idKey");
 						<ul class="navbar-nav ml-auto my-2 my-lg-0">
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
 								href="/leesfilm/">About</a></li>
-								
-							
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
 								href="/leesfilm/photo">Photo</a>
 								<ul>
-								<!-- 은비가 db에서 카테고리 명 갖고 오는 방법 알려주면 그 때 맞게 적용하기 -->
-							 <c:forEach items="${photoCategory}" var="subphotos"> 
-								
+							 	<c:forEach items="${photoCategory}" var="subphotos"> 
 									<li><a href="/leesfilm/photo/${subphotos}">${subphotos}</a></li>
-								
-								 </c:forEach>
-								 </ul> 
+								</c:forEach>
+								</ul> 
 							</li>
-							
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
 								href="/leesfilm/films">Films</a>
 							</li>
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
 								href="/leesfilm/commercial">Commercial</a>
-							<ul>
+								<ul>
 								<c:forEach items="${comCategory}" var="subcoms">
 									<li><a href="/leesfilm/commercial/${subcoms}">${subcoms}</a></li>
 								</c:forEach>
@@ -168,17 +158,10 @@ String id = (String)session.getAttribute("idKey");
 				</div>
 			</nav>
 		</div>
-		<!-- Bootstrap core JS-->
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-          <!-- Third party plugin JS-->
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 		<div style="position: fixed; bottom: 5px; right:5px; z-index:5;">
-   <a onClick="javascript:window.scrollTo(0,0)"><img style="width:50px;height:50px;" src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top3.png" title="위로 가기"></a>
-   </div>
- <%--    여기까지 
-   <jsp:include page="header.jsp"></jsp:include> --%>
+   			<a onClick="javascript:window.scrollTo(0,0)"><img style="width:50px;height:50px;" src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top3.png" title="위로 가기"></a>
+   		</div>
+	
 	<c:forEach items="${homepicMain}" var="Main">
     		<div class="title_img" id="t0">
 		  		<c:set var="gd" value="http://drive.google.com/uc?export=view&amp;id="/>
@@ -199,6 +182,7 @@ String id = (String)session.getAttribute("idKey");
 	<div id="partition">
 		<p>* * *</p>
 	</div>
+
 	<div class="sub_container">
 		<c:forEach items="${homepicMap}" var="homepicMap">
     		<div class = "sub_img" id="v0">
@@ -213,10 +197,9 @@ String id = (String)session.getAttribute("idKey");
 	<footer class="footer">
 	<div id="instagram">
 		<p>
-			Follow <a id="insta" href="https://www.instagram.com/toomhme/" target="_blank">@toomhme</a>
-			on Instagram
+			Follow <a id="insta" href="https://www.instagram.com/toomhme/" target="_blank">@toomhme</a> on Instagram
 		</p>
 	</div>	
-</footer>
+	</footer>
 </body>
 </html>
