@@ -168,59 +168,12 @@ public class HomeController {
 		model.addAttribute("commercial", categoryDAO.count("commercial").get(0));
 		return "editCategory";
 	}
-	@RequestMapping(value="/editCategoryApply")
-	public String editCategoryApply(Locale locale, Model model, 
-			@RequestParam("photo") String photo, @RequestParam("commercial") String commercial) {
-		logger.debug("editCategoryApply page.....");
-		String[] pOrder = photo.split(","); //»ç¿ëÀÚ°¡ ÁöÁ¤ÇÑ ¼ø¼­
-		String[] cOrder = commercial.split(",");
-
-		List<PhotoDTO> photoList = photoDAO.selectPhotoList();
-		List<CommeDTO> commeList = commeDAO.selectCommeList();
-		String[] photo_order = new String[categoryDAO.count("photo").get(0)];
-		String[] comme_order = new String[categoryDAO.count("commercial").get(0)];
-
-		for(int i=0;i<photoList.size();i++) {
-			if(pOrder[photoList.get(i).getP_cate_order()].equals("done")) continue;
-			PhotoDTO photoDTO = new PhotoDTO();
-			CategoryDTO categoryDTO = new CategoryDTO();
-			categoryDTO.setCate_type("photo");
-			photoDTO.setP_Category(photoList.get(i).getP_Category());
-			categoryDTO.setCate_name(photoList.get(i).getP_Category());
-			photoDTO.setP_cate_order(Integer.valueOf(pOrder[photoList.get(i).getP_cate_order()]));
-			categoryDTO.setCate_order(Integer.valueOf(pOrder[photoList.get(i).getP_cate_order()]));
-			pOrder[photoList.get(i).getP_cate_order()] = "done";
-			photo_order[photoDTO.getP_cate_order()] = photoList.get(i).getP_Category();
-			photoDAO.updatePhotoCategory(photoDTO);
-			categoryDAO.updateCateOrder(categoryDTO);
-		}
-
-		for(int i=0;i<commeList.size();i++) {
-			if(cOrder[commeList.get(i).getC_cate_order()].equals("done")) continue;
-			CommeDTO commeDTO = new CommeDTO();
-			CategoryDTO categoryDTO = new CategoryDTO();
-			categoryDTO.setCate_type("commercial");
-			commeDTO.setC_Category(commeList.get(i).getC_Category());
-			categoryDTO.setCate_name(commeList.get(i).getC_Category());
-			commeDTO.setC_cate_order(Integer.valueOf(cOrder[commeList.get(i).getC_cate_order()]));
-			categoryDTO.setCate_order(Integer.valueOf(cOrder[commeList.get(i).getC_cate_order()]));
-			cOrder[commeList.get(i).getC_cate_order()] = "done";
-			comme_order[commeDTO.getC_cate_order()] = commeList.get(i).getC_Category();
-			commeDAO.updateCommeCategory(commeDTO);
-			categoryDAO.updateCateOrder(categoryDTO);
-		}
-
-		model.addAttribute("photoCategory", photo_order);
-		model.addAttribute("comCategory", comme_order);
-
-		return "redirect:/";
-	}
 	
 	@RequestMapping(value="/editCategoryApply")
 	public String editCategoryApply(Locale locale, Model model, 
 			@RequestParam("photo") String photo, @RequestParam("commercial") String commercial) {
 		logger.debug("editCategoryApply page.....");
-		String[] pOrder = photo.split(","); //����ڰ� ������ ����
+		String[] pOrder = photo.split(","); //»ç¿ëÀÚ°¡ ÁöÁ¤ÇÑ ¼ø¼­
 		String[] cOrder = commercial.split(",");
 		
 		List<PhotoDTO> photoList = photoDAO.selectPhotoList();
