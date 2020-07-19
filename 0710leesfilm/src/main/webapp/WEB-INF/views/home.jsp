@@ -30,10 +30,6 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
 	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<!-- <link href="/css/styles.css" rel="stylesheet" /> -->
-<link href="<c:url value="/resources/css/styles.css?after" />"
-	rel="stylesheet" />
 
 <!-- Bootstrap core JS-->
 <script
@@ -71,10 +67,7 @@ function edit() {
 	            }else{
 	               alert("실행 취소 되었습니다.");
 	            }
-	         }
-	         else{
-	            showImage(path);
-	         }   
+	         } 
 	      });
 	   });
  }
