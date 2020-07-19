@@ -231,6 +231,11 @@ function delCate(){
 
 function subType(){
    var v_type = document.getElementById("sidoSelect").value;
+   if(document.getElementById("gugunSelect").value == "소분류를 선택하세요."){
+	   alert("소분류를 선택해 주세요.");
+       return;
+   }
+   
    if(v_type == "Photo"){
       if(document.form.photofile.value == ""){
          alert("사진을 첨부해 주세요.");

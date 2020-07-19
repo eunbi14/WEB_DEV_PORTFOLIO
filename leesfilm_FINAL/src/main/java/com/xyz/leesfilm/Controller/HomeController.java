@@ -169,11 +169,11 @@ public class HomeController {
 		return "editCategory";
 	}
 	
-	@RequestMapping(value="/editCategoryApply")
+	@RequestMapping(value="/editCategoryApply", method = RequestMethod.POST)
 	public String editCategoryApply(Locale locale, Model model, 
 			@RequestParam("photo") String photo, @RequestParam("commercial") String commercial) {
 		logger.debug("editCategoryApply page.....");
-		String[] pOrder = photo.split(","); //»ç¿ëÀÚ°¡ ÁöÁ¤ÇÑ ¼ø¼­
+		String[] pOrder = photo.split(","); //쨩챌쩔챘�횣째징 횁철횁짚횉횗 쩌첩쩌짯
 		String[] cOrder = commercial.split(",");
 		
 		List<PhotoDTO> photoList = photoDAO.selectPhotoList();

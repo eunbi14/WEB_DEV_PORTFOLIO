@@ -15,7 +15,7 @@ String id = (String)session.getAttribute("idKey");
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<meta name="viewport" content="width=device-width, minimum-scale=320"> 
+<!-- <meta name="viewport" content="width=device-width, minimum-scale=320">  -->
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"
@@ -156,7 +156,7 @@ String id = (String)session.getAttribute("idKey");
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
 								href="/">About</a></li>
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
-								href="/photo">Photo</a>
+								href="#">Photo</a>
 							 <c:forEach items="${photoCategory}" var="subphotos"> 
 								<ul>
 									<li><a href="/photo/${subphotos}">${subphotos}</a></li>
@@ -168,7 +168,7 @@ String id = (String)session.getAttribute("idKey");
 								href="/films">Films</a>
 							</li>
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
-								href="/commercial">Commercial</a>
+								href="#">Commercial</a>
 								<ul>
 								<c:forEach items="${comCategory}" var="subcoms">
 									<li><a href="/commercial/${subcoms}">${subcoms}</a></li>

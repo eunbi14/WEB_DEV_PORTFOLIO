@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MailController {
 	
-	// mailSending ì½”ë“œ
+	// mailSending ÄÚµå
 		@RequestMapping(value = "/mailSend", method=RequestMethod.POST)
 		public void mailSending(Model model,
 				@RequestParam("name") String name,
@@ -28,15 +28,15 @@ public class MailController {
 				@RequestParam("message") String body,
 				HttpServletResponse response) throws Exception {
 			
-			//ë©”ì¼ ê´€ë ¨ ì •ë³´
+			//¸ŞÀÏ °ü·Ã Á¤º¸
 			String host = "smtp.naver.com";
-			final String username = "email id";
-			final String password = "password"; //ë‚˜ì¤‘ì— ë§ëŠ” ë¹„ë°€ë²ˆí˜¸ë¡œ ë°”ê¾¸ê¸°
+			final String username = "email";
+			final String password = "password"; //³ªÁß¿¡ ¸Â´Â ºñ¹Ğ¹øÈ£·Î ¹Ù²Ù±â
 			int port=465;
 			String recipient = "email@naver.com";
 			
-			String title = name + "ë‹˜ìœ¼ë¡œë¶€í„° ë©”ì¼ì´ ë„ì°©í–ˆìŠµë‹ˆë‹¤.";
-			String msg = "ë³´ë‚¸ ë¶„ ì´ë©”ì¼: " + email + "\n" + "ë‚´ìš©: \n" + body;
+			String title = name + "´ÔÀ¸·ÎºÎÅÍ ¸ŞÀÏÀÌ µµÂøÇß½À´Ï´Ù.";
+			String msg = "º¸³½ ºĞ ÀÌ¸ŞÀÏ: " + email + "\n" + "³»¿ë: \n" + body;
 			
 			Properties props = System.getProperties();
 			
@@ -64,7 +64,7 @@ public class MailController {
 			
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('ì„±ê³µì ìœ¼ë¡œ ë©”ì¼ì´ ë³´ë‚´ì¡ŒìŠµë‹ˆë‹¤'); location.href='./';</script>");
+			out.println("<script>alert('¼º°øÀûÀ¸·Î ¸ŞÀÏÀÌ º¸³»Á³½À´Ï´Ù'); location.href='./';</script>");
 			out.flush();
 			
 		}

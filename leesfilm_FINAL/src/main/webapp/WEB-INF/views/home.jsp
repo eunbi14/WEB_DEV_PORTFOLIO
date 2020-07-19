@@ -14,7 +14,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<meta name="viewport" content="width=device-width, minimum-scale=320"> 
+<!-- <meta name="viewport" content="width=device-width, minimum-scale=320"> --> 
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"
@@ -46,7 +46,6 @@
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet" />
 
 <script type="text/javascript">
-function edit() {
 	$(document).ready(function(e) {
 	      $(document).on("click", "img", function() {
 	         var path = $(this).attr('src')
@@ -70,7 +69,6 @@ function edit() {
 	         } 
 	      });
 	   });
- }
 </script>
 </head>
 <body>
@@ -126,7 +124,7 @@ function edit() {
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
 								href="/">About</a></li>
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
-								href="/photo">Photo</a>
+								href="#">Photo</a>
 								<ul>
 							 	<c:forEach items="${photoCategory}" var="subphotos"> 
 									<li><a href="/photo/${subphotos}">${subphotos}</a></li>
@@ -137,7 +135,7 @@ function edit() {
 								href="/films">Films</a>
 							</li>
 							<li class="nav-item"><a class="nav-link js-scroll-trigger"
-								href="/commercial">Commercial</a>
+								href="#">Commercial</a>
 								<ul>
 								<c:forEach items="${comCategory}" var="subcoms">
 									<li><a href="/commercial/${subcoms}">${subcoms}</a></li>

@@ -659,84 +659,84 @@ mark,
 }
 
 #sidoSelect, #gugunSelect{
-	color:black;
-	font-size:15px;
+   color:black;
+   font-size:15px;
 }
 
 #upload_btn {
-	color:black;
-	font-size:15px;
-	margin-right:3px;
+   color:black;
+   font-size:15px;
+   margin-right:3px;
 }
 
 #upload_input{
-	font-size:15px;
+   font-size:15px;
 }
 
 #upload_th{
-	font-size:15px;
-	text-align: center;
+   font-size:15px;
+   text-align: center;
 }
 
 #insta {
-	color:orange;
+   color:orange;
 }
 
 #insta:hover {
-	color:white;
+   color:white;
 }
 
 /*네비게이션 바 서브*/
-	
+   
 .navbar-nav li {
-	float:left;
-	position:relative;
+   float:left;
+   position:relative;
 }
 
 .navbar-nav ul{
-	display:none;
-	list-style:none;
-	margin:0;
-	padding:0;
-	left:0;
-	text-align:center;
+   display:none;
+   list-style:none;
+   margin:0;
+   padding:0;
+   left:0;
+   text-align:center;
 }
 
 .navbar-nav ul li {
-	float:none;
-	margin:0;
-	padding:0;
+   float:none;
+   margin:0;
+   padding:0;
 }
 
 .navbar-nav ul li a {
-	color: #f5efe0;
+   color: #f5efe0;
     font-size: 0.7rem;
     padding: 0.75rem 0rem 0;
 }
 
 .navbar-nav ul li a:hover {
-	text-decoration: none;
-	color: #fcc55d;
+   text-decoration: none;
+   color: #fcc55d;
 }
 
 .navbar-nav li:hover ul {
-	display:initial;
+   display:initial;
 }
 
 .navbar-nav li:hover ul li {
-	/*height:35px;*/
-	overflow:visible;
-	padding:0;
+   /*height:35px;*/
+   overflow:visible;
+   padding:0;
 }
 
 .navbar-nav ul li:hover a{
-	/*background: yellow;*/
+   /*background: yellow;*/
 }
 
 /**/
 
 
-@media (min-width: 786px) {	
+@media (min-width: 786px) {   
   .navbar-expand-md {
     flex-flow: row nowrap;
     justify-content: flex-start;
@@ -1343,10 +1343,10 @@ body{
 }
 
 /* footer{
-	width: 100%;
-	height: 20%;
-	position: absolute;
-	bottom: 0;
+   width: 100%;
+   height: 20%;
+   position: absolute;
+   bottom: 0;
 } 
 */
 .footer{
@@ -1392,16 +1392,16 @@ body{
 
 @media (min-width:580px) and (max-width:786px) {
   /*navbar 수정*/
-	.navbar-nav ul li {
-    	text-align: right;
-	}
-	
-	.navbar-nav ul li a {
-		padding-right: 1rem;
-    	font-size: 0.8rem;
-	}
-	
-	/**/
+   .navbar-nav ul li {
+       text-align: right;
+   }
+   
+   .navbar-nav ul li a {
+      padding-right: 1rem;
+       font-size: 0.8rem;
+   }
+   
+   /**/
   
   #mainNav {
     box-shadow: none;
@@ -1445,24 +1445,23 @@ body{
   }
 }
 
-@media (max-width:580px)and (min-width:320px) {
-	/*navbar 수정*/
-	.navbar-nav ul li {
-    	text-align: right;
-	}
-	
-	.navbar-nav ul li a {
-		padding-right: 1rem;
-    	font-size: 0.8rem;
-	}
-		
-	/**/
+@media (max-width:580px)and (min-width:340px) {
+   /*navbar 수정*/
+   .navbar-nav ul li {
+       text-align: right;
+   }
+   
+   .navbar-nav ul li a {
+      padding-right: 1rem;
+       font-size: 0.8rem;
+   }
+      
+   /**/
  
   #mainNav .navbar-brand {
     color: #f5efe0;
-    font-size: 20px;
-    text-align: center;
-    padding-left:28%;
+    font-size: 1.2rem;
+    padding-left:15%;
   }
     #mainNav .navbar-brand:hover {
       color: #f5efe0;
@@ -1495,3 +1494,10 @@ body{
       color: #f4623a;
     }
 }
+@media (max-width:340px) and (min-width:200px) {
+  #mainNav .navbar-brand {
+    color: #f5efe0;
+    font-size: 0.9rem;
+    padding-left:15%;
+    margin : 0;
+  }

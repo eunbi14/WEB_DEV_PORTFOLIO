@@ -40,7 +40,7 @@ jQuery(function() {
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<meta name="viewport" content="width=device-width, minimum-scale=320">
+<!-- <meta name="viewport" content="width=device-width, minimum-scale=320"> -->
 
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 
@@ -129,7 +129,7 @@ jQuery(function() {
 
 
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"
-							href="/photo">Photo</a> <!-- 은비가 db에서 카테고리 명 갖고 오는 방법 알려주면 그 때 맞게 적용하기 -->
+							href="#">Photo</a> <!-- 은비가 db에서 카테고리 명 갖고 오는 방법 알려주면 그 때 맞게 적용하기 -->
 							<c:forEach items="${photoCategory}" var="subphotos">
 								<ul>
 									<li><a href="/photo/${subphotos}">${subphotos}</a></li>
@@ -139,7 +139,7 @@ jQuery(function() {
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"
 							href="/films">Films</a></li>
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"
-							href="/commercial">Commercial</a>
+							href="#">Commercial</a>
 							<ul>
 								<c:forEach items="${comCategory}" var="subcoms">
 									<li><a href="/commercial/${subcoms}">${subcoms}</a></li>
