@@ -5,7 +5,6 @@
 <html>
  <%
    request.setCharacterEncoding("UTF-8");
-   String del = (String)session.getAttribute("delete");
    String type = (String)session.getAttribute("type");
 %>
 <head>
@@ -26,45 +25,51 @@
         console.log(delete_photo_id);
      }
      
-</script>       
+     function submitPhoto(index){
+     	 if (index == 1)
+     		 document.form.action = "/leesfilm/updatephoto";
+     	 if (index == 2)
+     		 document.form.action = "/leesfilm/deletephoto";
+     	 
+     	 document.form.submit();
+     }
+
+     function submitFilms(index){
+     	 if (index == 1)
+     		 document.form.action = "/leesfilm/updatefilm";
+     	 if (index == 2)
+     		 document.form.action = "/leesfilm/deletefilm";
+     	 
+     	 document.form.submit();	
+     }
+     
+     function submitComme(index){
+     	 if (index == 1)
+     		 document.form.action = "/leesfilm/updatecomme";
+     	 if (index == 2)
+     		 document.form.action = "/leesfilm/deletecomme";
+     	 
+     	 document.form.submit();
+     }
+     
+     function submitHomepic(index){
+    	 if (index == 1)
+    		 document.form.action = "/leesfilm/updatehomepic";
+    	 if (index == 2)
+    		 document.form.action = "/leesfilm/deletehomepic";
+    	 
+    	 document.form.submit();
+     }
+     
+     function reloadParent(){
+    	 window.self.close();  
+    	 window.opener.document.location.href = window.opener.document.URL;
+      }
+
+</script>          
 </head>
-<body>
-<script type="text/javascript">
-function submitPhoto(index){
-	 if (index == 1)
-		 document.form.action = "/leesfilm/updatephoto";
-	 if( index == 2)
-		 document.form.action = "/leesfilm/deletephoto";
-	 
-	 document.form.submit();
-}
-
-function submitFilms(index){
-	 if (index == 1)
-		 document.form.action = "/leesfilm/updatefilm";
-	 if( index == 2)
-		 document.form.action = "/leesfilm/deletefilm";
-	 
-	 document.form.submit();	
-}
-function submitComme(index){
-	 if (index == 1)
-		 document.form.action = "/leesfilm/updatecomme";
-	 if( index == 2)
-		 document.form.action = "/leesfilm/deletecomme";
-	 
-	 document.form.submit();
-}
-
-function submitHomepic(index){
-	 if (index == 1)
-		 document.form.action = "/leesfilm/updatehomepic";
-	 if( index == 2)
-		 document.form.action = "/leesfilm/deletehomepic";
-	 
-	 document.form.submit();
-}
-</script>       
+<body onunload="reloadParent()">
+ 
 <div class="container" id="upload_container">
    <form id="form" name="form" method="post" enctype="multipart/form-data">
       <table class="table table-bordered">
@@ -79,8 +84,7 @@ function submitHomepic(index){
             <% if(type == "image") { %>
             <tr>
                 <th id="upload_th">사진 첨부 </th>
-                <td>
-                <input type="text" placeholder="이미지 링크를 입력하세요" id="upload_file" name="photofile" id="photoImg" class="form-control" /></td>
+                <td><input type="text" placeholder="이미지 링크를 입력하세요" id="upload_file" name="photofile" id="photoImg" class="form-control" /></td>
             </tr>
             <% } else if(type == "films") { %>
             <tr>
@@ -95,7 +99,7 @@ function submitHomepic(index){
             <% } else if(type == "homepic") { %>
             <tr>
                 <th id = "upload_th">사진 첨부 </th>
-                 <input type="text" placeholder="이미지 링크를 입력하세요" id="upload_file" name="photofile" id="photoImg" class="form-control" /></td>
+                <td><input type="text" placeholder="이미지 링크를 입력하세요" id="upload_file" name="photofile" id="photoImg" class="form-control" /></td>
             </tr>
             <% } %>
             <tr>
@@ -107,30 +111,19 @@ function submitHomepic(index){
                  <% if(type=="image") {%>
                  	<input id="upload_btn" type="button" value="수정" class="pull-right" onclick='submitPhoto(1)'/>
                  	<input id="upload_btn" type="reset" class="pull-left"/>
-                 	<%if(del == "true") {%>
-	                	<input id="upload_btn" type="button" value="삭제" class="pull-right" onclick='submitPhoto(2)'/>
-	             	<% } %>
-	             
+                 	<input id="upload_btn" type="button" value="삭제" class="pull-right" onclick='submitPhoto(2)'/>
 	             <% } else if (type == "films") {%>
 	              	<input id="upload_btn" type="button" value="수정" class="pull-right" onclick='submitFilms(1)'/>
                   	<input id="upload_btn" type="reset" class="pull-left"/>
-	                <%if(del == "true") {%>
-	                	<input id="upload_btn" type="button" value="삭제" class="pull-right" onclick='submitFilms(2)'/>
-	              	<% } %>
-	             
+	                <input id="upload_btn" type="button" value="삭제" class="pull-right" onclick='submitFilms(2)'/>
 	             <% } else if (type == "comme") {%>
 					<input id="upload_btn" type="button" value="수정" class="pull-right" onclick='submitComme(1)'/>
                   	<input id="upload_btn" type="reset" class="pull-left"/>
-	                <%if(del == "true") {%>
-	                	<input id="upload_btn" type="button" value="삭제" class="pull-right" onclick='submitComme(2)'/>
-	              	<% } %>
+	                <input id="upload_btn" type="button" value="삭제" class="pull-right" onclick='submitComme(2)'/>
 	             <% } else if (type == "homepic") {%>
 					<input id="upload_btn" type="button" value="수정" class="pull-right" onclick='submitHomepic(1)'/>
                   	<input id="upload_btn" type="reset" class="pull-left"/>
-	                <%if(del == "true") {%>
-	                	<!-- <input id="upload_btn" type="button" value="삭제" class="pull-right" onclick='submitHomepic(2)'/> -->
-	              	<% } %>
-	             <%} %>
+                 <% } %>
                 </td>
             </tr>
        </tbody>
