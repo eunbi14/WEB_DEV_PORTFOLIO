@@ -30,7 +30,7 @@ public class MailController {
 			
 			//메일 관련 정보
 			String host = "smtp.naver.com";
-			final String username = "id";
+			final String username = "email id";
 			final String password = "password"; //나중에 맞는 비밀번호로 바꾸기
 			int port=465;
 			String recipient = "email@naver.com";
