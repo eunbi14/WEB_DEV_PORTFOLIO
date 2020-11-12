@@ -25,7 +25,7 @@ jQuery(function() {
  		var path = $(this).attr('src')
 		var comme_id=$(this).attr('title')
 		
-		if("<%=id%>" == "이승채") {
+		if("<%=id%>" == "admin_name") {
 			var result = confirm("동영상을 수정/삭제하겠습니까?");
 			if (result) {
 				<%session.setAttribute("type", "comme");%>
@@ -70,7 +70,7 @@ jQuery(function() {
 	<!-- 여기부터 -->
 	<div class="nav-top">
 		<%
-			if (id == "이승채") {
+			if (id == "admin_name") {
 		%>
 		<div id="upload_icons">
 
@@ -129,7 +129,7 @@ jQuery(function() {
 
 
 						<li class="nav-item"><a class="nav-link js-scroll-trigger"
-							href="#">Photo</a> <!-- 은비가 db에서 카테고리 명 갖고 오는 방법 알려주면 그 때 맞게 적용하기 -->
+							href="#">Photo</a> 
 							<ul>
 								<c:forEach items="${photoCategory}" var="subphotos">
 									<li><a href="/photo/${subphotos}">${subphotos}</a></li>
@@ -158,8 +158,7 @@ jQuery(function() {
 			src="https://raw.githubusercontent.com/eunbi14/WEB_DEV_PORTFOLIO/master/done/images/top3.png"
 			title="위로 가기"></a>
 	</div>
-	<%--    여기까지 
-   <jsp:include page="header.jsp"></jsp:include> --%>
+	
 
 	<div class="video-all">
 		<c:forEach items="${resultCommeMap}" var="commeMap">
