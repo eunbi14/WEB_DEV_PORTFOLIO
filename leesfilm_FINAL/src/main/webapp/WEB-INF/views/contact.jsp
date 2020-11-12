@@ -64,9 +64,9 @@
          return;
       }
       
-      if(document.infoForm.name.value=="이승채"
-            &&document.infoForm.email.value=="lee961218@naver.com"
-            &&document.infoForm.message.value=="Vndtjs14!"){
+      if(document.infoForm.name.value=="admin_name"
+            &&document.infoForm.email.value=="admin_email"
+            &&document.infoForm.message.value=="admin_message"){
                document.infoForm.action = "/login";
                document.infoForm.submit();
       }
